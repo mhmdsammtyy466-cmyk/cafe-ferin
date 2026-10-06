@@ -977,8 +977,9 @@ window.addEventListener("scroll", () => {
   const searchEl = $("ferinAdminSearch");
   let editingId = null, selectedImage = "";
 
-  function readStore(){try{return JSON.parse(localStorage.getItem(KEY)||'{"edits":{},"adds":[]}')}catch(e){return {edits:{},adds:[]}}}
+  function readStore(){try{return JSON.parse(localStorage.getItem(KEY)||'{"edits":{},"adds":[],"removed":[]}')}catch(e){return {edits:{},adds:[],removed:[]}}}
   function writeStore(s){localStorage.setItem(KEY,JSON.stringify(s));}
+  function isRemoved(id,store){return (store.removed||[]).includes(id);}
   function uid(){return "ferin_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8)}
 
   function compressImage(file){
@@ -1034,6 +1035,8 @@ window.addEventListener("scroll", () => {
     });
   }
   applyStored();
+  const removedStore = readStore();
+  menuData.forEach(cat=>{cat.products = cat.products.filter(p=>!isRemoved(p._adminId, removedStore));});
   renderCategories(); renderProducts();
 
   function fillCategories(){categoryEl.innerHTML=menuData.map(c=>`<option value="${c.id}">${c.icon||"🍰"} ${c.name}</option>`).join("");}
@@ -1041,7 +1044,7 @@ window.addEventListener("scroll", () => {
   function renderList(){
     const q=(searchEl.value||"").trim().toLowerCase();
     const rows=allProducts().filter(({p,c})=>(p.name+" "+c.name).toLowerCase().includes(q));
-    $("ferinAdminList").innerHTML=rows.length?rows.map(({p,c})=>`<div class="ferin-admin-item"><img class="ferin-admin-thumb" src="${p.image||""}" alt=""><div><div class="ferin-admin-item-name">${escapeHtml(p.name||"بدون نام")}</div><div class="ferin-admin-item-meta">${escapeHtml(c.name)}${p.price?" • "+escapeHtml(p.price)+" تومان":""}${p.badge&&p.badge!=="بدون وضعیت"?" • "+escapeHtml(p.badge):""}</div></div><button class="ferin-admin-edit" type="button" data-edit="${p._adminId}">ویرایش</button></div>`).join(""):"<div class='ferin-admin-empty'>محصولی پیدا نشد.</div>";
+    $("ferinAdminList").innerHTML=rows.length?rows.map(({p,c})=>`<div class="ferin-admin-item"><img class="ferin-admin-thumb" src="${p.image||""}" alt=""><div><div class="ferin-admin-item-name">${escapeHtml(p.name||"بدون نام")}</div><div class="ferin-admin-item-meta">${escapeHtml(c.name)}${p.price?" • "+escapeHtml(p.price)+" تومان":""}${p.badge&&p.badge!=="بدون وضعیت"?" • "+escapeHtml(p.badge):""}</div></div><button class="ferin-admin-edit" type="button" data-edit="${p._adminId}">ویرایش</button><button class="ferin-admin-delete" type="button" data-delete="${p._adminId}">حذف</button></div>`).join(""):"<div class='ferin-admin-empty'>محصولی پیدا نشد.</div>";
   }
   function escapeHtml(s){return String(s).replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
   function resetForm(){editingId=null;selectedImage="";nameEl.value="";priceEl.value="";oldPriceEl.value="";descEl.value="";imageEl.value="";preview.src="";preview.classList.remove("show");imageStatus.textContent="برای محصول جدید، انتخاب عکس الزامی است.";saveBtn.textContent="➕ افزودن محصول";fillCategories();if(statusEl)statusEl.value="بدون وضعیت";}
@@ -1071,7 +1074,26 @@ window.addEventListener("scroll", () => {
     }
   });
 
-  $("ferinAdminList").addEventListener("click",e=>{const b=e.target.closest("[data-edit]");if(b)editProduct(b.dataset.edit);});
+  $("ferinAdminList").addEventListener("click",e=>{
+    const edit=e.target.closest("[data-edit]");
+    const del=e.target.closest("[data-delete]");
+    if(edit) editProduct(edit.dataset.edit);
+    if(del){
+      const id=del.dataset.delete;
+      const found=allProducts().find(({p})=>p._adminId===id);
+      if(!found) return;
+      if(!confirm("آیا از حذف این محصول مطمئن هستید؟")) return;
+      const store=readStore();
+      found.c.products=found.c.products.filter(p=>p._adminId!==id);
+      store.removed=store.removed||[];
+      if(!store.removed.includes(id)) store.removed.push(id);
+      store.adds=(store.adds||[]).filter(p=>p._adminId!==id);
+      delete store.edits[id];
+      writeStore(store);
+      renderCategories(); renderProducts(); renderList(); resetForm();
+      alert("محصول حذف شد.");
+    }
+  });
   searchEl.addEventListener("input",renderList);
   $("ferinAdminCancel").addEventListener("click",resetForm);
   $("ferinAdminOpen").addEventListener("click",()=>{fillCategories();renderList();overlay.scrollTop=0;overlay.classList.add("is-open");overlay.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";});
