@@ -1,0 +1,5168 @@
+/* Cafe Ferin — extracted CSS */
+
+:root{
+  --bg:#fbf7f1;
+  --paper:#fffdf9;
+  --dark:#17120f;
+  --brown:#6e4935;
+  --gold:#c99b61;
+  --muted:#806f63;
+  --line:rgba(23,18,15,.10);
+  --shadow:0 20px 60px rgba(49,31,20,.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Vazirmatn",sans-serif;
+  background:var(--bg);
+  color:var(--dark);
+  overflow-x:hidden;
+  transition:background-color .35s ease,color .35s ease;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+img{max-width:100%;display:block}
+
+/* INTRO */
+#intro{
+  position:fixed;inset:0;z-index:9999;
+  background:#17120f;color:#fffaf4;
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .7s ease,visibility .7s ease;
+}
+#intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+.intro-inner{text-align:center}
+.intro-small{
+  font-size:12px;letter-spacing:5px;text-transform:uppercase;
+  opacity:.6;margin-bottom:18px;direction:ltr;
+}
+.intro-title{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(52px,11vw,110px);
+  font-weight:600;letter-spacing:-2px;direction:ltr;
+}
+.intro-line{
+  width:0;height:1px;background:var(--gold);
+  margin:22px auto 0;animation:lineGrow 1.1s ease forwards .35s;
+}
+@keyframes lineGrow{to{width:150px}}
+.intro-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--gold);
+  margin:18px auto 0;animation:pulse 1s infinite;
+}
+@keyframes pulse{50%{transform:scale(1.7);opacity:.4}}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:18px 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:.35s;
+}
+.nav.scrolled{
+  background:rgba(255,250,244,.88);
+  backdrop-filter:blur(18px);
+  box-shadow:0 8px 30px rgba(0,0,0,.07);
+  padding-top:12px;padding-bottom:12px;
+}
+.brand-logo{
+  width:58px;height:58px;object-fit:cover;border-radius:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,.10);background:#fff;
+}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-text{
+  font-family:"Playfair Display",serif;
+  font-size:24px;font-weight:700;direction:ltr;
+}
+.theme-toggle{
+  width:42px;height:42px;border:1px solid var(--line);
+  border-radius:50%;background:var(--paper);color:var(--dark);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:18px;transition:.25s;
+}
+.theme-toggle:hover{transform:rotate(12deg) scale(1.05)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:14px;color:#fff;transition:.25s}
+.nav.scrolled .nav-links a{color:var(--dark)}
+.nav-links a:hover{color:var(--gold)!important}
+.order-nav{
+  background:var(--dark);color:#fff!important;
+  padding:10px 18px;border-radius:30px;
+}
+.menu-btn{display:none;border:0;background:none;font-size:25px;color:inherit}
+
+/* HERO */
+.hero{
+  min-height:100svh;
+  position:relative;
+  display:flex;align-items:center;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,var(--hero-overlay-1),var(--hero-overlay-2)),
+    url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2000&q=85") center/cover;
+  color:var(--hero-text);
+}
+.hero-content{width:min(1100px,90%);margin:auto;padding-top:70px}
+.eyebrow{font-size:12px;letter-spacing:4px;opacity:.8;margin-bottom:18px}
+.hero h1{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(62px,10vw,130px);
+  line-height:.95;direction:ltr;
+}
+.hero h1 span{color:#d9ae78}
+.hero p{max-width:500px;margin:28px 0 32px;line-height:2;color:#eee;font-size:15px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:14px 24px;border-radius:40px;font-size:14px;
+  transition:.3s;border:1px solid transparent;cursor:pointer;
+}
+.btn-primary{background:#fff;color:var(--dark)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px #0004}
+.btn-outline{border-color:#ffffff66;color:#fff}
+.btn-outline:hover{background:#fff;color:var(--dark)}
+.scroll-indicator{
+  position:absolute;bottom:25px;left:50%;transform:translateX(-50%);
+  font-size:11px;opacity:.7;display:flex;gap:10px;align-items:center;
+}
+.scroll-indicator span{width:45px;height:1px;background:#fff}
+
+/* GENERAL */
+section{padding:100px 5%}
+.container{width:min(1150px,100%);margin:auto}
+.section-head{text-align:center;margin-bottom:45px}
+.section-kicker{
+  color:var(--brown);font-size:12px;letter-spacing:3px;
+  margin-bottom:10px;
+}
+.section-title{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(34px,5vw,55px);
+  direction:ltr;
+}
+.section-text{color:var(--muted);margin:15px auto 0;max-width:620px;line-height:2}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
+.about-image{
+  height:520px;border-radius:28px;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.about-image img{width:100%;height:100%;object-fit:cover}
+.about-copy .section-title{text-align:right;margin-bottom:20px}
+.about-copy p{color:var(--muted);line-height:2.1;margin-bottom:18px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.feature{background:var(--paper);padding:18px;border-radius:18px;border:1px solid var(--line)}
+.feature strong{display:block;font-size:14px;margin-bottom:5px}
+.feature span{font-size:12px;color:var(--muted)}
+
+/* CATEGORIES */
+.categories{background:#17120f;color:#fff}
+.categories .section-kicker{color:#d5a970}
+.categories .section-text{color:#bdb0a6}
+.category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+.category{
+  border:1px solid #ffffff18;background:#ffffff08;
+  border-radius:20px;padding:27px 15px;text-align:center;
+  cursor:pointer;transition:.3s;color:#fff;
+}
+.category:hover,.category.active{
+  background:#fff;color:var(--dark);transform:translateY(-5px);
+}
+.category .icon{font-size:28px;margin-bottom:12px}
+.category h3{font-size:14px;font-weight:500}
+
+/* MENU */
+.menu-section{background:var(--paper);display:none}
+.menu-section.visible{display:block}
+.menu-toolbar{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:25px;gap:15px;flex-wrap:wrap;
+}
+.current-category{font-size:18px;font-weight:700}
+.products-count{font-size:12px;color:var(--muted)}
+.product-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.product-card{
+  background:#fff;border:1px solid var(--line);
+  border-radius:23px;overflow:hidden;transition:.35s;
+}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.product-image{height:100%}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.product-card:hover .product-image img{transform:scale(1.05)}
+.product-info{padding:20px}
+.product-top{display:flex;justify-content:space-between;gap:15px;align-items:start}
+.product-name{font-size:17px;font-weight:700}
+.product-price{font-weight:800;color:var(--blue);white-space:nowrap}
+.product-desc{font-size:12px;color:var(--muted);line-height:1.8;margin-top:9px}
+.empty{grid-column:1/-1;text-align:center;padding:50px;color:var(--muted)}
+
+/* NOTICE */
+.notice-wrap{background:#e9ded0}
+.notice{
+  background:var(--dark);color:#fff;border-radius:28px;padding:45px;
+  display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center;
+}
+.notice h2{font-family:"Playfair Display",serif;font-size:42px;direction:ltr}
+.notice p{color:#c8bdb4;line-height:2;margin-top:10px}
+.notice-box{border:1px solid #ffffff1c;border-radius:20px;padding:25px}
+.notice-box strong{display:block;color:#d8ae77;margin-bottom:8px}
+.notice-box span{font-size:14px;line-height:2}
+
+/* ORDER */
+.order-section{background:#f3e9de}
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.order-card{
+  background:#fff;border-radius:25px;padding:30px;
+  border:1px solid var(--line);transition:.3s;
+}
+.order-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.order-icon{font-size:32px;margin-bottom:18px}
+.order-card h3{font-size:19px;margin-bottom:9px}
+.order-card p{font-size:13px;color:var(--muted);line-height:2}
+.order-link{
+  display:inline-block;margin-top:18px;color:var(--brown);
+  font-weight:700;direction:ltr;
+}
+.order-note{
+  grid-column:1/-1;text-align:center;
+  background:#f3dfb8;color:#3b2618;padding:23px;border-radius:18px;
+  font-size:14px;
+  border:1px solid #c9a66b;
+}
+
+/* FOOTER */
+footer{background:#17120f;color:#fff;padding:55px 5% 25px}
+.footer-inner{
+  width:min(1150px,100%);margin:auto;
+  display:flex;justify-content:space-between;gap:30px;align-items:center;
+}
+.footer-logo{font-family:"Playfair Display",serif;font-size:34px;direction:ltr}
+.footer-social{display:flex;gap:18px;font-size:13px;color:#d1c5ba}
+.copyright{text-align:center;border-top:1px solid #ffffff14;margin-top:35px;padding-top:20px;color:#8f8278;font-size:11px}
+
+
+/* =========================
+   DAY / NIGHT THEME SYSTEM
+   ========================= */
+
+:root{
+  --bg:#fbf7f1;
+  --paper:#fffdf9;
+  --surface:#ffffff;
+  --surface-2:#f3e9de;
+  --text:#17120f;
+  --heading:#17120f;
+  --brown:#6e4935;
+  --gold:#c99b61;
+  --muted:#806f63;
+  --line:rgba(23,18,15,.10);
+  --shadow:0 20px 60px rgba(49,31,20,.12);
+
+  --nav-bg:rgba(255,250,244,.88);
+  --hero-overlay-1:rgba(255,250,244,.62);
+  --hero-overlay-2:rgba(255,250,244,.16);
+  --hero-text:#17120f;
+  --hero-paragraph:#33261f;
+  --hero-outline:rgba(23,18,15,.35);
+  --category-bg:#f4eadf;
+  --category-text:#17120f;
+  --category-hover:#ffffff;
+  --notice-bg:#fffdf9;
+  --notice-text:#17120f;
+  --notice-muted:#806f63;
+  --footer-bg:#f0e4d7;
+  --footer-text:#17120f;
+  --mobile-menu-bg:rgba(255,253,249,.98);
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+}
+
+.nav.scrolled{
+  background:var(--nav-bg);
+}
+
+.nav-links a{
+  color:var(--text);
+}
+
+.nav.scrolled .nav-links a{
+  color:var(--text);
+}
+
+.order-nav{
+  background:var(--text);
+  color:var(--bg)!important;
+}
+
+.hero{
+  color:var(--hero-text);
+}
+
+.hero h1 span{
+  color:var(--gold);
+}
+
+.hero p{
+  color:var(--hero-paragraph);
+}
+
+.btn-primary{
+  background:var(--text);
+  color:var(--bg);
+}
+
+.btn-outline{
+  border-color:var(--hero-outline);
+  color:var(--hero-text);
+}
+
+.btn-outline:hover{
+  background:var(--text);
+  color:var(--bg);
+}
+
+.scroll-indicator span{
+  background:var(--hero-text);
+}
+
+.section-title,
+.current-category,
+.product-name,
+.order-card h3{
+  color:var(--heading);
+}
+
+.section-text,
+.products-count,
+.product-desc,
+.order-card p,
+.feature span{
+  color:var(--muted);
+}
+
+.about-copy p{
+  color:var(--muted);
+}
+
+.feature{
+  background:var(--paper);
+  border-color:var(--line);
+}
+
+.categories{
+  background:var(--category-bg);
+  color:var(--category-text);
+}
+
+.categories .section-kicker{
+  color:var(--brown);
+}
+
+.categories .section-text{
+  color:var(--muted);
+}
+
+.category{
+  border-color:var(--line);
+  background:var(--surface);
+  color:var(--text);
+}
+
+.category:hover,
+.category.active{
+  background:var(--category-hover);
+  color:var(--text);
+  box-shadow:var(--shadow);
+}
+
+.menu-section{
+  background:var(--bg);
+}
+
+.product-card{
+  background:var(--surface);
+  border-color:var(--line);
+  color:var(--text);
+}
+
+.product-image{
+  background:var(--surface-2);
+}
+
+.notice-wrap{
+  background:var(--surface-2);
+}
+
+.notice{
+  background:var(--notice-bg);
+  color:var(--notice-text);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+
+.notice p{
+  color:var(--notice-muted);
+}
+
+.notice-box{
+  border-color:var(--line);
+}
+
+.notice-box strong{
+  color:var(--brown);
+}
+
+.order-section{
+  background:var(--surface-2);
+}
+
+.order-card{
+  background:var(--surface);
+  color:var(--text);
+  border-color:var(--line);
+}
+
+.order-link{
+  color:var(--brown);
+}
+
+.order-note{
+  background:var(--text);
+  color:var(--bg);
+}
+
+footer{
+  background:var(--footer-bg);
+  color:var(--footer-text);
+}
+
+.footer-social{
+  color:var(--muted);
+}
+
+.copyright{
+  border-top-color:var(--line);
+  color:var(--muted);
+}
+
+.theme-toggle{
+  background:var(--surface);
+  color:var(--text);
+  border-color:var(--line);
+}
+
+/* DARK */
+body.dark{
+  --bg:#12100f;
+  --paper:#1b1715;
+  --surface:#211c19;
+  --surface-2:#191512;
+  --text:#f6efe7;
+  --heading:#fff8f0;
+  --brown:#e2b77e;
+  --gold:#e2b77e;
+  --muted:#bcaea3;
+  --line:rgba(255,255,255,.11);
+  --shadow:0 20px 60px rgba(0,0,0,.36);
+
+  --nav-bg:rgba(25,21,18,.92);
+  --hero-overlay-1:rgba(18,12,9,.84);
+  --hero-overlay-2:rgba(18,12,9,.32);
+  --hero-text:#fffaf4;
+  --hero-paragraph:#eee3da;
+  --hero-outline:rgba(255,255,255,.38);
+  --category-bg:#171311;
+  --category-text:#fff8f0;
+  --category-hover:#f8f0e8;
+  --notice-bg:#1d1815;
+  --notice-text:#fff8f0;
+  --notice-muted:#bcaea3;
+  --footer-bg:#0d0b0a;
+  --footer-text:#fff8f0;
+  --mobile-menu-bg:rgba(24,20,18,.99);
+}
+
+body.dark .nav.scrolled{
+  background:var(--nav-bg);
+}
+
+body.dark .nav-links a,
+body.dark .nav.scrolled .nav-links a{
+  color:var(--text);
+}
+
+body.dark .order-nav{
+  background:var(--text);
+  color:#17120f!important;
+}
+
+body.dark .categories{
+  background:var(--category-bg);
+  color:var(--category-text);
+}
+
+body.dark .category{
+  background:var(--surface);
+  border-color:var(--line);
+  color:var(--text);
+}
+
+body.dark .category:hover,
+body.dark .category.active{
+  background:var(--category-hover);
+  color:#17120f;
+}
+
+body.dark .menu-section{
+  background:var(--bg);
+}
+
+body.dark .product-card{
+  background:var(--surface);
+  color:var(--text);
+  border-color:var(--line);
+}
+
+body.dark .notice-wrap{
+  background:var(--surface-2);
+}
+
+body.dark .notice{
+  background:var(--notice-bg);
+  color:var(--notice-text);
+}
+
+body.dark .order-section{
+  background:var(--surface-2);
+}
+
+body.dark .order-card{
+  background:var(--surface);
+  color:var(--text);
+}
+
+body.dark .feature{
+  background:var(--surface);
+}
+
+body.dark footer{
+  background:var(--footer-bg);
+  color:var(--footer-text);
+}
+
+body.dark .theme-toggle{
+  background:var(--surface);
+  color:var(--text);
+}
+
+body.dark .nav.scrolled .menu-btn{
+  color:var(--text);
+}
+
+/* Instagram icon */
+.instagram-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  direction:ltr;
+}
+
+.instagram-icon{
+  width:21px;
+  height:21px;
+  flex:0 0 21px;
+  display:inline-block;
+  vertical-align:middle;
+}
+
+.instagram-heading{
+  display:inline-flex!important;
+  align-items:center;
+  gap:8px;
+}
+
+.instagram-heading .instagram-icon{
+  width:22px;
+  height:22px;
+}
+
+/* Mobile navigation must also follow the selected theme */
+@media(max-width:850px){
+  .nav-links{
+    background:var(--mobile-menu-bg);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+  }
+
+  .nav-links a,
+  .nav.scrolled .nav-links a{
+    color:var(--text)!important;
+  }
+
+  .nav-links .order-nav{
+    background:var(--text);
+    color:var(--bg)!important;
+  }
+
+  .menu-btn{
+    color:var(--text);
+  }
+
+  .nav:not(.scrolled) .menu-btn{
+    color:var(--hero-text);
+  }
+}
+
+/* RESPONSIVE */
+@media(max-width:850px){
+  .brand-logo{width:50px;height:50px}
+  .logo-text{font-size:21px}
+  .nav-links{
+    position:absolute;top:70px;left:5%;right:5%;
+    background:rgba(23,18,15,.97);padding:20px;
+    border-radius:20px;display:none;flex-direction:column;align-items:stretch;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{color:#fff!important;padding:10px;text-align:center}
+  .menu-btn{display:block;color:#fff}
+  .nav.scrolled .menu-btn{color:var(--dark)}
+  .about-grid,.notice,.order-grid{grid-template-columns:1fr}
+  .about-image{height:400px}
+  .category-grid{grid-template-columns:repeat(2,1fr)}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .order-note{grid-column:auto}
+  .footer-inner{flex-direction:column;text-align:center}
+}
+@media(max-width:560px){
+  section{padding:75px 5%}
+  .hero-content{padding-top:30px}
+  .hero h1{font-size:65px}
+  .hero p{font-size:13px}
+  .features{grid-template-columns:1fr}
+  .category-grid,.product-grid{grid-template-columns:1fr}
+  .product-image{height:100%}
+  .notice{padding:30px 23px}
+  .notice h2{font-size:34px}
+}
+
+.intro-logo{
+  width:82px;
+  height:82px;
+  object-fit:contain;
+  display:block;
+  margin:0 auto 20px;
+  border-radius:12px;
+  opacity:0;
+  transform:translateY(8px) scale(.94);
+  animation:introLogoIn .8s ease forwards .08s;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.12));
+}
+@keyframes introLogoIn{
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+
+/* =========================================================
+   FINAL CAFE FERIN VISUAL SYSTEM
+   Theme consistency + mobile nav fix + premium animations
+   ========================================================= */
+
+/* Explicit colors prevent the mobile "ثبت سفارش" pill from becoming blank. */
+.nav-links .order-nav{
+  background:#17120f !important;
+  color:#fffaf4 !important;
+  border:1px solid transparent;
+}
+body.dark .nav-links .order-nav{
+  background:#f6efe7 !important;
+  color:#17120f !important;
+}
+
+/* All theme-sensitive components transition together. */
+body,
+.nav,
+.nav.scrolled,
+.nav-links,
+.hero,
+.about-grid,
+.about-image,
+.categories,
+.category,
+.menu-section,
+.product-card,
+.notice-wrap,
+.notice,
+.notice-box,
+.order-section,
+.order-card,
+.order-note,
+.feature,
+footer,
+.theme-toggle{
+  transition:
+    background-color .45s ease,
+    color .45s ease,
+    border-color .45s ease,
+    box-shadow .45s ease,
+    opacity .45s ease;
+}
+
+/* Keep the light theme visibly light everywhere. */
+body:not(.dark) .hero{
+  background:
+    linear-gradient(90deg,rgba(255,250,244,.78),rgba(255,250,244,.22)),
+    url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2000&q=85") center/cover;
+  color:#17120f;
+}
+body:not(.dark) .hero p{color:#33261f}
+body:not(.dark) .hero .btn-outline{
+  border-color:rgba(23,18,15,.30);
+  color:#17120f;
+}
+body:not(.dark) .scroll-indicator span{background:#17120f}
+
+/* Dark hero stays dark, while the rest of the page switches too. */
+body.dark .hero{
+  background:
+    linear-gradient(90deg,rgba(18,12,9,.88),rgba(18,12,9,.34)),
+    url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2000&q=85") center/cover;
+}
+
+/* Better mobile navigation in both themes. */
+@media(max-width:850px){
+  .nav-links{
+    background:var(--mobile-menu-bg) !important;
+    border:1px solid var(--line);
+    box-shadow:0 25px 70px rgba(0,0,0,.18);
+    overflow:hidden;
+  }
+  .nav-links a{
+    position:relative;
+  }
+  .nav-links a:not(.order-nav)::after{
+    content:"";
+    position:absolute;
+    right:10%;
+    left:10%;
+    bottom:2px;
+    height:1px;
+    background:var(--line);
+    transform:scaleX(0);
+    transform-origin:center;
+    transition:transform .3s ease;
+  }
+  .nav-links a:hover::after{transform:scaleX(1)}
+  .nav-links .order-nav{
+    margin-top:6px;
+    text-align:center;
+    border-radius:999px;
+  }
+}
+
+/* Instagram: polished wordmark treatment. */
+.instagram-link,
+.instagram-heading{
+  font-family:"Instagram Sans","Helvetica Neue",Arial,sans-serif !important;
+  letter-spacing:.1px;
+}
+.instagram-link{
+  display:inline-flex !important;
+  align-items:center;
+  gap:9px;
+  direction:ltr;
+  transition:transform .3s ease, opacity .3s ease;
+}
+.instagram-link:hover{
+  transform:translateY(-2px);
+  opacity:.9;
+}
+.instagram-heading{
+  display:inline-flex !important;
+  align-items:center;
+  gap:9px;
+}
+.instagram-icon{
+  filter:drop-shadow(0 3px 7px rgba(0,0,0,.12));
+  transition:transform .35s ease;
+}
+.instagram-link:hover .instagram-icon,
+.notice-box:hover .instagram-icon{
+  transform:rotate(-7deg) scale(1.08);
+}
+
+/* =========================================================
+   SCROLL REVEAL ANIMATIONS
+   ========================================================= */
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:
+    opacity .8s cubic-bezier(.22,1,.36,1),
+    transform .8s cubic-bezier(.22,1,.36,1);
+}
+.reveal.reveal-left{
+  transform:translateX(-40px);
+}
+.reveal.reveal-right{
+  transform:translateX(40px);
+}
+.reveal.revealed{
+  opacity:1;
+  transform:none;
+}
+
+/* Product cards enter with a tiny stagger. */
+.product-card.reveal{
+  transition-duration:.7s;
+}
+.product-card:nth-child(2){transition-delay:.06s}
+.product-card:nth-child(3){transition-delay:.12s}
+.product-card:nth-child(4){transition-delay:.18s}
+.product-card:nth-child(5){transition-delay:.24s}
+.product-card:nth-child(6){transition-delay:.30s}
+
+/* Category cards have a refined hover lift. */
+.category{
+  position:relative;
+  overflow:hidden;
+}
+.category::before{
+  content:"";
+  position:absolute;
+  width:100px;height:100px;
+  border-radius:50%;
+  top:-55px;left:-35px;
+  background:rgba(201,155,97,.10);
+  transition:transform .55s ease;
+}
+.category:hover::before,
+.category.active::before{
+  transform:scale(2.5);
+}
+
+/* Hero entrance */
+.hero-content > *{
+  opacity:0;
+  animation:heroRise .9s cubic-bezier(.22,1,.36,1) forwards;
+}
+.hero-content .eyebrow{animation-delay:.15s}
+.hero-content h1{animation-delay:.28s}
+.hero-content p{animation-delay:.40s}
+.hero-content .hero-buttons{animation-delay:.54s}
+@keyframes heroRise{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Floating hero glow */
+.hero::after{
+  content:"";
+  position:absolute;
+  width:280px;height:280px;
+  border-radius:50%;
+  border:1px solid rgba(201,155,97,.18);
+  left:-100px;
+  bottom:8%;
+  animation:heroFloat 7s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes heroFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(30px,-25px) scale(1.08)}
+}
+
+/* Subtle image zoom */
+.about-image img{
+  transition:transform 1.1s cubic-bezier(.22,1,.36,1);
+}
+.about-image:hover img{transform:scale(1.045)}
+
+/* Product image hover */
+.product-image{overflow:hidden}
+.product-image img{
+  transition:transform .8s cubic-bezier(.22,1,.36,1), filter .5s ease;
+}
+.product-card:hover .product-image img{
+  transform:scale(1.07);
+  filter:saturate(1.06);
+}
+
+/* Notice / order cards */
+.notice-box,
+.order-card,
+.feature{
+  transition:
+    transform .4s cubic-bezier(.22,1,.36,1),
+    box-shadow .4s ease,
+    background-color .45s ease,
+    border-color .45s ease;
+}
+.notice-box:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 45px rgba(0,0,0,.10);
+}
+.feature:hover{
+  transform:translateY(-4px);
+}
+
+/* Theme button feedback */
+.theme-toggle{
+  position:relative;
+  overflow:hidden;
+}
+.theme-toggle::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:rgba(201,155,97,.18);
+  transform:scale(0);
+  transition:transform .35s ease;
+}
+.theme-toggle:active::after{transform:scale(1)}
+
+/* Reduced motion accessibility */
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
+  }
+  .reveal{opacity:1;transform:none}
+}
+
+
+/* FINAL INTRO FIX */
+#intro{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition:opacity .65s ease, visibility .65s ease;
+}
+#intro.hide{
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+
+/* Compact centered Instagram card */
+.notice .instagram-box{
+  width:min(235px, 72%);
+  min-height:185px;
+  margin:0 auto;
+  padding:24px 18px;
+  border-radius:24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  text-align:center;
+  text-decoration:none;
+  background:#f1e5d7;
+  border:1px solid rgba(110,73,53,.14);
+  color:#17120f;
+  box-shadow:0 12px 30px rgba(49,31,20,.10);
+}
+.instagram-box-icon{
+  width:68px;
+  height:68px;
+  object-fit:cover;
+  border-radius:17px;
+  display:block;
+  box-shadow:0 7px 18px rgba(0,0,0,.13);
+  transition:transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s ease;
+}
+.instagram-box-label{
+  font-family:"Instagram Sans","Helvetica Neue",Arial,sans-serif;
+  font-size:19px;
+  font-weight:700;
+  line-height:1.2;
+  direction:ltr;
+}
+.instagram-box-handle{
+  font-size:12px;
+  color:#806f63;
+  direction:ltr;
+}
+.notice .instagram-box:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 45px rgba(49,31,20,.17);
+}
+.notice .instagram-box:hover .instagram-box-icon{
+  transform:scale(1.07) rotate(-3deg);
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+}
+
+/* Dark theme: card deliberately remains a different tone from the page. */
+body.dark .notice .instagram-box{
+  background:#2b211b;
+  border-color:rgba(226,183,126,.20);
+  color:#fff8f0;
+  box-shadow:0 14px 35px rgba(0,0,0,.28);
+}
+body.dark .instagram-box-handle{
+  color:#c8b8aa;
+}
+
+@media(max-width:560px){
+  .notice .instagram-box{
+    width:210px;
+    min-height:170px;
+    padding:20px 16px;
+  }
+  .instagram-box-icon{
+    width:62px;
+    height:62px;
+  }
+}
+
+
+/* FINAL LIGHT-FIRST PALETTE */
+html{
+  background:#fbf7f1;
+}
+body:not(.dark){
+  background:#fbf7f1 !important;
+  color:#17120f !important;
+}
+body:not(.dark) .nav{
+  background:rgba(255,253,249,.96);
+}
+body:not(.dark) .menu-section{
+  background:#fffaf4 !important;
+}
+body:not(.dark) .categories{
+  background:#f4eadf !important;
+}
+body:not(.dark) .notice-wrap,
+body:not(.dark) .order-section{
+  background:#eee1d2 !important;
+}
+body:not(.dark) footer{
+  background:#e8dacb !important;
+  color:#17120f !important;
+}
+
+/* Uploaded Instagram icon */
+.instagram-uploaded-icon{
+  width:34px !important;
+  height:34px !important;
+  object-fit:cover;
+  border-radius:9px;
+  display:block;
+  flex:0 0 34px;
+  box-shadow:0 4px 12px rgba(0,0,0,.10);
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.instagram-link:hover .instagram-uploaded-icon,
+.notice-box:hover .instagram-uploaded-icon{
+  transform:scale(1.08) rotate(-3deg);
+  box-shadow:0 7px 18px rgba(0,0,0,.16);
+}
+
+/* Keep Instagram wordmark text elegant while the uploaded icon is the visual mark. */
+.instagram-link span{
+  font-family:"Instagram Sans","Helvetica Neue",Arial,sans-serif !important;
+}
+
+
+#intro{
+  background:#fbf7f1 !important;
+  color:#17120f !important;
+}
+.intro-small{color:#6e4935}
+.intro-title{color:#17120f}
+.intro-line{background:#c99b61}
+
+
+/* FINAL INSTAGRAM ICON FIX
+   Prevent cropping/tilting: show the entire uploaded image. */
+.notice .instagram-box-icon{
+  width:76px !important;
+  height:76px !important;
+  max-width:76px !important;
+  max-height:76px !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  border-radius:16px !important;
+  display:block !important;
+  transform:none !important;
+  rotate:0deg !important;
+  flex:0 0 76px !important;
+  background:transparent;
+  overflow:visible;
+}
+.notice .instagram-box:hover .instagram-box-icon{
+  transform:scale(1.05) !important;
+  rotate:0deg !important;
+}
+@media(max-width:560px){
+  .notice .instagram-box-icon{
+    width:72px !important;
+    height:72px !important;
+    max-width:72px !important;
+    max-height:72px !important;
+    flex-basis:72px !important;
+  }
+}
+
+
+/* FINAL INTRO EDGE / WHITE-CORNER FIX */
+html{
+  min-height:100%;
+  background:#fbf7f1 !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+body{
+  min-height:100vh;
+  margin:0 !important;
+  padding:0 !important;
+  background:#fbf7f1 !important;
+  overflow-x:hidden !important;
+}
+
+/* The intro must cover the complete viewport, including every corner. */
+#intro{
+  position:fixed !important;
+  inset:0 !important;
+  width:100vw !important;
+  min-width:100vw !important;
+  height:100dvh !important;
+  min-height:100vh !important;
+  margin:0 !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+  background:#fbf7f1 !important;
+  z-index:99999 !important;
+  overflow:hidden !important;
+}
+
+/* Prevent a white strip caused by viewport-width calculations. */
+#intro::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:#fbf7f1;
+  z-index:-1;
+}
+
+body.dark #intro,
+body.dark #intro::before{
+  background:#12100f !important;
+}
+
+/* After intro closes, the page itself remains the same theme color. */
+body:not(.dark){
+  background:#fbf7f1 !important;
+}
+body.dark{
+  background:#12100f !important;
+}
+
+
+/* FINAL HORIZONTAL-SCROLL LOCK
+   The intro must never create a wider-than-viewport document. */
+html,
+body{
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow-x:clip !important;
+}
+
+@supports not (overflow-x:clip){
+  html,
+  body{
+    overflow-x:hidden !important;
+  }
+}
+
+/* Use left/right edges instead of 100vw; 100vw can be wider than
+   the layout viewport when a scrollbar exists and can create side scroll. */
+#intro{
+  left:0 !important;
+  right:0 !important;
+  top:0 !important;
+  bottom:0 !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:none !important;
+  margin:0 !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+}
+
+/* Clip any decorative element that intentionally extends outside a section. */
+.hero,
+.nav,
+.about,
+.categories,
+.menu-section,
+.notice-wrap,
+.order-section,
+footer{
+  max-width:100%;
+  overflow-x:clip;
+}
+
+/* Never let an image, animation or transformed child enlarge the page. */
+img,
+svg,
+video,
+canvas{
+  max-width:100%;
+}
+
+
+/* =========================================================
+   FINAL DARK-FIRST THEME + MOBILE MENU FIX
+   ========================================================= */
+
+/* Dark is the default visual theme. */
+html, body{
+  background:#12100f !important;
+}
+body:not(.dark){
+  /* User requested the site's main/default color to be black again. */
+  background:#12100f !important;
+  color:#f7efe7 !important;
+}
+
+/* Mobile menu must appear directly under the header, not below the
+   current scroll position. */
+@media (max-width:850px){
+  .nav{
+    position:sticky !important;
+    top:0 !important;
+    z-index:10000 !important;
+  }
+
+  .nav-links{
+    position:fixed !important;
+    top:calc(var(--nav-height, 76px) + env(safe-area-inset-top, 0px)) !important;
+    right:14px !important;
+    left:14px !important;
+    width:auto !important;
+    max-height:calc(100dvh - var(--nav-height, 76px) - 28px) !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    padding:18px !important;
+    margin:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:flex-start !important;
+    align-items:stretch !important;
+    gap:4px !important;
+    transform:none !important;
+    visibility:hidden !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+    border-radius:22px !important;
+  }
+
+  /* Support common open-state patterns used by the existing JS. */
+  .nav-links.open,
+  .nav-links.active,
+  .nav-links.show,
+  .nav-links.menu-open{
+    visibility:visible !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+    transform:translateY(0) !important;
+  }
+
+  .nav-links a{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    min-height:52px !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+    flex:0 0 auto !important;
+    margin:0 !important;
+  }
+
+  .nav-links .order-nav{
+    margin-top:6px !important;
+  }
+
+  /* Menu backdrop; it does not participate in page layout. */
+  .nav::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background:rgba(0,0,0,.48);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease;
+  }
+
+  .nav.menu-open::after,
+  .nav:has(.nav-links.open)::after,
+  .nav:has(.nav-links.active)::after,
+  .nav:has(.nav-links.show)::after{
+    opacity:1;
+    pointer-events:auto;
+  }
+}
+
+/* Dark palette for the main site. */
+body:not(.dark) .nav,
+body.dark .nav{
+  background:#15110f !important;
+  color:#f7efe7 !important;
+}
+body:not(.dark) .nav-links,
+body.dark .nav-links{
+  background:#1b1613 !important;
+  border-color:rgba(255,255,255,.10) !important;
+}
+body:not(.dark) .menu-section,
+body.dark .menu-section{
+  background:#15110f !important;
+}
+body:not(.dark) .categories,
+body.dark .categories{
+  background:#12100f !important;
+}
+body:not(.dark) .notice-wrap,
+body.dark .notice-wrap,
+body:not(.dark) .order-section,
+body.dark .order-section{
+  background:#171310 !important;
+}
+body:not(.dark) footer,
+body.dark footer{
+  background:#0e0c0b !important;
+}
+
+/* Keep the intro dark as well. */
+#intro,
+#intro::before{
+  background:#12100f !important;
+  color:#f7efe7 !important;
+}
+
+
+/* =========================================================
+   FINAL LIGHT-FIRST THEME
+   Initial/default appearance: completely light, with no dark
+   sections mixed into the page.
+   ========================================================= */
+html{
+  background:#faf6f0 !important;
+}
+body{
+  background:#faf6f0 !important;
+  color:#211b17 !important;
+}
+
+/* Header */
+.nav{
+  background:#fffdf9 !important;
+  color:#211b17 !important;
+  border-color:rgba(33,27,23,.10) !important;
+}
+.nav-links{
+  background:#fffdf9 !important;
+  color:#211b17 !important;
+  border-color:rgba(33,27,23,.10) !important;
+}
+.nav-links a{
+  color:#211b17 !important;
+}
+.nav-links .order-nav{
+  background:#211b17 !important;
+  color:#fffaf4 !important;
+}
+
+/* Main sections */
+.hero{
+  color:#211b17 !important;
+}
+.menu-section{
+  background:#fffaf4 !important;
+  color:#211b17 !important;
+}
+.categories{
+  background:#f4eadf !important;
+  color:#211b17 !important;
+}
+.notice-wrap{
+  background:#eee1d2 !important;
+  color:#211b17 !important;
+}
+.order-section{
+  background:#f3e8dc !important;
+  color:#211b17 !important;
+}
+footer{
+  background:#e7d8c8 !important;
+  color:#211b17 !important;
+}
+
+/* Cards */
+.category,
+.product-card,
+.notice,
+.order-card,
+.order-note,
+.feature{
+  background:#fffdf9 !important;
+  color:#211b17 !important;
+  border-color:rgba(33,27,23,.12) !important;
+}
+.category h3,
+.product-card h3,
+.notice h2,
+.order-card h2,
+.order-note h3,
+.feature h3{
+  color:#211b17 !important;
+}
+.category p,
+.product-card p,
+.notice p,
+.order-card p,
+.order-note p,
+.feature p{
+  color:#6e6259 !important;
+}
+
+/* Instagram card */
+.instagram-box{
+  background:#f3e8dc !important;
+  color:#211b17 !important;
+  border-color:rgba(33,27,23,.13) !important;
+}
+.instagram-box strong,
+.instagram-box span{
+  color:#211b17 !important;
+}
+
+/* Intro */
+#intro,
+#intro::before{
+  background:#faf6f0 !important;
+  color:#211b17 !important;
+}
+.intro-title{
+  color:#211b17 !important;
+}
+
+/* Mobile menu backdrop */
+@media(max-width:850px){
+  .nav::after{
+    background:rgba(255,255,255,.62) !important;
+  }
+}
+
+/* Light theme icon/button surfaces */
+.theme-toggle{
+  background:#f1e6da !important;
+  color:#211b17 !important;
+  border-color:rgba(33,27,23,.12) !important;
+}
+
+
+/* =========================================================
+   AUTHORITATIVE THEME SYSTEM — FINAL
+   Only body.dark controls the theme.
+   ========================================================= */
+:root{
+  --light-bg:#faf6f0;
+  --light-surface:#fffdf9;
+  --light-surface-2:#f3e8dc;
+  --light-section:#f4eadf;
+  --light-text:#211b17;
+  --light-muted:#6e6259;
+  --light-border:rgba(33,27,23,.12);
+
+  --dark-bg:#12100f;
+  --dark-surface:#1d1815;
+  --dark-surface-2:#241e1a;
+  --dark-section:#171310;
+  --dark-text:#f7efe7;
+  --dark-muted:#c2b4a8;
+  --dark-border:rgba(255,255,255,.12);
+}
+
+html{
+  background:var(--light-bg) !important;
+}
+
+body{
+  background:var(--light-bg) !important;
+  color:var(--light-text) !important;
+}
+
+/* LIGHT — every major section */
+body:not(.dark) .nav,
+body:not(.dark) .nav-links,
+body:not(.dark) .menu-section,
+body:not(.dark) .product-card,
+body:not(.dark) .notice,
+body:not(.dark) .order-card,
+body:not(.dark) .feature{
+  background:var(--light-surface) !important;
+  color:var(--light-text) !important;
+  border-color:var(--light-border) !important;
+}
+
+body:not(.dark) .categories{
+  background:var(--light-section) !important;
+  color:var(--light-text) !important;
+}
+body:not(.dark) .notice-wrap,
+body:not(.dark) .order-section{
+  background:var(--light-surface-2) !important;
+  color:var(--light-text) !important;
+}
+body:not(.dark) footer{
+  background:#e7d8c8 !important;
+  color:var(--light-text) !important;
+}
+body:not(.dark) .nav-links a,
+body:not(.dark) .section-title,
+body:not(.dark) .current-category,
+body:not(.dark) .product-name,
+body:not(.dark) .order-card h3,
+body:not(.dark) .notice-box strong{
+  color:var(--light-text) !important;
+}
+body:not(.dark) .section-text,
+body:not(.dark) .products-count,
+body:not(.dark) .product-desc,
+body:not(.dark) .order-card p,
+body:not(.dark) .feature span,
+body:not(.dark) .about-copy p{
+  color:var(--light-muted) !important;
+}
+body:not(.dark) .theme-toggle{
+  background:#f1e6da !important;
+  color:var(--light-text) !important;
+  border-color:var(--light-border) !important;
+}
+
+/* DARK — every major section */
+body.dark{
+  background:var(--dark-bg) !important;
+  color:var(--dark-text) !important;
+}
+body.dark .nav,
+body.dark .nav-links,
+body.dark .menu-section,
+body.dark .product-card,
+body.dark .notice,
+body.dark .order-card,
+body.dark .feature{
+  background:var(--dark-surface) !important;
+  color:var(--dark-text) !important;
+  border-color:var(--dark-border) !important;
+}
+body.dark .categories{
+  background:var(--dark-section) !important;
+  color:var(--dark-text) !important;
+}
+body.dark .notice-wrap,
+body.dark .order-section{
+  background:var(--dark-surface-2) !important;
+  color:var(--dark-text) !important;
+}
+body.dark footer{
+  background:#0e0c0b !important;
+  color:var(--dark-text) !important;
+}
+body.dark .nav-links a,
+body.dark .section-title,
+body.dark .current-category,
+body.dark .product-name,
+body.dark .order-card h3,
+body.dark .notice-box strong{
+  color:var(--dark-text) !important;
+}
+body.dark .section-text,
+body.dark .products-count,
+body.dark .product-desc,
+body.dark .order-card p,
+body.dark .feature span,
+body.dark .about-copy p{
+  color:var(--dark-muted) !important;
+}
+body.dark .theme-toggle{
+  background:#2a211c !important;
+  color:var(--dark-text) !important;
+  border-color:var(--dark-border) !important;
+}
+
+/* Hero */
+body:not(.dark) .hero{
+  color:var(--light-text) !important;
+  background:
+    linear-gradient(90deg,rgba(255,250,244,.78),rgba(255,250,244,.20)),
+    url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2000&q=85") center/cover !important;
+}
+body.dark .hero{
+  color:var(--dark-text) !important;
+  background:
+    linear-gradient(90deg,rgba(18,12,9,.88),rgba(18,12,9,.34)),
+    url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=2000&q=85") center/cover !important;
+}
+
+/* Mobile menu always follows current theme */
+@media(max-width:850px){
+  body:not(.dark) .nav-links{
+    background:var(--light-surface) !important;
+  }
+  body.dark .nav-links{
+    background:var(--dark-surface) !important;
+  }
+  body:not(.dark) .nav-links a{
+    color:var(--light-text) !important;
+  }
+  body.dark .nav-links a{
+    color:var(--dark-text) !important;
+  }
+}
+
+/* Intro follows current theme too */
+body:not(.dark) #intro,
+body:not(.dark) #intro::before{
+  background:var(--light-bg) !important;
+  color:var(--light-text) !important;
+}
+body.dark #intro,
+body.dark #intro::before{
+  background:var(--dark-bg) !important;
+  color:var(--dark-text) !important;
+}
+
+
+
+/* ===== Original inline style block ===== */
+
+/* =========================================================
+   STRICT FINAL THEME
+   Light = EVERYTHING UI LIGHT on first load.
+   Dark  = EVERYTHING UI SURFACE DARK after toggle.
+   No localStorage: every fresh page load starts LIGHT.
+   ========================================================= */
+
+html, body {
+  background: #fbf7f1 !important;
+  color: #211b17 !important;
+  color-scheme: light !important;
+}
+
+body, main, section, header, footer, nav, article, aside,
+.hero, .about, .categories, .menu-section, .notice,
+.notice-wrap, .order-section, .order-card, .features,
+.feature, .category, .product-card, .nav-links, #intro,
+.intro-inner {
+  transition: background-color .35s ease, color .35s ease,
+              border-color .35s ease, box-shadow .35s ease !important;
+}
+
+/* ---------- LIGHT: no dark UI surfaces ---------- */
+body:not(.dark),
+body:not(.dark) main,
+body:not(.dark) section,
+body:not(.dark) .about,
+body:not(.dark) .categories,
+body:not(.dark) .menu-section,
+body:not(.dark) .notice-wrap,
+body:not(.dark) .order-section,
+body:not(.dark) footer {
+  background-color: #fbf7f1 !important;
+  color: #211b17 !important;
+}
+
+body:not(.dark) .nav {
+  background: rgba(255,255,255,.96) !important;
+  color: #211b17 !important;
+}
+
+body:not(.dark) .nav-links {
+  background: #fffdf9 !important;
+}
+
+body:not(.dark) .nav-links a,
+body:not(.dark) .logo-text,
+body:not(.dark) .section-title,
+body:not(.dark) .section-text,
+body:not(.dark) .product-name,
+body:not(.dark) .product-desc,
+body:not(.dark) .products-count,
+body:not(.dark) .about-copy,
+body:not(.dark) .about-copy p,
+body:not(.dark) .feature,
+body:not(.dark) .feature span,
+body:not(.dark) .category,
+body:not(.dark) .notice,
+body:not(.dark) .notice-box,
+body:not(.dark) .order-card,
+body:not(.dark) .order-card h3,
+body:not(.dark) .order-card p {
+  color: #211b17 !important;
+}
+
+body:not(.dark) .category,
+body:not(.dark) .product-card,
+body:not(.dark) .notice,
+body:not(.dark) .order-card,
+body:not(.dark) .feature {
+  background: #fffdf9 !important;
+  border-color: rgba(33,27,23,.12) !important;
+}
+
+body:not(.dark) .theme-toggle {
+  background: #f3e8dc !important;
+  color: #211b17 !important;
+  border-color: rgba(33,27,23,.14) !important;
+}
+
+body:not(.dark) footer {
+  background: #f1e6da !important;
+  color: #211b17 !important;
+}
+
+/* ---------- DARK: no light UI surfaces ---------- */
+html:has(body.dark),
+body.dark,
+body.dark main,
+body.dark section,
+body.dark .about,
+body.dark .categories,
+body.dark .menu-section,
+body.dark .notice-wrap,
+body.dark .order-section,
+body.dark footer {
+  background-color: #0d0b0a !important;
+  color: #f5eee7 !important;
+}
+
+body.dark .nav {
+  background: rgba(16,13,12,.98) !important;
+  color: #f5eee7 !important;
+}
+
+body.dark .nav-links {
+  background: #15110f !important;
+}
+
+body.dark .nav-links a,
+body.dark .logo-text,
+body.dark .section-title,
+body.dark .section-text,
+body.dark .product-name,
+body.dark .product-desc,
+body.dark .products-count,
+body.dark .about-copy,
+body.dark .about-copy p,
+body.dark .feature,
+body.dark .feature span,
+body.dark .category,
+body.dark .notice,
+body.dark .notice-box,
+body.dark .order-card,
+body.dark .order-card h3,
+body.dark .order-card p {
+  color: #f5eee7 !important;
+}
+
+body.dark .category,
+body.dark .product-card,
+body.dark .notice,
+body.dark .order-card,
+body.dark .feature {
+  background: #171310 !important;
+  border-color: rgba(255,255,255,.10) !important;
+}
+
+body.dark .theme-toggle {
+  background: #29201b !important;
+  color: #fff4e9 !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+
+body.dark footer {
+  background: #080706 !important;
+  color: #f5eee7 !important;
+}
+
+/* Make inputs/buttons follow the active theme too */
+body:not(.dark) input,
+body:not(.dark) textarea,
+body:not(.dark) select {
+  background: #fffdf9 !important;
+  color: #211b17 !important;
+  border-color: rgba(33,27,23,.14) !important;
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select {
+  background: #171310 !important;
+  color: #f5eee7 !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+
+/* Hero: image stays photographic, but the UI overlay follows the theme. */
+body:not(.dark) .hero {
+  color: #211b17 !important;
+}
+body.dark .hero {
+  color: #f5eee7 !important;
+}
+
+/* Mobile menu must never use the opposite theme. */
+@media (max-width: 850px) {
+  body:not(.dark) .nav-links {
+    background: #fffdf9 !important;
+    box-shadow: 0 18px 50px rgba(33,27,23,.16) !important;
+  }
+  body.dark .nav-links {
+    background: #15110f !important;
+    box-shadow: 0 18px 50px rgba(0,0,0,.55) !important;
+  }
+}
+
+/* Intro is always LIGHT on first load, then changes only after toggle. */
+#intro {
+  background: #fbf7f1 !important;
+  color: #211b17 !important;
+}
+body.dark #intro {
+  background: #0d0b0a !important;
+  color: #f5eee7 !important;
+}
+body.dark #intro .intro-inner,
+body.dark #intro h1,
+body.dark #intro p,
+body.dark #intro span {
+  color: #f5eee7 !important;
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* ثبت سفارش در منوی بالا دقیقاً مثل بقیه لینک‌ها */
+.nav-links a[href*="order"],
+.nav-links a[href*="سفارش"],
+.nav-links .order-link,
+.nav-links .order-btn,
+.nav-links .nav-order {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  transform: none !important;
+}
+
+/* در حالت روشن و تاریک هم همان ظاهر لینک‌های معمولی */
+body:not(.dark) .nav-links a[href*="order"],
+body:not(.dark) .nav-links a[href*="سفارش"],
+body:not(.dark) .nav-links .order-link,
+body:not(.dark) .nav-links .order-btn,
+body:not(.dark) .nav-links .nav-order,
+body.dark .nav-links a[href*="order"],
+body.dark .nav-links a[href*="سفارش"],
+body.dark .nav-links .order-link,
+body.dark .nav-links .order-btn,
+body.dark .nav-links .nav-order {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* =========================================================
+   CAFE FERIN — EXTRA PREMIUM MOTION
+   Added without changing the existing content/structure.
+   ========================================================= */
+
+/* Hero now works beautifully without a background photo. */
+.hero{
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(201,155,97,.16), transparent 28%),
+    radial-gradient(circle at 85% 70%, rgba(110,73,53,.10), transparent 30%),
+    linear-gradient(135deg,#fbf7f1 0%,#f3e7d9 48%,#fffdf9 100%) !important;
+}
+body.dark .hero{
+  background:
+    radial-gradient(circle at 15% 25%, rgba(226,183,126,.13), transparent 28%),
+    radial-gradient(circle at 85% 70%, rgba(110,73,53,.16), transparent 30%),
+    linear-gradient(135deg,#12100f 0%,#1b1512 52%,#211a16 100%) !important;
+}
+
+/* Animated ambient light inside hero */
+.hero::before{
+  content:"";
+  position:absolute;
+  width:520px;
+  height:520px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(201,155,97,.14),transparent 68%);
+  top:-190px;
+  right:-130px;
+  filter:blur(4px);
+  animation:ferinOrb 10s ease-in-out infinite;
+  pointer-events:none;
+  z-index:-1;
+}
+.hero::after{
+  width:360px;
+  height:360px;
+  left:-130px;
+  bottom:-150px;
+  border:1px solid rgba(201,155,97,.18);
+  box-shadow:0 0 80px rgba(201,155,97,.07);
+  animation:ferinOrb2 9s ease-in-out infinite;
+}
+@keyframes ferinOrb{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(-55px,45px,0) scale(1.12)}
+}
+@keyframes ferinOrb2{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(55px,-35px,0) scale(1.12)}
+}
+
+/* Hero title gets a subtle premium shimmer */
+.hero h1{
+  animation:heroTitleIn 1s cubic-bezier(.22,1,.36,1) .25s both,
+            heroTitleFloat 6s ease-in-out 1.5s infinite;
+}
+@keyframes heroTitleIn{
+  from{opacity:0;transform:translateY(28px) scale(.97);filter:blur(7px)}
+  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
+@keyframes heroTitleFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+
+/* Elegant moving line under section titles */
+.section-head .section-title,
+.about-copy .section-title{
+  position:relative;
+}
+.section-head .section-title::after,
+.about-copy .section-title::after{
+  content:"";
+  display:block;
+  width:54px;
+  height:2px;
+  margin:15px auto 0;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(.25);
+  transform-origin:center;
+  transition:transform .8s cubic-bezier(.22,1,.36,1);
+}
+.about-copy .section-title::after{
+  margin:15px 0 0 auto;
+  transform-origin:right;
+}
+.revealed .section-title::after,
+.about-copy.revealed .section-title::after{
+  transform:scaleX(1);
+}
+
+/* Buttons: soft glow + shine sweep */
+.btn{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+.btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:70%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);
+  transform:skewX(-20deg);
+  transition:left .7s ease;
+  pointer-events:none;
+  z-index:-1;
+}
+.btn:hover::before{left:140%}
+.btn-primary{
+  box-shadow:0 8px 25px rgba(49,31,20,.10);
+}
+.btn-primary:hover{
+  box-shadow:0 14px 38px rgba(49,31,20,.18);
+}
+
+/* Navigation entrance */
+.nav{
+  animation:navDrop .8s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes navDrop{
+  from{opacity:0;transform:translateY(-18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.nav-links a{
+  position:relative;
+}
+.nav-links a:not(.order-nav)::after{
+  transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .35s ease !important;
+  transform-origin:center !important;
+}
+
+/* Feature/category cards get a gentle glow on hover */
+.feature,.category,.product-card,.order-card,.notice-box{
+  will-change:transform;
+}
+.feature:hover,.category:hover,.order-card:hover,.notice-box:hover{
+  box-shadow:0 18px 45px rgba(49,31,20,.12);
+}
+.category .icon,
+.order-icon{
+  display:inline-block;
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+.category:hover .icon,
+.order-card:hover .order-icon{
+  transform:translateY(-5px) rotate(-4deg) scale(1.1);
+}
+
+/* Product card image gets a soft reveal */
+.product-image{
+  position:relative;
+}
+.product-image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.16) 48%,transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .8s ease;
+  pointer-events:none;
+}
+.product-card:hover .product-image::after{
+  transform:translateX(120%);
+}
+
+/* Scroll indicator gently breathes */
+.scroll-indicator{
+  animation:scrollHint 2.2s ease-in-out infinite;
+}
+@keyframes scrollHint{
+  0%,100%{opacity:.55;transform:translate(-50%,0)}
+  50%{opacity:1;transform:translate(-50%,5px)}
+}
+
+/* Instagram card */
+.instagram-box{
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease !important;
+}
+.instagram-box:hover{
+  transform:translateY(-8px) scale(1.015) !important;
+}
+
+/* Footer social links */
+.footer-social a{
+  transition:transform .3s ease,color .3s ease,opacity .3s ease;
+  display:inline-block;
+}
+.footer-social a:hover{
+  transform:translateY(-3px);
+  color:var(--gold);
+}
+
+/* Page loading polish */
+body.ferin-ready #intro .intro-title{
+  animation:introTitlePulse 1.1s ease both;
+}
+@keyframes introTitlePulse{
+  0%{opacity:0;transform:translateY(12px) scale(.96)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* Mobile: keep motion elegant and light */
+@media(max-width:560px){
+  .hero::before{width:330px;height:330px}
+  .hero::after{width:230px;height:230px}
+}
+
+/* Accessibility */
+@media(prefers-reduced-motion:reduce){
+  .hero h1,.hero::before,.hero::after,.scroll-indicator,.nav{
+    animation:none !important;
+  }
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* Center and polish the hero action buttons */
+.hero-buttons{
+  justify-content:center !important;
+  align-items:center;
+  width:100%;
+  margin:28px auto 0;
+  gap:16px;
+}
+.hero-buttons .btn{
+  min-width:155px;
+  min-height:52px;
+  padding:15px 28px;
+  font-weight:700;
+  letter-spacing:.1px;
+}
+.hero-buttons .btn-primary{
+  box-shadow:0 10px 28px rgba(0,0,0,.16);
+}
+.hero-buttons .btn-outline{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.hero-buttons .btn:hover{
+  transform:translateY(-4px) scale(1.025);
+}
+
+/* Instagram icon: always fully visible and perfectly centered */
+.instagram-box{
+  overflow:visible !important;
+}
+.instagram-icon-wrap{
+  width:78px;
+  height:78px;
+  flex:0 0 78px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 8px 22px rgba(0,0,0,.13);
+  overflow:visible;
+}
+.instagram-svg{
+  width:62px;
+  height:62px;
+  display:block;
+  flex:none;
+  overflow:visible;
+}
+.notice .instagram-box:hover .instagram-icon-wrap{
+  transform:scale(1.06) rotate(-2deg);
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+}
+.instagram-icon-wrap,
+.instagram-svg{
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s ease;
+}
+body.dark .instagram-icon-wrap{
+  background:#fff;
+}
+@media(max-width:600px){
+  .hero-buttons{
+    flex-direction:column;
+    width:min(100%,340px);
+  }
+  .hero-buttons .btn{
+    width:100%;
+    min-width:0;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-buttons .btn,
+  .instagram-icon-wrap,
+  .instagram-svg{transition:none !important;}
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* حذف کامل بخش عکس کافه از قسمت معرفی */
+.about-grid{
+  grid-template-columns:1fr !important;
+  max-width:900px;
+  margin:0 auto;
+}
+.about-copy{
+  width:100%;
+}
+.about-copy .section-title,
+.about-copy p{
+  text-align:center;
+}
+.about-copy .features{
+  justify-content:center;
+}
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr !important;}
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* دسته‌بندی‌ها: خوانایی کامل در حالت روز و شب */
+.categories .category,
+.categories .category h3,
+.categories .category p,
+.categories .category span,
+.categories .category small,
+.categories .category .icon {
+  color: #17120f !important;
+}
+.categories .category svg {
+  color: #17120f !important;
+  fill: currentColor;
+}
+
+/* حالت شب: تمام نوشته‌های داخل دسته‌بندی سفید */
+body.dark .categories .category,
+body.dark .categories .category h3,
+body.dark .categories .category p,
+body.dark .categories .category span,
+body.dark .categories .category small,
+body.dark .categories .category .icon {
+  color: #ffffff !important;
+}
+body.dark .categories .category svg {
+  color: #ffffff !important;
+  fill: currentColor;
+}
+
+/* در حالت شب، حالت فعال هم نوشته سفید داشته باشد */
+body.dark .categories .category:hover,
+body.dark .categories .category.active {
+  background: #2a2420 !important;
+  color: #ffffff !important;
+}
+body.dark .categories .category:hover h3,
+body.dark .categories .category.active h3,
+body.dark .categories .category:hover p,
+body.dark .categories .category.active p,
+body.dark .categories .category:hover span,
+body.dark .categories .category.active span,
+body.dark .categories .category:hover small,
+body.dark .categories .category.active small,
+body.dark .categories .category:hover .icon,
+body.dark .categories .category.active .icon,
+body.dark .categories .category:hover svg,
+body.dark .categories .category.active svg {
+  color: #ffffff !important;
+  fill: currentColor;
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* Global readable typography: light mode = black, dark mode = white */
+body:not(.dark) .about,
+body:not(.dark) .categories,
+body:not(.dark) .menu-section,
+body:not(.dark) .notice-wrap,
+body:not(.dark) .order-section,
+body:not(.dark) footer{color:#17120f!important}
+body:not(.dark) .about h1,body:not(.dark) .about h2,body:not(.dark) .about h3,
+body:not(.dark) .about p,body:not(.dark) .about li,
+body:not(.dark) .categories h1,body:not(.dark) .categories h2,body:not(.dark) .categories h3,body:not(.dark) .categories p,
+body:not(.dark) .menu-section h1,body:not(.dark) .menu-section h2,body:not(.dark) .menu-section h3,body:not(.dark) .menu-section h4,body:not(.dark) .menu-section p,
+body:not(.dark) .notice-wrap h1,body:not(.dark) .notice-wrap h2,body:not(.dark) .notice-wrap h3,body:not(.dark) .notice-wrap p,
+body:not(.dark) .order-section h1,body:not(.dark) .order-section h2,body:not(.dark) .order-section h3,body:not(.dark) .order-section h4,body:not(.dark) .order-section p,
+body:not(.dark) footer h1,body:not(.dark) footer h2,body:not(.dark) footer h3,body:not(.dark) footer p,body:not(.dark) footer a,body:not(.dark) footer span{color:#17120f!important}
+
+body.dark .about,
+body.dark .categories,
+body.dark .menu-section,
+body.dark .notice-wrap,
+body.dark .order-section,
+body.dark footer{color:#fff!important}
+body.dark .about h1,body.dark .about h2,body.dark .about h3,
+body.dark .about p,body.dark .about li,
+body.dark .categories h1,body.dark .categories h2,body.dark .categories h3,body.dark .categories p,
+body.dark .menu-section h1,body.dark .menu-section h2,body.dark .menu-section h3,body.dark .menu-section h4,body.dark .menu-section p,
+body.dark .notice-wrap h1,body.dark .notice-wrap h2,body.dark .notice-wrap h3,body.dark .notice-wrap p,
+body.dark .order-section h1,body.dark .order-section h2,body.dark .order-section h3,body.dark .order-section h4,body.dark .order-section p,
+body.dark footer h1,body.dark footer h2,body.dark footer h3,body.dark footer p,body.dark footer a,body.dark footer span{color:#fff!important}
+
+/* Kicker / secondary text also follows the theme */
+body:not(.dark) .section-kicker,body:not(.dark) .section-text,body:not(.dark) .products-count{color:#17120f!important}
+body.dark .section-kicker,body.dark .section-text,body.dark .products-count{color:#fff!important}
+
+/* Category cards: text-only defaults. Active/hover colors are owned by
+   the final unified stylesheet at the end of <head> so there is a single
+   source of truth for the category states. */
+body:not(.dark) .category h3{color:#17120f!important}
+body.dark .category h3{color:#fff!important}
+
+/* Instagram card - elegant dark theme */
+body.dark .notice .instagram-box{
+  background:linear-gradient(145deg,#261b35 0%,#171521 55%,#20162d 100%)!important;
+  border:1px solid rgba(225,183,126,.38)!important;
+  color:#fff!important;
+  box-shadow:0 18px 45px rgba(0,0,0,.38),0 0 28px rgba(214,41,118,.08)!important;
+}
+body.dark .instagram-box-label,body.dark .instagram-box-handle{color:#fff!important}
+body.dark .instagram-box-handle{opacity:.82}
+body.dark .instagram-icon-wrap{
+  background:linear-gradient(145deg,#30233f,#17131f)!important;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 10px 28px rgba(0,0,0,.35)!important;
+}
+body.dark .notice .instagram-box:hover{
+  border-color:rgba(225,183,126,.72)!important;
+  box-shadow:0 24px 55px rgba(0,0,0,.46),0 0 32px rgba(214,41,118,.12)!important;
+}
+
+/* Light Instagram card */
+body:not(.dark) .notice .instagram-box{color:#17120f!important}
+body:not(.dark) .instagram-box-label,body:not(.dark) .instagram-box-handle{color:#17120f!important}
+body:not(.dark) .instagram-box-handle{opacity:.68}
+
+
+/* ===== Original inline style block ===== */
+
+/* Intro cafe name: one uniform gold color */
+.intro-title,
+.intro-title * {
+  color: var(--gold) !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--gold) !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* صفحه اصلی: نام کامل کافه بالای دکمه «مشاهده منو» یکدست طلایی */
+.hero h1,
+.hero h1 span,
+.hero h1 * {
+  color: var(--gold) !important;
+  background: none !important;
+  background-image: none !important;
+  -webkit-text-fill-color: var(--gold) !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* تغییر رنگ باکس «ثبت سفارش» فقط در حالت شب */
+body.dark .order-note{
+  background:#3a2a20 !important;
+  color:#fff8f0 !important;
+  border:1px solid rgba(226,183,126,.22);
+  box-shadow:0 10px 30px rgba(0,0,0,.22);
+}
+
+/* FINAL LIGHT ORDER BOX ACCENT */
+body:not(.dark) .order-section .order-card,
+body:not(.dark) .order-section .order-note{
+  background:#d8c3a5 !important;
+  color:#3f3428 !important;
+  border-color:#d8c3a5 !important;
+  box-shadow:0 14px 35px rgba(92,72,51,.12);
+}
+
+body:not(.dark) .order-section .order-card h3,
+body:not(.dark) .order-section .order-card p,
+body:not(.dark) .order-section .order-card .order-link,
+body:not(.dark) .order-section .order-note{
+  color:#3f3428 !important;
+}
+
+body:not(.dark) .order-section .order-card .order-link{
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+
+body:not(.dark) .order-section .order-card:hover{
+  box-shadow:0 20px 45px rgba(92,72,51,.18);
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* =====================================================================
+   CAFE FERIN — FINAL UNIFIED STYLESHEET
+   Dominant accent = brand blue. Gold = active state + hover only.
+   All rules are theme-aware (light / dark) and mobile-safe.
+   ===================================================================== */
+
+:root{
+  /* Palette taken from the reference board:
+     #F7F4EF cream, #1C1C1C charcoal, #A58B70 taupe */
+  --cream:#f7f4ef;
+  --charcoal:#1c1c1c;
+  --taupe:#a58b70;
+  --taupe-deep:#8d7358;
+  --blue:#a58b70;
+  --blue-strong:#8d7358;
+  --blue-deep:#6f5a43;
+  --gold-hi:#a58b70;
+
+  /* Hero + nav accents (light) */
+  --accent:#a58b70;
+  --accent-strong:#8d7358;
+  --on-accent:#f7f4ef;
+}
+
+body.dark{
+  --blue:#c3ab8e;
+  --blue-strong:#d8c3a5;
+  --blue-deep:#b09472;
+  --gold-hi:#d8c3a5;
+
+  --accent:#c3ab8e;
+  --accent-strong:#d8c3a5;
+  --on-accent:#1c1c1c;
+}
+
+/* ---------------------------------------------------------------------
+   0. CINEMATIC INTRO — croissant photograph behind frosted glass
+   --------------------------------------------------------------------- */
+#intro{
+  background:#1c1c1c !important;
+  overflow:hidden;
+}
+.intro-bg{
+  position:absolute;
+  inset:-4%;
+  background-image:url("../assets/images/embedded-9b1c095a3330.jpg");
+  background-size:cover;
+  background-position:center 55%;
+  filter:saturate(.92) contrast(1.05) brightness(.72);
+  transform:scale(1.08);
+  animation:introKenBurns 14s ease-out both;
+  will-change:transform;
+}
+@keyframes introKenBurns{
+  from{transform:scale(1.16) translate3d(0,1.2%,0)}
+  to{transform:scale(1.02) translate3d(0,0,0)}
+}
+.intro-veil{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(28,28,28,.28) 0%, rgba(28,28,28,.80) 62%, rgba(28,28,28,.95) 100%),
+    linear-gradient(180deg, rgba(28,28,28,.55) 0%, rgba(28,28,28,.30) 40%, rgba(28,28,28,.88) 100%);
+}
+.intro-grain{
+  position:absolute;
+  inset:0;
+  opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+  pointer-events:none;
+}
+#intro .intro-inner{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:34px 30px 30px;
+  border-radius:26px;
+  background:rgba(247,244,239,.07);
+  border:1px solid rgba(247,244,239,.16);
+  box-shadow:0 30px 90px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.14);
+  backdrop-filter:blur(14px) saturate(120%);
+  -webkit-backdrop-filter:blur(14px) saturate(120%);
+  animation:introPanelIn 1s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes introPanelIn{
+  from{opacity:0;transform:perspective(1200px) translateY(26px) rotateX(6deg)}
+  to{opacity:1;transform:perspective(1200px) translateY(0) rotateX(0)}
+}
+#intro .intro-logo{
+  filter:drop-shadow(0 12px 30px rgba(0,0,0,.5));
+}
+#intro .intro-title{
+  text-shadow:0 6px 30px rgba(0,0,0,.45);
+}
+#intro .intro-small{
+  color:rgba(247,244,239,.72) !important;
+}
+#intro .intro-line{
+  background:rgba(165,139,112,.85) !important;
+}
+#intro .intro-dot{
+  background:rgba(165,139,112,.95) !important;
+}
+@media(max-width:560px){
+  #intro .intro-inner{padding:26px 20px 24px;border-radius:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  .intro-bg,#intro .intro-inner{animation:none !important}
+  .intro-bg{transform:scale(1.04)}
+}
+
+/* ---------------------------------------------------------------------
+   1. BRAND WORDMARK — always the brand blue, in both themes
+   --------------------------------------------------------------------- */
+.cafe-brand,
+.cafe-brand *{
+  color:var(--blue) !important;
+  -webkit-text-fill-color:var(--blue) !important;
+  background:none !important;
+  background-image:none !important;
+  -webkit-background-clip:initial !important;
+  background-clip:initial !important;
+}
+
+/* Intro overlay + hero title keep the gold treatment explicitly, since
+   those two are intentionally gold rather than blue. */
+#intro .intro-title,
+#intro .intro-title *{
+  color:var(--gold-hi) !important;
+  -webkit-text-fill-color:var(--gold-hi) !important;
+}
+
+.hero h1,
+.hero h1 span,
+.hero h1 *{
+  color:var(--gold-hi) !important;
+  -webkit-text-fill-color:var(--gold-hi) !important;
+  background:none !important;
+  background-image:none !important;
+  -webkit-background-clip:initial !important;
+  background-clip:initial !important;
+}
+
+/* ---------------------------------------------------------------------
+   2. HERO ACTION BUTTONS — blue by default, gold on hover/focus
+   --------------------------------------------------------------------- */
+.hero .hero-buttons .btn,
+.hero-buttons .btn{
+  transition:background-color .3s ease,color .3s ease,
+             border-color .3s ease,transform .3s ease,box-shadow .3s ease;
+}
+
+/* Primary button: solid brand blue */
+.hero-buttons .btn-primary,
+body:not(.dark) .hero .hero-buttons .btn-primary,
+body.dark .hero .hero-buttons .btn-primary{
+  background:var(--blue) !important;
+  color:#ffffff !important;
+  border:1px solid var(--blue) !important;
+  -webkit-text-fill-color:#ffffff !important;
+}
+body.dark .hero-buttons .btn-primary{
+  color:#12100f !important;
+  -webkit-text-fill-color:#12100f !important;
+}
+
+/* Outline button: blue text + blue border */
+.hero-buttons .btn-outline,
+body:not(.dark) .hero .hero-buttons .btn-outline{
+  background:transparent !important;
+  color:var(--blue) !important;
+  border:1.5px solid var(--blue) !important;
+  -webkit-text-fill-color:var(--blue) !important;
+}
+body.dark .hero-buttons .btn-outline{
+  color:var(--blue-strong) !important;
+  border-color:var(--blue-strong) !important;
+  -webkit-text-fill-color:var(--blue-strong) !important;
+}
+
+/* Hover / focus = gold, on the very same element */
+.hero-buttons .btn:hover,
+.hero-buttons .btn:focus-visible{
+  background:var(--gold-hi) !important;
+  border-color:var(--gold-hi) !important;
+  color:#17120f !important;
+  -webkit-text-fill-color:#17120f !important;
+  transform:translateY(-3px);
+  box-shadow:0 14px 32px rgba(201,155,97,.35);
+}
+
+/* ---------------------------------------------------------------------
+   3. NAVIGATION LINKS — blue default, gold on hover, gold active
+   --------------------------------------------------------------------- */
+.nav-links a{
+  transition:color .28s ease;
+}
+
+body:not(.dark) .nav-links a,
+body:not(.dark) .nav.scrolled .nav-links a,
+body.dark .nav-links a,
+body.dark .nav.scrolled .nav-links a{
+  color:var(--blue) !important;
+  -webkit-text-fill-color:var(--blue) !important;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links a[aria-current="page"],
+.nav-links a.active{
+  color:var(--gold-hi) !important;
+  -webkit-text-fill-color:var(--gold-hi) !important;
+}
+
+/* The underline micro-interaction follows the accent, not the gold. */
+.nav-links a:not(.order-nav)::after{
+  background:var(--blue) !important;
+}
+
+/* "ثبت سفارش" nav pill: blue, flipped to gold on hover */
+.nav-links .order-nav,
+body:not(.dark) .nav-links .order-nav,
+body.dark .nav-links .order-nav{
+  background:var(--blue) !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+  border:1px solid var(--blue) !important;
+}
+body.dark .nav-links .order-nav{
+  color:#12100f !important;
+  -webkit-text-fill-color:#12100f !important;
+}
+.nav-links .order-nav:hover,
+.nav-links .order-nav:focus-visible{
+  background:var(--gold-hi) !important;
+  border-color:var(--gold-hi) !important;
+  color:#17120f !important;
+  -webkit-text-fill-color:#17120f !important;
+}
+
+/* ---------------------------------------------------------------------
+   4. PRODUCT CARDS — name, price and description all in brand blue
+   --------------------------------------------------------------------- */
+.product-card .product-name,
+body:not(.dark) .product-card .product-name,
+body.dark .product-card .product-name{
+  color:var(--blue) !important;
+  -webkit-text-fill-color:var(--blue) !important;
+}
+
+.product-card .product-price,
+body:not(.dark) .product-card .product-price,
+body.dark .product-card .product-price{
+  color:var(--blue-strong) !important;
+  -webkit-text-fill-color:var(--blue-strong) !important;
+}
+
+.product-card .product-desc,
+body:not(.dark) .product-card .product-desc,
+body.dark .product-card .product-desc{
+  color:var(--blue) !important;
+  -webkit-text-fill-color:var(--blue) !important;
+  opacity:.86;
+}
+
+/* The "Cafe Ferin" inline brand inside a description follows the same blue */
+.product-card .product-desc .cafe-brand{
+  color:var(--blue) !important;
+  -webkit-text-fill-color:var(--blue) !important;
+  opacity:1;
+  font-weight:600;
+}
+
+/* ---------------------------------------------------------------------
+   5. CATEGORY TILES — selected tile turns blue, hover turns gold
+   --------------------------------------------------------------------- */
+.category{
+  transition:background-color .3s ease,color .3s ease,
+             border-color .3s ease,transform .3s ease,box-shadow .3s ease;
+}
+
+/* active / selected tile -> blue */
+.category.active,
+.category[aria-selected="true"],
+.category.is-active{
+  background:var(--blue) !important;
+  border-color:var(--blue) !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+}
+body.dark .category.active,
+body.dark .category[aria-selected="true"],
+body.dark .category.is-active{
+  color:#12100f !important;
+  -webkit-text-fill-color:#12100f !important;
+}
+.category.active *,
+.category[aria-selected="true"] *,
+.category.is-active *{
+  color:inherit !important;
+  -webkit-text-fill-color:currentColor !important;
+}
+
+/* hover (not selected) -> gold */
+.category:hover:not(.active){
+  border-color:var(--gold-hi) !important;
+  box-shadow:0 14px 32px rgba(201,155,97,.22);
+}
+.category:hover:not(.active) h3,
+.category:hover:not(.active) .icon{
+  color:var(--gold-hi) !important;
+}
+
+/* ---------------------------------------------------------------------
+   6. ORDER SECTION — active/link accents in blue, hover in gold
+   --------------------------------------------------------------------- */
+.order-card .order-link,
+body:not(.dark) .order-card .order-link,
+body.dark .order-card .order-link{
+  color:var(--blue) !important;
+  -webkit-text-fill-color:var(--blue) !important;
+}
+.order-card .order-link:hover{
+  color:var(--gold-hi) !important;
+  -webkit-text-fill-color:var(--gold-hi) !important;
+}
+
+/* ---------------------------------------------------------------------
+   7. DARK-MODE SURFACES — keep the blue accent readable at night
+   --------------------------------------------------------------------- */
+body.dark .product-card,
+body.dark .category,
+body.dark .notice,
+body.dark .order-card,
+body.dark .notice-box{
+  border-color:rgba(142,163,196,.22) !important;
+}
+
+body.dark .product-card:hover,
+body.dark .category:hover:not(.active){
+  box-shadow:0 16px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(142,163,196,.28);
+}
+
+body.dark .section-title,
+body.dark .current-category{
+  color:var(--blue-strong) !important;
+  -webkit-text-fill-color:var(--blue-strong) !important;
+}
+
+body:not(.dark) .section-title,
+body:not(.dark) .current-category{
+  color:var(--blue-deep) !important;
+  -webkit-text-fill-color:var(--blue-deep) !important;
+}
+
+/* Products-count chip stays legible in both themes */
+.products-count{
+  color:var(--blue) !important;
+  -webkit-text-fill-color:var(--blue) !important;
+}
+
+/* ---------------------------------------------------------------------
+   8. MOBILE MENU — single source of truth for open / closed state
+   --------------------------------------------------------------------- */
+@media(max-width:850px){
+
+  .nav{ z-index:12000; }
+
+  /* Button is only visible on mobile */
+  .menu-btn{
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    background:none;
+    border:0;
+    font-size:25px;
+    line-height:1;
+    padding:4px;
+    color:var(--blue) !important;
+    transition:color .3s ease,transform .3s ease;
+  }
+  .menu-btn:hover{ color:var(--gold-hi) !important; }
+  body.dark .menu-btn{ color:var(--blue-strong) !important; }
+
+  /* Panel: hidden by default, shown only when .open is present */
+  .nav .nav-links{
+    position:fixed !important;
+    z-index:12001 !important;
+    top:calc(var(--nav-height,76px) + 12px) !important;
+    right:14px !important;
+    left:14px !important;
+    width:auto !important;
+    max-height:calc(100dvh - var(--nav-height,76px) - 30px) !important;
+    overflow-y:auto !important;
+    margin:0 !important;
+    padding:16px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:4px !important;
+    border-radius:20px !important;
+    background:var(--mobile-menu-bg) !important;
+    border:1px solid var(--line) !important;
+    box-shadow:0 25px 70px rgba(0,0,0,.22) !important;
+
+    /* closed state */
+    visibility:hidden !important;
+    opacity:0 !important;
+    transform:translateY(-10px) !important;
+    pointer-events:none !important;
+    transition:opacity .28s ease,transform .28s ease,visibility .28s ease !important;
+  }
+
+  /* open state — wins over the closed rules above by source order */
+  .nav .nav-links.open{
+    visibility:visible !important;
+    z-index:12001 !important;
+    opacity:1 !important;
+    transform:translateY(0) !important;
+    pointer-events:auto !important;
+  }
+
+  .nav .nav-links a{
+    position:relative !important;
+    z-index:12002 !important;
+    pointer-events:auto !important;
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    min-height:50px;
+    width:100%;
+    padding:10px 14px !important;
+    text-align:center;
+    border-radius:12px;
+    color:var(--blue) !important;
+    -webkit-text-fill-color:var(--blue) !important;
+  }
+  body.dark .nav .nav-links a{
+    color:var(--blue-strong) !important;
+    -webkit-text-fill-color:var(--blue-strong) !important;
+  }
+  .nav .nav-links a:hover{
+    color:var(--gold-hi) !important;
+    -webkit-text-fill-color:var(--gold-hi) !important;
+  }
+  .nav .nav-links .order-nav{
+    margin-top:6px;
+    background:var(--blue) !important;
+    color:#ffffff !important;
+    -webkit-text-fill-color:#ffffff !important;
+    border-radius:999px;
+    border:1px solid var(--blue) !important;
+  }
+  body.dark .nav .nav-links .order-nav{
+    color:#12100f !important;
+    -webkit-text-fill-color:#12100f !important;
+  }
+  .nav .nav-links .order-nav:hover{
+    background:var(--gold-hi) !important;
+    border-color:var(--gold-hi) !important;
+    color:#17120f !important;
+    -webkit-text-fill-color:#17120f !important;
+  }
+
+  /* The little separator underline is desktop-only */
+  .nav .nav-links a:not(.order-nav)::after{ display:none !important; }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-buttons .btn,
+  .nav-links,
+  .nav-links a,
+  .category,
+  .menu-btn{ transition:none !important; }
+}
+
+
+/* ===== Original inline style block ===== */
+
+
+/* =====================================================================
+   PRODUCT BARS — narrow full-width horizontal rows, image on the right.
+   ===================================================================== */
+
+.product-grid{
+  display:flex;
+  flex-direction:column;
+  gap:11px;
+  max-width:none;
+}
+
+.product-card{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 264px;
+  gap:0;
+  min-height:208px;
+  border-radius:16px;
+  overflow:hidden;
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 6px 18px rgba(28,28,28,.055), inset 0 1px 0 rgba(255,255,255,.65);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);
+  backdrop-filter:blur(18px) saturate(150%);
+  transition:transform .34s cubic-bezier(.2,.7,.3,1), box-shadow .34s, border-color .34s;
+}
+body.dark .product-card{
+  background:rgba(28,28,28,.5);
+  border-color:rgba(255,255,255,.09);
+  box-shadow:0 8px 22px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.07);
+}
+@supports not ((backdrop-filter:blur(4px)) or (-webkit-backdrop-filter:blur(4px))){
+  .product-card{background:rgba(255,255,255,.93)}
+  body.dark .product-card{background:rgba(28,28,28,.93)}
+}
+.product-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(165,139,112,.5);
+  box-shadow:0 14px 30px rgba(28,28,28,.13);
+}
+body.dark .product-card:hover{ box-shadow:0 16px 34px rgba(0,0,0,.5); }
+
+/* photo — right side */
+.product-card .product-image{
+  order:2;
+  position:relative;
+  height:100%;
+  min-height:208px;
+  overflow:hidden;
+  background:#e9e2d8;
+}
+.product-card .product-image img{
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+  transition:transform .6s cubic-bezier(.2,.7,.3,1);
+}
+.product-card:hover .product-image img{ transform:scale(1.06); }
+.product-card .product-image::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(90deg, rgba(255,255,255,.3), rgba(255,255,255,0) 38%);
+  pointer-events:none;
+}
+body.dark .product-card .product-image::after{
+  background:linear-gradient(90deg, rgba(28,28,28,.42), rgba(28,28,28,0) 42%);
+}
+
+/* text — left side, vertically centred */
+.product-card .p-body{
+  order:1;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-areas:"name price" "desc price";
+  align-content:center;
+  align-items:center;
+  column-gap:24px;
+  row-gap:9px;
+  padding:22px 26px;
+  min-width:0;
+}
+
+.product-card .product-name{
+  grid-area:name;
+  font-size:20px;
+  font-weight:800;
+  line-height:1.45;
+  color:var(--blue);
+  margin:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body.dark .product-card .product-name{ color:var(--gold-hi); }
+
+.product-card .product-desc{
+  grid-area:desc;
+  margin:0;
+  font-size:14px;
+  line-height:1.7;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.product-card .cafe-brand{ color:var(--blue); font-weight:700; }
+body.dark .product-card .cafe-brand{ color:var(--gold-hi); }
+
+.product-card .p-price{
+  grid-area:price;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:1px;
+  padding-inline-start:18px;
+  border-inline-start:1px dashed rgba(28,28,28,.13);
+  min-width:132px;
+}
+body.dark .product-card .p-price{ border-inline-start-color:rgba(255,255,255,.14); }
+
+.p-old{
+  font-size:13px;
+  color:var(--muted);
+  text-decoration:line-through;
+  text-decoration-thickness:1px;
+}
+.product-card .product-price{
+  font-size:20px;
+  font-weight:900;
+  white-space:nowrap;
+  color:var(--blue);
+  display:inline-flex;
+  align-items:baseline;
+  gap:4px;
+}
+body.dark .product-card .product-price{ color:var(--gold-hi); }
+.product-card .product-price em{
+  font-size:10px; font-weight:600; font-style:normal; color:var(--muted);
+}
+body.dark .product-card .product-price em{ color:#B9AFA5; }
+
+/* entrance */
+@keyframes ferinCardIn{
+  from{ opacity:0; transform:translateY(10px) }
+  to{ opacity:1; transform:none }
+}
+.product-grid .product-card{ animation:ferinCardIn .45s cubic-bezier(.2,.7,.3,1) both; }
+.product-grid .product-card:nth-child(2){ animation-delay:.06s }
+.product-grid .product-card:nth-child(3){ animation-delay:.12s }
+.product-grid .product-card:nth-child(4){ animation-delay:.18s }
+
+@media(max-width:820px){
+  .product-card{ grid-template-columns:1fr 216px; min-height:192px; }
+  .product-card .product-image{ min-height:192px; }
+  .product-card .p-body{ padding:11px 14px; column-gap:12px; }
+  .product-card .product-name{ font-size:13.5px; }
+  .product-card .p-price{ min-width:104px; padding-inline-start:12px; }
+  .product-card .product-price{ font-size:13.5px; }
+}
+@media(max-width:430px){
+  .product-card{ grid-template-columns:1fr 168px; min-height:176px; }
+  .product-card .product-image{ min-height:176px; }
+  .product-card .product-desc{ display:none; }
+  .product-card .p-body{ grid-template-areas:"name price"; }
+  .product-card .product-name{ font-size:12.5px; }
+  .product-card .p-price{ min-width:88px; }
+  .product-card .product-price{ font-size:12.5px; }
+  .p-old{ font-size:9.5px; }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .product-grid .product-card{ animation:none !important; }
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* Cafe Ferin brand color — matched to the uploaded reference */
+:root{
+  --cafe-ferin-blue:#7386A4;
+}
+
+/* Every visual Cafe Ferin wordmark */
+.cafe-brand,
+.cafe-brand *{
+  color:var(--cafe-ferin-blue) !important;
+  -webkit-text-fill-color:var(--cafe-ferin-blue) !important;
+  background:none !important;
+  background-image:none !important;
+  -webkit-background-clip:initial !important;
+  background-clip:initial !important;
+}
+
+/* Main hero title: "Ferin Cafe" */
+.hero h1,
+.hero h1 *,
+.hero h1 span{
+  color:var(--cafe-ferin-blue) !important;
+  -webkit-text-fill-color:var(--cafe-ferin-blue) !important;
+  background:none !important;
+  background-image:none !important;
+  -webkit-background-clip:initial !important;
+  background-clip:initial !important;
+}
+
+/* Intro brand name */
+#intro .intro-title{
+  color:var(--cafe-ferin-blue) !important;
+  -webkit-text-fill-color:var(--cafe-ferin-blue) !important;
+}
+
+/* Keep the same brand color in both light and dark modes */
+body.dark .cafe-brand,
+body.dark .cafe-brand *,
+body.dark .hero h1,
+body.dark .hero h1 *,
+body.dark #intro .intro-title{
+  color:var(--cafe-ferin-blue) !important;
+  -webkit-text-fill-color:var(--cafe-ferin-blue) !important;
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* ================================================================
+   RESPONSIVE PRODUCT CARDS
+   Make product names/prices fully readable on phones and browsers.
+   ================================================================ */
+.product-card .p-body,
+.product-card .product-name,
+.product-card .product-desc,
+.product-card .p-price{
+  min-width:0;
+}
+
+.product-card .product-name{
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+
+@media (max-width: 850px){
+  .product-grid{gap:12px; width:100%;}
+  .product-card{
+    width:100%;
+    grid-template-columns:minmax(0, 1fr) minmax(150px, 38%);
+    min-height:184px;
+  }
+  .product-card .product-image{min-height:184px;}
+  .product-card .p-body{
+    padding:16px 14px;
+    column-gap:10px;
+    row-gap:8px;
+  }
+  .product-card .product-name{
+    font-size:clamp(14px, 3.6vw, 17px);
+    line-height:1.55;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    line-clamp:3;
+    overflow:hidden;
+  }
+  .product-card .product-desc{
+    white-space:normal;
+    line-height:1.6;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    line-clamp:2;
+    overflow:hidden;
+  }
+  .product-card .p-price{
+    min-width:96px;
+    padding-inline-start:10px;
+  }
+  .product-card .product-price{font-size:clamp(13px,3.5vw,17px);}
+}
+
+@media (max-width: 600px){
+  .product-card{
+    grid-template-columns:minmax(0, 1fr) minmax(132px, 40%);
+    min-height:166px;
+    border-radius:15px;
+  }
+  .product-card .product-image{min-height:166px;}
+  .product-card .p-body{padding:13px 12px;}
+  .product-card .product-name{
+    font-size:clamp(13.5px, 4vw, 16px);
+    line-height:1.5;
+    -webkit-line-clamp:3;
+    line-clamp:3;
+  }
+  .product-card .product-desc{font-size:12px;}
+  .product-card .p-price{min-width:84px; padding-inline-start:9px;}
+  .p-old{font-size:10px;}
+}
+
+@media (max-width: 430px){
+  /* On narrow phones, stack name and price so neither can squeeze or
+     disappear because of the horizontal grid. */
+  .product-card{
+    grid-template-columns:minmax(0, 1fr) minmax(132px, 42%);
+    min-height:158px;
+  }
+  .product-card .product-image{min-height:158px;}
+  .product-card .p-body{
+    padding:12px 11px;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:
+      "name"
+      "price";
+    align-content:center;
+    row-gap:10px;
+  }
+  .product-card .product-name{
+    font-size:14px;
+    line-height:1.55;
+    -webkit-line-clamp:3;
+    line-clamp:3;
+  }
+  .product-card .product-desc{display:none;}
+  .product-card .p-price{
+    min-width:0;
+    width:100%;
+    padding-inline-start:0;
+    border-inline-start:0;
+    align-items:flex-start;
+    gap:2px;
+  }
+  .product-card .product-price{font-size:14px;}
+  .p-old{font-size:10px;}
+}
+
+@media (max-width: 360px){
+  .product-card{
+    grid-template-columns:minmax(0, 1fr) 120px;
+    min-height:150px;
+  }
+  .product-card .product-image{min-height:150px;}
+  .product-card .p-body{padding:10px;}
+  .product-card .product-name{font-size:13px;}
+  .product-card .product-price{font-size:13px;}
+}
+
+/* Prevent any product row from creating horizontal page overflow. */
+.product-grid,
+.product-card,
+.product-card .p-body{max-width:100%;}
+
+
+/* ===== Original inline style block ===== */
+
+/* =====================================================================
+   GLASSMORPHISM + 3D LAYER
+   Cards become frosted-glass panels that tilt in real perspective on
+   hover, and the hero gets depth parallax. Everything degrades to a
+   static, readable layout without JS, without blur support, or when the
+   visitor prefers reduced motion.
+   ===================================================================== */
+
+/* --- Shared glass surface --- */
+.product-card,
+.category,
+.notice,
+.order-card,
+.feature,
+.notice-box{
+  position:relative;
+  backdrop-filter:blur(16px) saturate(135%);
+  -webkit-backdrop-filter:blur(16px) saturate(135%);
+  background-color:rgba(255,255,255,.55) !important;
+  border:1px solid rgba(255,255,255,.65) !important;
+  box-shadow:
+    0 18px 44px rgba(28,28,28,.10),
+    inset 0 1px 0 rgba(255,255,255,.85);
+  transform-style:preserve-3d;
+  transition:
+    transform .5s cubic-bezier(.22,1,.36,1),
+    box-shadow .5s cubic-bezier(.22,1,.36,1),
+    border-color .4s ease,
+    background-color .4s ease;
+  overflow:hidden;
+}
+
+/* Soft light sweep across the glass on hover */
+.product-card::before,
+.category::before,
+.notice-box::before,
+.order-card::before,
+.feature::before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width:55%;
+  left:-140%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-18deg);
+  transition:left .85s cubic-bezier(.22,1,.36,1);
+  pointer-events:none;
+  z-index:3;
+}
+.product-card:hover::before,
+.category:hover::before,
+.notice-box:hover::before,
+.order-card:hover::before,
+.feature:hover::before{
+  left:150%;
+}
+
+/* --- 3D tilt: JS writes --rx / --ry, CSS just consumes them --- */
+.product-card,
+.category{
+  --rx:0deg;
+  --ry:0deg;
+  --tz:0px;
+  transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0,0,var(--tz));
+}
+.product-card:hover,
+.category:hover{
+  --tz:14px;
+  border-color:rgba(165,139,112,.55) !important;
+  box-shadow:
+    0 30px 70px rgba(28,28,28,.20),
+    inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+/* Inner content lifts slightly for a real parallax-on-glass feel */
+.product-card .product-image,
+.product-card .product-info,
+.category .icon,
+.category h3{
+  transform:translateZ(26px);
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.product-card:hover .product-image,
+.product-card:hover .product-info,
+.category:hover .icon,
+.category:hover h3{
+  transform:translateZ(46px);
+}
+
+/* --- Dark theme glass --- */
+body.dark .product-card,
+body.dark .category,
+body.dark .notice,
+body.dark .order-card,
+body.dark .feature,
+body.dark .notice-box{
+  background-color:rgba(28,28,28,.55) !important;
+  border-color:rgba(216,195,165,.20) !important;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.07);
+}
+body.dark .product-card:hover,
+body.dark .category:hover{
+  border-color:rgba(216,195,165,.45) !important;
+}
+body.dark .product-card::before,
+body.dark .category::before,
+body.dark .notice-box::before,
+body.dark .order-card::before,
+body.dark .feature::before{
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.14),transparent);
+}
+
+/* --- Hero depth --- */
+.hero{
+  --mx:0px;
+  --my:0px;
+  perspective:1100px;
+}
+.hero-content{
+  transform:translate3d(var(--mx),var(--my),0);
+  transition:transform .6s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+}
+
+/* --- Floating ambient orbs behind the glass --- */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(165,139,112,.16), transparent 42%),
+    radial-gradient(circle at 88% 72%, rgba(165,139,112,.13), transparent 46%);
+  animation:ferinOrbs 16s ease-in-out infinite alternate;
+}
+@keyframes ferinOrbs{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to{transform:translate3d(-18px,-26px,0) scale(1.06)}
+}
+main{position:relative;z-index:1}
+
+/* --- Minimum fallbacks --- */
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
+  .product-card,.category,.notice,.order-card,.feature,.notice-box{
+    background-color:rgba(255,255,255,.92) !important;
+  }
+  body.dark .product-card,body.dark .category,body.dark .notice,
+  body.dark .order-card,body.dark .feature,body.dark .notice-box{
+    background-color:rgba(28,28,28,.94) !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .product-card,.category,.hero-content,body::after{
+    transform:none !important;
+    animation:none !important;
+    transition:none !important;
+  }
+  .product-card::before,.category::before,.notice-box::before,
+  .order-card::before,.feature::before{display:none !important}
+}
+
+@media(max-width:850px){
+  /* Touch devices: no tilt, just a clean lift */
+  .product-card,.category{transform:none}
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* =====================================================================
+   SITE-WIDE POLISH LAYER
+   Glass surfaces on every section, photograph-backed category tiles with
+   glass name plates, larger two-per-row product cards, and deeper 3D.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. GLASS SECTIONS — every block sits on a frosted panel
+   --------------------------------------------------------------------- */
+.about-grid,
+.order-grid,
+.notice,
+.menu-section .container,
+#categories .container,
+#about .container,
+#order .container{
+  position:relative;
+}
+
+#about .container,
+#categories .container,
+#menu .container,
+#order .container,
+#notice .container,
+footer .footer-inner{
+  backdrop-filter:blur(18px) saturate(135%);
+  -webkit-backdrop-filter:blur(18px) saturate(135%);
+  background:rgba(247,244,239,.55);
+  border:1px solid rgba(255,255,255,.60);
+  border-radius:26px;
+  box-shadow:
+    0 22px 60px rgba(28,28,28,.10),
+    inset 0 1px 0 rgba(255,255,255,.75);
+  padding:40px 34px;
+  margin:0 auto;
+  transition:background-color .45s ease,border-color .45s ease,box-shadow .45s ease;
+}
+
+body.dark #about .container,
+body.dark #categories .container,
+body.dark #menu .container,
+body.dark #order .container,
+body.dark #notice .container,
+body.dark footer .footer-inner{
+  background:rgba(28,28,28,.52);
+  border-color:rgba(216,195,165,.16);
+  box-shadow:
+    0 24px 64px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* Keep the glass panels comfortably inset on small screens */
+@media(max-width:850px){
+  #about .container,
+  #categories .container,
+  #menu .container,
+  #order .container,
+  #notice .container,
+  footer .footer-inner{padding:26px 18px;border-radius:20px}
+}
+
+/* ---------------------------------------------------------------------
+   2. CATEGORY TILES — photo background + glass name plate
+   --------------------------------------------------------------------- */
+.category-grid{
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:20px !important;
+}
+
+.category{
+  position:relative !important;
+  min-height:250px !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border-radius:24px !important;
+  border:1px solid rgba(255,255,255,.28) !important;
+  background:rgba(28,28,28,.35) !important;
+  isolation:isolate;
+  display:flex !important;
+  align-items:flex-end !important;
+  justify-content:center !important;
+}
+
+/* The photograph itself */
+.category-photo{
+  position:absolute;
+  inset:0;
+  background-image:var(--cat-photo);
+  background-size:cover;
+  background-position:center;
+  transform:scale(1.06);
+  transition:transform 1s cubic-bezier(.22,1,.36,1),filter .6s ease;
+  filter:saturate(.96) contrast(1.04);
+  z-index:-1;
+}
+.category::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(28,28,28,.10) 0%,rgba(28,28,28,.35) 55%,rgba(28,28,28,.78) 100%);
+  transition:opacity .5s ease;
+  z-index:0;
+  pointer-events:none;
+}
+.category:hover .category-photo,
+.category.active .category-photo{
+  transform:scale(1.13);
+  filter:saturate(1.06) contrast(1.08) brightness(.94);
+}
+
+/* The name sits directly on the photograph as large frosted glass text.
+   No box, no sticker: the glass is in the lettering itself. */
+.category-name{
+  position:absolute;
+  z-index:3;
+  left:14px;
+  right:14px;
+  bottom:6px;
+  display:block;
+  font-size:clamp(20px,2.2vw,27px);
+  font-weight:800;
+  line-height:1.25;
+  letter-spacing:-.2px;
+  text-align:center;
+  color:#fff;
+  -webkit-text-fill-color:#fff;
+  background:none;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  text-shadow:none;
+  filter:none;
+  transition:none;
+  transform:none;
+}
+
+/* Darker gradient so the frosted text always keeps contrast */
+.category-shade{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(28,28,28,.06) 0%,rgba(28,28,28,.28) 52%,rgba(28,28,28,.80) 100%);
+  transition:background .5s ease;
+}
+.category:hover .category-shade{
+  background:linear-gradient(180deg,rgba(28,28,28,.02) 0%,rgba(28,28,28,.22) 50%,rgba(28,28,28,.74) 100%);
+}
+.category:hover .category-name,
+.category.active .category-name{
+  transform:none;
+  filter:none;
+}
+
+
+.category.active{
+  border-color:rgba(216,195,165,.85) !important;
+  box-shadow:0 26px 60px rgba(28,28,28,.30), 0 0 0 2px rgba(216,195,165,.55) !important;
+}
+.category.active::after{
+  background:linear-gradient(180deg,rgba(28,28,28,0) 0%,rgba(28,28,28,.22) 55%,rgba(28,28,28,.70) 100%);
+}
+
+/* ---------------------------------------------------------------------
+   3. PRODUCT CARDS — two per row, noticeably larger
+   --------------------------------------------------------------------- */
+.product-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:26px !important;
+}
+.product-card{
+  border-radius:26px !important;
+  padding:0 !important;
+}
+.product-card .product-image{height:100% !important}
+.product-card .product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 1.1s cubic-bezier(.22,1,.36,1),filter .5s ease;
+}
+.product-card:hover .product-image img{
+  transform:scale(1.07);
+  filter:saturate(1.05) brightness(1.02);
+}
+.product-card .product-info{
+  padding:22px 24px 26px !important;
+}
+.product-card .product-name{
+  font-size:19px !important;
+}
+.product-card .product-price{
+  font-size:16px !important;
+}
+
+/* Single column only on genuinely narrow screens */
+@media(max-width:560px){
+  .product-grid{grid-template-columns:1fr !important;gap:20px !important}
+  .product-card .product-image{height:100% !important}
+  .category-grid{grid-template-columns:repeat(2,1fr) !important}
+  .category{min-height:190px !important}
+}
+
+/* ---------------------------------------------------------------------
+   4. SCROLL REVEAL for section panels
+   --------------------------------------------------------------------- */
+.ferin-reveal{
+  opacity:0;
+  transform:translateY(26px);
+  transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);
+}
+.ferin-reveal.ferin-in{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ---------------------------------------------------------------------
+   5. EXTRA 3D DEPTH on section headings
+   --------------------------------------------------------------------- */
+.section-head{
+  transform-style:preserve-3d;
+  perspective:900px;
+}
+.section-title{
+  transition:transform .6s cubic-bezier(.22,1,.36,1),text-shadow .6s ease;
+}
+.section-head:hover .section-title{
+  transform:translateZ(24px);
+  text-shadow:0 10px 30px rgba(28,28,28,.18);
+}
+
+/* Glass toolbar above the product grid */
+.menu-toolbar{
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  background:rgba(247,244,239,.45);
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:16px;
+  padding:12px 18px;
+}
+body.dark .menu-toolbar{
+  background:rgba(28,28,28,.45);
+  border-color:rgba(216,195,165,.16);
+}
+
+@media(prefers-reduced-motion:reduce){
+  .ferin-reveal{opacity:1 !important;transform:none !important;transition:none !important}
+  .category-photo,.category-name,.product-card .product-image img{transition:none !important}
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* =====================================================================
+   AMBIENT BACKGROUND FIELD
+   A quiet grid of fine lines with soft warm glows, plus outlines of the
+   bakery shapes drifting very slowly behind the content. Everything sits
+   at low contrast so it reads as texture, never as decoration.
+   ===================================================================== */
+
+.ferin-field{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.ferin-field > *{position:absolute;inset:0}
+
+/* Fine technical grid */
+.ferin-grid{
+  background-image:
+    linear-gradient(to right, var(--field-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--field-line) 1px, transparent 1px);
+  background-size:88px 88px;
+  mask-image:radial-gradient(ellipse 92% 78% at 50% 42%, #000 26%, transparent 82%);
+  -webkit-mask-image:radial-gradient(ellipse 92% 78% at 50% 42%, #000 26%, transparent 82%);
+}
+
+/* Two warm blooms that drift against each other */
+.ferin-bloom{
+  background:
+    radial-gradient(circle at 18% 24%, var(--field-glow) 0%, transparent 46%),
+    radial-gradient(circle at 82% 76%, var(--field-glow) 0%, transparent 48%);
+  animation:ferinBloom 26s ease-in-out infinite alternate;
+}
+@keyframes ferinBloom{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to{transform:translate3d(-26px,-34px,0) scale(1.07)}
+}
+
+/* Drifting bakery silhouettes */
+.ferin-shapes{opacity:var(--field-shape-opacity)}
+.ferin-shape{
+  position:absolute;
+  color:var(--field-shape);
+  will-change:transform;
+}
+.ferin-shape svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+.ferin-shape--croissant{width:190px;height:190px;left:7%;top:16%;animation:ferinDrift1 34s ease-in-out infinite}
+.ferin-shape--cake{width:160px;height:160px;right:9%;top:24%;animation:ferinDrift2 40s ease-in-out infinite}
+.ferin-shape--bread{width:210px;height:210px;left:16%;bottom:12%;animation:ferinDrift3 46s ease-in-out infinite}
+.ferin-shape--croissant2{width:140px;height:140px;right:14%;bottom:18%;animation:ferinDrift2 38s ease-in-out infinite reverse}
+.ferin-shape--cup{width:150px;height:150px;right:42%;top:58%;animation:ferinDrift1 44s ease-in-out infinite reverse}
+
+/* Drift is one animation; the pointer offset is a second transform on the
+   same element, so they compose instead of overwriting each other. */
+@keyframes ferinDrift1{
+  0%,100%{transform:rotate(-4deg)}
+  50%{transform:rotate(5deg)}
+}
+@keyframes ferinDrift2{
+  0%,100%{transform:rotate(5deg)}
+  50%{transform:rotate(-5deg)}
+}
+@keyframes ferinDrift3{
+  0%,100%{transform:rotate(3deg)}
+  50%{transform:rotate(-6deg)}
+}
+.ferin-shape{
+  translate:var(--px,0) var(--py,0);
+  transition:translate .9s cubic-bezier(.22,1,.36,1);
+}
+
+/* Light theme: whisper-quiet warmth on cream */
+:root{
+  --field-line:rgba(28,28,28,.045);
+  --field-glow:rgba(165,139,112,.10);
+  --field-shape:rgba(141,115,88,.20);
+  --field-shape-opacity:.85;
+}
+/* Dark theme: the reference look — faint grid, warm coffee embers */
+body.dark{
+  --field-line:rgba(247,244,239,.045);
+  --field-glow:rgba(165,139,112,.14);
+  --field-shape:rgba(216,195,165,.16);
+  --field-shape-opacity:.9;
+}
+
+body.dark .ferin-field{
+  background:#141312;
+}
+
+/* The content has to sit above the field */
+.nav,main,footer{position:relative;z-index:2}
+
+@media(prefers-reduced-motion:reduce){
+  .ferin-bloom,.ferin-shape{animation:none !important}
+}
+@media(max-width:850px){
+  .ferin-shape--croissant2,.ferin-shape--cup{display:none}
+  .ferin-grid{background-size:64px 64px}
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* Product cards and category tiles are rebuilt by JavaScript on every
+   category change, so they carry a pure-CSS staggered entrance that always
+   resolves to the fully visible end state. */
+@keyframes ferinCardIn{
+  from{opacity:0;transform:translateY(18px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.category-grid .category,
+.product-grid .product-card{
+  animation:ferinCardIn .55s cubic-bezier(.22,1,.36,1) both;
+}
+.product-grid .product-card:nth-child(1){animation-delay:0ms}
+.product-grid .product-card:nth-child(2){animation-delay:55ms}
+.product-grid .product-card:nth-child(3){animation-delay:110ms}
+.product-grid .product-card:nth-child(4){animation-delay:165ms}
+.product-grid .product-card:nth-child(5){animation-delay:220ms}
+.product-grid .product-card:nth-child(6){animation-delay:275ms}
+.product-grid .product-card:nth-child(7){animation-delay:330ms}
+.product-grid .product-card:nth-child(8){animation-delay:385ms}
+.category-grid .category:nth-child(1){animation-delay:0ms}
+.category-grid .category:nth-child(2){animation-delay:60ms}
+.category-grid .category:nth-child(3){animation-delay:120ms}
+.category-grid .category:nth-child(4){animation-delay:180ms}
+.category-grid .category:nth-child(5){animation-delay:240ms}
+.category-grid .category:nth-child(6){animation-delay:300ms}
+@media(prefers-reduced-motion:reduce){
+  .category-grid .category,
+  .product-grid .product-card{animation:none !important}
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* =========================================================
+   MOBILE MENU — rebuilt from scratch with native HTML details
+   The menu links are plain anchors. No JS click interception.
+   ========================================================= */
+.mobile-menu{display:none;position:relative;}
+.mobile-menu-toggle{
+  list-style:none;
+  width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;
+  border:0;border-radius:12px;
+  background:transparent;
+  color:var(--blue,#7386a4);
+  cursor:pointer;
+  font-size:31px;
+  line-height:1;
+  -webkit-tap-highlight-color:transparent;
+}
+.mobile-menu-toggle::-webkit-details-marker{display:none;}
+.mobile-menu-toggle::marker{content:"";}
+.mobile-menu-toggle span{display:block;line-height:1;}
+.mobile-menu-panel{
+  position:absolute;
+  top:58px;
+  left:0;
+  width:min(330px,calc(100vw - 28px));
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  background:#fffdf9;
+  border:1px solid rgba(23,18,15,.10);
+  border-radius:20px;
+  box-shadow:0 24px 60px rgba(49,31,20,.18);
+  z-index:999999;
+}
+.mobile-menu-panel a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:54px;
+  width:100%;
+  padding:10px 14px;
+  border-radius:14px;
+  color:#7386a4 !important;
+  -webkit-text-fill-color:#7386a4 !important;
+  background:transparent;
+  font-size:16px;
+  font-weight:600;
+  text-decoration:none !important;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(115,134,164,.16);
+}
+.mobile-menu-panel a:active{background:rgba(115,134,164,.10);}
+.mobile-menu-panel .mobile-order-link{
+  background:#7386a4 !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+}
+.mobile-menu-panel .mobile-order-link:active{background:#647895 !important;}
+
+@media (max-width:850px){
+  /* Hide every previous mobile nav implementation. */
+  .nav > .nav-links{display:none !important;}
+  .nav .menu-btn{display:none !important;}
+  .mobile-menu{display:block;}
+  .nav-actions{display:flex;align-items:center;gap:10px;}
+  .mobile-menu[open] .mobile-menu-toggle{background:rgba(115,134,164,.10);}
+  #home,#about,#categories,#notice,#order{scroll-margin-top:90px;}
+}
+@media (min-width:851px){
+  .mobile-menu{display:none !important;}
+}
+@media (max-width:420px){
+  .mobile-menu-panel{left:50% !important;right:auto !important;transform:translateX(-50%) !important;}
+  .mobile-menu-panel a{min-height:52px;font-size:15px;}
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* FINAL MOBILE MENU FIX: keep the native details menu inside the viewport. */
+@media (max-width:850px){
+  .nav{
+    position:fixed !important;
+    top:0 !important; left:0 !important; right:0 !important;
+    z-index:50000 !important;
+    overflow:visible !important;
+  }
+  .nav-actions{
+    position:relative !important;
+    z-index:50002 !important;
+    overflow:visible !important;
+  }
+  .mobile-menu{
+    display:block !important;
+    position:static !important;
+    overflow:visible !important;
+  }
+  .mobile-menu-toggle{
+    position:relative !important;
+    z-index:50004 !important;
+    pointer-events:auto !important;
+  }
+  .mobile-menu-panel{
+    position:fixed !important;
+    top:76px !important;
+    left:50% !important;
+    right:auto !important;
+    transform:translateX(-50%) !important;
+    width:min(330px, calc(100vw - 28px)) !important;
+    max-height:calc(100dvh - 92px) !important;
+    overflow-y:auto !important;
+    box-sizing:border-box !important;
+    z-index:50003 !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+  .mobile-menu-panel a{
+    position:relative !important;
+    z-index:50004 !important;
+    pointer-events:auto !important;
+    touch-action:manipulation !important;
+  }
+}
+
+
+/* ===== Original inline style block ===== */
+
+  .merteks-footer{
+    width:100%;
+    box-sizing:border-box;
+    text-align:center;
+    padding:24px 16px 20px;
+    font-size:11px;
+    line-height:1.9;
+    color:#8b8b8b;
+    direction:rtl;
+  }
+  .merteks-footer .promo{
+    display:block;
+    font-size:11px;
+    font-weight:600;
+    color:#7386a4;
+    margin-bottom:3px;
+  }
+  .merteks-footer .site-line{
+    display:block;
+    font-size:10px;
+    color:#999;
+  }
+  .merteks-footer a{
+    color:#7386a4;
+    text-decoration:none;
+    font-weight:700;
+    font-size:10px;
+  }
+  .merteks-footer a:hover{
+    text-decoration:underline;
+  }
+
+
+/* ===== Original inline style block ===== */
+
+
+/* ---------- Premium visual layer ---------- */
+:root{
+  --ferin-addon-accent:#7386A4;
+  --ferin-addon-accent-2:#9eabc0;
+  --ferin-addon-glass:rgba(255,255,255,.72);
+  --ferin-addon-shadow:0 22px 70px rgba(30,24,20,.14);
+}
+
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+
+/* Ambient light that does not interfere with existing layout */
+.ferin-premium-light{
+  position:fixed;
+  inset:auto;
+  width:340px;height:340px;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:0;
+  opacity:.12;
+  filter:blur(55px);
+  background:radial-gradient(circle,var(--ferin-addon-accent),transparent 68%);
+  transform:translate3d(0,0,0);
+  transition:opacity .5s ease;
+}
+.ferin-premium-light.one{top:10vh;left:-180px}
+.ferin-premium-light.two{bottom:8vh;right:-190px;opacity:.09}
+
+/* Hero polish */
+.hero{isolation:isolate}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,255,255,.09),transparent 32%),
+    linear-gradient(180deg,transparent 55%,rgba(0,0,0,.16));
+}
+.hero-content,.scroll-indicator{position:relative;z-index:2}
+.ferin-premium-hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 13px;
+  margin-bottom:14px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  color:inherit;
+  font-size:11px;
+  letter-spacing:.08em;
+  box-shadow:0 10px 35px rgba(0,0,0,.10);
+  animation:ferinBadgeIn .9s .35s both;
+}
+.ferin-premium-hero-badge i{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--ferin-addon-accent);
+  box-shadow:0 0 0 5px rgba(115,134,164,.16),0 0 18px rgba(115,134,164,.55);
+}
+@keyframes ferinBadgeIn{
+  from{opacity:0;transform:translateY(12px) scale(.96)}
+  to{opacity:1;transform:none}
+}
+
+/* Category cards */
+.category{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+.category::before{
+  content:"";
+  position:absolute;
+  width:130px;height:130px;
+  top:-70px;right:-55px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(115,134,164,.25),transparent 68%);
+  opacity:0;
+  transform:scale(.7);
+  transition:.45s ease;
+  pointer-events:none;
+}
+.category::after{
+  content:"↗";
+  position:absolute;
+  left:13px;bottom:12px;
+  width:28px;height:28px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.10);
+  opacity:0;
+  transform:translate(-7px,7px);
+  transition:.35s ease;
+  font-size:14px;
+}
+.category:hover::before,.category.active::before{opacity:1;transform:scale(1)}
+.category:hover::after,.category.active::after{opacity:1;transform:none}
+.category .icon{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.category:hover .icon,.category.active .icon{transform:translateY(-4px) scale(1.08)}
+
+/* Product premium layer */
+.product-card{
+  position:relative;
+  isolation:isolate;
+}
+.product-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  z-index:3;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.ferin-product-badge{
+  position:absolute;
+  top:12px;right:12px;
+  z-index:6;
+  padding:6px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.88);
+  color:#211b17;
+  font-size:10px;
+  font-weight:800;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+body.dark .ferin-product-badge{
+  background:rgba(20,18,16,.86);
+  color:#fff;
+}
+.product-card .product-image{overflow:hidden}
+.product-card .product-image img{
+  will-change:transform;
+}
+.product-card:hover .product-image img{transform:scale(1.075)}
+.ferin-product-view{
+  position:absolute;
+  left:12px;bottom:12px;
+  z-index:7;
+  width:38px;height:38px;
+  border:0;
+  border-radius:50%;
+  display:grid;place-items:center;
+  cursor:pointer;
+  color:#fff;
+  background:rgba(20,18,16,.72);
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  opacity:0;
+  transform:translateY(8px) scale(.9);
+  transition:.3s ease;
+}
+.product-card:hover .ferin-product-view,
+.product-card:focus-within .ferin-product-view{
+  opacity:1;transform:none;
+}
+@media(max-width:700px){
+  .ferin-product-view{opacity:1;transform:none;width:34px;height:34px}
+}
+
+/* Quick View modal */
+#ferinQuickView{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:rgba(10,8,7,.60);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  opacity:0;
+  visibility:hidden;
+  transition:.3s ease;
+}
+#ferinQuickView.is-open{
+  opacity:1;visibility:visible;
+}
+.ferin-qv-card{
+  width:min(760px,100%);
+  max-height:min(760px,92vh);
+  overflow:auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,.85fr);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:28px;
+  background:rgba(255,253,249,.96);
+  color:#211b17;
+  box-shadow:0 35px 100px rgba(0,0,0,.32);
+  transform:translateY(20px) scale(.97);
+  transition:.4s cubic-bezier(.2,.8,.2,1);
+}
+#ferinQuickView.is-open .ferin-qv-card{transform:none}
+body.dark .ferin-qv-card{
+  background:rgba(27,24,22,.97);
+  color:#fff;
+  border-color:rgba(255,255,255,.12);
+}
+.ferin-qv-image{min-height:330px;background:#eee;overflow:hidden}
+.ferin-qv-image img{width:100%;height:100%;min-height:330px;object-fit:cover;display:block}
+.ferin-qv-info{
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.ferin-qv-kicker{
+  font-size:10px;
+  letter-spacing:.14em;
+  opacity:.6;
+  margin-bottom:10px;
+}
+.ferin-qv-title{font-size:27px;line-height:1.5;margin:0 0 10px}
+.ferin-qv-desc{font-size:13px;line-height:2;opacity:.72;margin:0 0 18px}
+.ferin-qv-price{font-size:20px;font-weight:900;color:var(--ferin-addon-accent);margin-bottom:20px}
+.ferin-qv-close{
+  position:absolute;
+  top:18px;left:18px;
+  width:40px;height:40px;
+  border:0;border-radius:50%;
+  cursor:pointer;
+  background:rgba(255,255,255,.88);
+  color:#17120f;
+  font-size:20px;
+  z-index:2;
+}
+.ferin-qv-wrap{position:relative;width:min(760px,100%)}
+@media(max-width:650px){
+  .ferin-qv-card{grid-template-columns:1fr;max-height:90vh;border-radius:22px}
+  .ferin-qv-image,.ferin-qv-image img{min-height:220px;height:220px}
+  .ferin-qv-info{padding:22px}
+  .ferin-qv-title{font-size:22px}
+}
+
+/* Buttons micro-interactions */
+.btn,.order-nav,.theme-toggle,button{
+  -webkit-tap-highlight-color:transparent;
+}
+.btn{
+  position:relative;
+  overflow:hidden;
+}
+.btn::after{
+  content:"";
+  position:absolute;
+  width:10px;height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,.42);
+  transform:scale(0);
+  opacity:0;
+  pointer-events:none;
+}
+.btn:active::after{
+  animation:ferinRipple .5s ease-out;
+}
+@keyframes ferinRipple{
+  0%{transform:scale(1);opacity:.55}
+  100%{transform:scale(24);opacity:0}
+}
+
+/* Install/app prompt */
+#ferinInstallPrompt{
+  position:fixed;
+  left:14px;right:14px;
+  bottom:14px;
+  z-index:99990;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  border:1px solid rgba(115,134,164,.25);
+  border-radius:18px;
+  background:rgba(255,253,249,.92);
+  color:#211b17;
+  box-shadow:0 20px 60px rgba(0,0,0,.18);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  transform:translateY(130%);
+  opacity:0;
+  transition:.45s cubic-bezier(.2,.8,.2,1);
+}
+#ferinInstallPrompt.show{transform:none;opacity:1}
+body.dark #ferinInstallPrompt{background:rgba(27,24,22,.94);color:#fff}
+.ferin-install-icon{
+  width:42px;height:42px;
+  border-radius:13px;
+  display:grid;place-items:center;
+  background:var(--ferin-addon-accent);
+  color:#fff;font-size:20px;flex:none;
+}
+.ferin-install-copy{flex:1;min-width:0}
+.ferin-install-copy strong{display:block;font-size:13px}
+.ferin-install-copy span{display:block;font-size:10px;opacity:.65;margin-top:3px}
+.ferin-install-btn{
+  border:0;border-radius:12px;
+  padding:9px 12px;
+  background:var(--ferin-addon-accent);
+  color:#fff;font-weight:800;
+  cursor:pointer;
+}
+.ferin-install-close{
+  border:0;background:none;cursor:pointer;font-size:18px;opacity:.55;
+}
+
+/* Safe-area and touch comfort */
+@supports(padding:max(0px)){
+  #ferinInstallPrompt{
+    bottom:max(14px,env(safe-area-inset-bottom));
+  }
+}
+@media(max-width:700px){
+  .btn,.theme-toggle,.nav button,.nav a{min-height:42px}
+  .hero{min-height:100svh}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.001ms!important;
+  }
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* ---------- Global viewport safety ---------- */
+html,body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden !important;
+}
+*{box-sizing:border-box;}
+img,svg,video,canvas{max-width:100%;}
+button,a,input,select,textarea{max-width:100%;}
+
+/* ---------- Large desktop ---------- */
+@media (min-width:1200px){
+  .hero-content{max-width:1050px;margin-inline:auto;}
+  main > section,
+  section{scroll-margin-top:90px;}
+  .category-grid{grid-template-columns:repeat(5,minmax(0,1fr));}
+  .product-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+
+/* ---------- Tablet ---------- */
+@media (min-width:701px) and (max-width:1100px){
+  section{padding-left:6%;padding-right:6%;}
+  .hero-content{width:min(92%,900px);}
+  .hero h1{font-size:clamp(54px,8vw,82px);line-height:.98;}
+  .hero p{max-width:680px;margin-inline:auto;}
+  .about-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;}
+  .category-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .features{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .order-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .footer-inner{gap:24px;}
+}
+
+/* ---------- All phones ---------- */
+@media (max-width:700px){
+  body{font-size:15px;}
+  section{
+    width:100%;
+    max-width:100%;
+    padding:64px 16px !important;
+    scroll-margin-top:74px;
+  }
+
+  /* Header / navigation */
+  .nav{
+    width:100%;
+    max-width:100vw;
+  }
+  .nav-inner{
+    width:100%;
+    min-width:0;
+    padding-inline:14px !important;
+    gap:8px;
+  }
+  .brand-logo{width:44px;height:44px;flex:0 0 44px;}
+  .logo-text{font-size:19px !important;white-space:nowrap;}
+  .menu-btn{font-size:22px !important;min-width:42px;min-height:42px;}
+  .nav-links{
+    max-width:calc(100vw - 24px) !important;
+    left:12px !important;
+    right:12px !important;
+    top:64px !important;
+    width:auto !important;
+    max-height:calc(100vh - 82px);
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+  }
+  .nav-links a{
+    width:100%;
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+
+  /* Hero / first screen */
+  .hero{
+    min-height:100svh !important;
+    min-height:100dvh !important;
+    height:auto !important;
+    padding:96px 18px 42px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    overflow:hidden !important;
+  }
+  .hero-content{
+    width:100% !important;
+    max-width:620px !important;
+    padding:0 !important;
+    margin:auto !important;
+    text-align:center;
+    transform:none !important;
+  }
+  .hero h1{
+    width:100%;
+    font-size:clamp(44px,15vw,68px) !important;
+    line-height:.98 !important;
+    letter-spacing:-.04em;
+    overflow-wrap:anywhere;
+  }
+  .hero p{
+    width:min(100%,560px);
+    margin:18px auto 0 !important;
+    font-size:clamp(13px,3.8vw,16px) !important;
+    line-height:1.9 !important;
+  }
+  .hero-buttons{
+    width:100%;
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    gap:10px !important;
+    margin-top:22px !important;
+  }
+  .hero-buttons .btn{
+    width:100% !important;
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 8px !important;
+    font-size:13px !important;
+    white-space:normal;
+  }
+  .scroll-indicator{
+    bottom:18px !important;
+    font-size:10px !important;
+    max-width:90%;
+    text-align:center;
+  }
+
+  /* Generic grids */
+  .about-grid,
+  .notice,
+  .order-grid,
+  .features{
+    grid-template-columns:1fr !important;
+  }
+  .about-image{height:min(78vw,380px) !important;min-height:240px;}
+  .features{gap:12px !important;}
+
+  /* Categories */
+  .category-grid{
+    width:100%;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+  .category{
+    min-width:0;
+    padding:18px 9px !important;
+    border-radius:17px !important;
+  }
+  .category img,
+  .category .category-image{max-width:100%;}
+
+  /* Products: one clean card per row on small screens */
+  .product-grid{
+    width:100%;
+    grid-template-columns:1fr !important;
+    gap:14px !important;
+  }
+  .product-card{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    grid-template-columns:minmax(0,1fr) minmax(112px,38%) !important;
+    min-height:172px !important;
+    overflow:hidden;
+  }
+  .product-card .product-image{
+    min-width:0 !important;
+    min-height:172px !important;
+    height:100% !important;
+  }
+  .product-card .p-body{
+    min-width:0 !important;
+    padding:13px 11px !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) auto !important;
+    grid-template-areas:
+      "name price"
+      "desc desc" !important;
+    align-content:center;
+    gap:7px !important;
+  }
+  .product-card .product-name{
+    grid-area:name;
+    min-width:0 !important;
+    font-size:clamp(13px,3.7vw,16px) !important;
+    line-height:1.5 !important;
+    overflow-wrap:anywhere !important;
+  }
+  .product-card .product-desc{
+    grid-area:desc;
+    min-width:0 !important;
+    font-size:11px !important;
+    line-height:1.6 !important;
+    display:-webkit-box !important;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden !important;
+  }
+  .product-card .p-price{
+    grid-area:price;
+    min-width:0 !important;
+    padding-inline-start:6px !important;
+    text-align:end;
+  }
+  .product-card .product-price{font-size:clamp(12px,3.5vw,15px) !important;}
+  .product-card .p-old{font-size:9px !important;}
+
+  /* Order form */
+  .order-grid{gap:14px !important;}
+  .order-grid > *{min-width:0 !important;}
+  input,select,textarea,button{
+    font-size:16px !important; /* prevents iOS zoom */
+  }
+  input,select,textarea{width:100% !important;max-width:100% !important;}
+  textarea{min-height:120px;}
+
+  /* Footer */
+  .footer-inner{
+    width:100%;
+    flex-direction:column !important;
+    text-align:center !important;
+    gap:16px !important;
+  }
+  footer{padding-left:16px !important;padding-right:16px !important;}
+}
+
+/* ---------- Very small phones ---------- */
+@media (max-width:420px){
+  section{padding-left:13px !important;padding-right:13px !important;}
+  .nav-inner{padding-inline:11px !important;}
+  .logo-text{font-size:17px !important;}
+  .hero{padding-left:14px !important;padding-right:14px !important;}
+  .hero h1{font-size:clamp(38px,14vw,55px) !important;}
+  .hero-buttons{grid-template-columns:1fr !important;}
+  .hero-buttons .btn{min-height:46px;}
+  .category-grid{grid-template-columns:1fr 1fr !important;gap:8px !important;}
+  .category{padding:15px 7px !important;}
+  .product-card{
+    grid-template-columns:minmax(0,1fr) 42% !important;
+    min-height:154px !important;
+  }
+  .product-card .product-image{min-height:154px !important;}
+  .product-card .product-name{font-size:12px !important;}
+  .product-card .product-desc{font-size:10px !important;}
+  .product-card .product-price{font-size:11px !important;}
+}
+
+/* ---------- Extra-small screens ---------- */
+@media (max-width:350px){
+  .brand-logo{width:38px;height:38px;flex-basis:38px;}
+  .logo-text{font-size:15px !important;}
+  .hero h1{font-size:36px !important;}
+  .category-grid{grid-template-columns:1fr !important;}
+  .product-card{grid-template-columns:1fr !important;}
+  .product-card .product-image{height:190px !important;min-height:190px !important;}
+}
+
+/* ---------- Touch devices: remove hover-only enlargement ---------- */
+@media (hover:none) and (pointer:coarse){
+  .category:hover,
+  .product-card:hover,
+  .btn:hover{transform:none !important;}
+  .product-card:hover .product-image img{transform:none !important;}
+}
+
+/* ---------- Accessibility / motion ---------- */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto !important;
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* =========================================================
+   CAFE FERIN — ALL DROPDOWN / SELECT CONTRAST
+   Keeps every dropdown visually separate from its text.
+   Applies to current and future <select> elements, including
+   the admin product/category controls.
+   ========================================================= */
+
+/* Light theme */
+body:not(.dark) select,
+body:not(.dark) .ferin-admin-panel select,
+body:not(.dark) #ferinAdminPanel select{
+  appearance:auto !important;
+  -webkit-appearance:auto !important;
+  background:#e8ded2 !important;
+  color:#211b17 !important;
+  border:1.5px solid #b59b80 !important;
+  border-radius:12px !important;
+  box-shadow:0 4px 14px rgba(33,27,23,.08) !important;
+  font-weight:700 !important;
+  min-height:46px;
+}
+
+body:not(.dark) select:hover,
+body:not(.dark) select:focus,
+body:not(.dark) .ferin-admin-panel select:focus,
+body:not(.dark) #ferinAdminPanel select:focus{
+  background:#ded0c0 !important;
+  border-color:#7386A4 !important;
+  outline:3px solid rgba(115,134,164,.18) !important;
+}
+
+/* Dark theme */
+body.dark select,
+body.dark .ferin-admin-panel select,
+body.dark #ferinAdminPanel select{
+  appearance:auto !important;
+  -webkit-appearance:auto !important;
+  background:#302720 !important;
+  color:#fff7ef !important;
+  border:1.5px solid #8f775f !important;
+  border-radius:12px !important;
+  box-shadow:0 4px 16px rgba(0,0,0,.30) !important;
+  font-weight:700 !important;
+  min-height:46px;
+}
+
+body.dark select:hover,
+body.dark select:focus,
+body.dark .ferin-admin-panel select:focus,
+body.dark #ferinAdminPanel select:focus{
+  background:#3a2f27 !important;
+  border-color:#7386A4 !important;
+  outline:3px solid rgba(115,134,164,.22) !important;
+}
+
+/* Dropdown list items themselves.
+   Browsers that allow styling native option popups will use these colors. */
+select option{
+  background:#fffdf9 !important;
+  color:#211b17 !important;
+  font-weight:600 !important;
+}
+
+body.dark select option{
+  background:#302720 !important;
+  color:#fff7ef !important;
+}
+
+select option:checked,
+select option:hover{
+  background:#d9c9b8 !important;
+  color:#211b17 !important;
+}
+
+body.dark select option:checked,
+body.dark select option:hover{
+  background:#574638 !important;
+  color:#fff7ef !important;
+}
+
+/* Placeholder / disabled dropdown option remains readable. */
+select option:disabled{
+  color:#7d7066 !important;
+}
+body.dark select option:disabled{
+  color:#a99b90 !important;
+}
+
+/* Mobile: make every dropdown easy to tap and never narrower than its field. */
+@media (max-width:850px){
+  select,
+  .ferin-admin-panel select,
+  #ferinAdminPanel select{
+    width:100% !important;
+    max-width:100% !important;
+    min-height:50px !important;
+    padding:0 14px !important;
+    font-size:15px !important;
+    line-height:1.4 !important;
+    box-sizing:border-box !important;
+  }
+}
+
+/* Prevent a white native dropdown from appearing inside the dark admin UI. */
+body.dark .ferin-admin-panel select option,
+body.dark #ferinAdminPanel select option{
+  background-color:#302720 !important;
+  color:#fff7ef !important;
+}
+
+/* Extra safety for any future dropdown class/id added to the site. */
+select[class*="drop"],
+select[class*="menu"],
+select[id*="drop"],
+select[id*="menu"]{
+  background:#e8ded2 !important;
+  color:#211b17 !important;
+}
+body.dark select[class*="drop"],
+body.dark select[class*="menu"],
+body.dark select[id*="drop"],
+body.dark select[id*="menu"]{
+  background:#302720 !important;
+  color:#fff7ef !important;
+}
+
+
+/* ===== Original inline style block ===== */
+
+#ferinAdminAuthOverlay{
+  position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;
+  padding:18px;background:rgba(20,16,13,.58);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)
+}
+#ferinAdminAuthOverlay.is-open{display:flex}
+#ferinAdminAuthBox{
+  width:min(430px,100%);box-sizing:border-box;border-radius:24px;padding:25px;
+  background:#fffdf9;color:#211b17;border:1px solid rgba(33,27,23,.12);
+  box-shadow:0 25px 80px rgba(0,0,0,.25);direction:rtl;text-align:right
+}
+body.dark #ferinAdminAuthBox{background:#171310;color:#f5eee7;border-color:rgba(255,255,255,.1)}
+.ferin-auth-icon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:#f0e4d7;font-size:27px;margin-bottom:14px}
+body.dark .ferin-auth-icon{background:#29201b}
+.ferin-auth-title{font-size:21px;font-weight:900;margin:0 0 7px}
+.ferin-auth-sub{font-size:12px;line-height:1.8;opacity:.68;margin:0 0 17px}
+#ferinAdminAuthPassword{
+  width:100%;box-sizing:border-box;border:1px solid rgba(33,27,23,.16);border-radius:14px;
+  padding:13px 14px;background:#fff;color:#211b17;font:inherit;font-size:16px;outline:none;direction:ltr;text-align:left
+}
+body.dark #ferinAdminAuthPassword{background:#24211e;color:#f5eee7;border-color:rgba(255,255,255,.14);color-scheme:dark}
+#ferinAdminAuthPassword{color-scheme:light}
+/* Password reveal / native password controls follow the active theme. */
+body.dark #ferinAdminAuthPassword::-ms-reveal{filter:invert(1);}
+body.dark #ferinAdminAuthPassword::-webkit-credentials-auto-fill-button{filter:invert(1);}
+body.dark #ferinAdminAuthPassword::-webkit-textfield-decoration-container{color:#fff;}
+body:not(.dark) #ferinAdminAuthPassword::-ms-reveal{filter:none;}
+body:not(.dark) #ferinAdminAuthPassword::-webkit-credentials-auto-fill-button{filter:none;}
+#ferinAdminAuthPassword:focus{border-color:#7386A4;box-shadow:0 0 0 4px rgba(115,134,164,.13)}
+.ferin-auth-actions{display:flex;gap:9px;margin-top:12px}
+.ferin-auth-btn{flex:1;border:0;border-radius:14px;padding:12px 15px;font:inherit;font-weight:900;cursor:pointer}
+.ferin-auth-enter{background:#7386A4;color:#fff}
+.ferin-auth-cancel{background:rgba(115,134,164,.12);color:inherit}
+#ferinAdminAuthError{min-height:20px;margin-top:9px;font-size:12px;color:#a9443c;font-weight:800}
+@media(max-width:480px){#ferinAdminAuthOverlay{padding:12px}#ferinAdminAuthBox{padding:20px;border-radius:20px}.ferin-auth-actions{flex-direction:column}}
+
+
+/* ===== Original inline style block ===== */
+
+#ferinAdminOpen{position:fixed;left:18px;right:auto;bottom:18px;z-index:99990;width:52px;height:52px;border:1px solid rgba(115,134,164,.35);border-radius:50%;background:rgba(255,255,255,.92);color:#7386A4;box-shadow:0 12px 35px rgba(0,0,0,.14);font-size:21px;cursor:pointer;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:.25s}
+#ferinAdminOpen:hover{transform:translateY(-3px) scale(1.04)}
+body.dark #ferinAdminOpen{background:rgba(28,27,25,.94);color:#d8c3a5;border-color:rgba(216,195,165,.28)}
+/* Admin panel: normal document layer — never fixed in the middle of the page */
+#ferinAdminOverlay{position:absolute;top:0;left:0;right:0;min-height:100%;z-index:99999;display:none;background:rgba(10,10,10,.55);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);padding:20px;overflow:visible;box-sizing:border-box}
+#ferinAdminOverlay.is-open{display:block}
+#ferinAdminPanel{width:min(980px,100%);min-height:0;max-height:none;overflow:visible;margin:0 auto;background:#fbf7f1;color:#241f1b;border:1px solid rgba(115,134,164,.22);border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.28);direction:rtl;font-family:inherit;box-sizing:border-box}
+body.dark #ferinAdminPanel{background:#171513;color:#f6efe7;border-color:rgba(216,195,165,.2)}
+.ferin-admin-head{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;background:inherit;border-bottom:1px solid rgba(0,0,0,.08)}
+body.dark .ferin-admin-head{border-color:rgba(255,255,255,.08)}
+.ferin-admin-title{font-size:20px;font-weight:900}.ferin-admin-sub{font-size:12px;opacity:.65;margin-top:3px}
+.ferin-admin-close{width:40px;height:40px;border:0;border-radius:12px;background:rgba(115,134,164,.12);color:inherit;font-size:22px;cursor:pointer}
+.ferin-admin-body{padding:20px}.ferin-admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.ferin-admin-field{display:flex;flex-direction:column;gap:7px}.ferin-admin-field.full{grid-column:1/-1}.ferin-admin-field label{font-size:13px;font-weight:800}.ferin-admin-field input,.ferin-admin-field select,.ferin-admin-field textarea{width:100%;box-sizing:border-box;border:1px solid rgba(35,31,27,.15);border-radius:14px;background:#fff;color:#241f1b;padding:12px 13px;font:inherit;outline:none}.ferin-admin-field textarea{min-height:90px;resize:vertical}body.dark .ferin-admin-field input,body.dark .ferin-admin-field select,body.dark .ferin-admin-field textarea{background:#24211e;color:#f6efe7;border-color:rgba(255,255,255,.12)}
+.ferin-admin-field input:focus,.ferin-admin-field select:focus,.ferin-admin-field textarea:focus{border-color:#7386A4;box-shadow:0 0 0 3px rgba(115,134,164,.12)}
+#ferinAdminStatus{min-height:46px;background:#fff!important;color:#241f1b!important;-webkit-text-fill-color:#241f1b!important;font-weight:800!important;color-scheme:light}
+#ferinAdminStatus option{background:#fff!important;color:#241f1b!important;font-weight:700!important}
+body.dark #ferinAdminStatus{background:#24211e!important;color:#f6efe7!important;-webkit-text-fill-color:#f6efe7!important;border-color:rgba(255,255,255,.12);color-scheme:dark}
+body.dark #ferinAdminStatus option{background:#24211e!important;color:#f6efe7!important}
+.ferin-status-help{font-size:11px;line-height:1.7;opacity:.68}
+body.dark .ferin-status-help{opacity:.82}
+
+.ferin-admin-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.ferin-admin-btn{border:0;border-radius:14px;padding:12px 17px;font:inherit;font-weight:900;cursor:pointer;transition:.2s}.ferin-admin-btn:hover{transform:translateY(-1px)}.ferin-admin-primary{background:#7386A4;color:#fff}.ferin-admin-secondary{background:rgba(115,134,164,.12);color:inherit}.ferin-admin-danger{background:#9b4c45;color:#fff}.ferin-admin-note{font-size:12px;line-height:1.8;opacity:.68;margin-top:10px}
+.ferin-admin-divider{height:1px;background:rgba(0,0,0,.08);margin:22px 0}body.dark .ferin-admin-divider{background:rgba(255,255,255,.08)}
+.ferin-admin-toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap}.ferin-admin-toolbar h3{margin:0;font-size:16px}.ferin-admin-search{flex:1;min-width:180px;max-width:310px;border:1px solid rgba(35,31,27,.14);border-radius:12px;padding:10px 12px;background:#fff;color:#241f1b;font:inherit}body.dark .ferin-admin-search{background:#24211e;color:#fff;border-color:rgba(255,255,255,.12)}
+.ferin-admin-list{display:grid;gap:9px}.ferin-admin-item{display:grid;grid-template-columns:58px 1fr auto;gap:11px;align-items:center;padding:10px;border:1px solid rgba(0,0,0,.08);border-radius:16px;background:rgba(255,255,255,.58)}body.dark .ferin-admin-item{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.08)}.ferin-admin-thumb{width:58px;height:58px;border-radius:12px;object-fit:cover;background:#eee}.ferin-admin-item-name{font-weight:900;font-size:14px}.ferin-admin-item-meta{font-size:11px;opacity:.62;margin-top:4px}.ferin-admin-edit{border:0;border-radius:11px;padding:9px 12px;background:#7386A4;color:#fff;font:inherit;font-weight:800;cursor:pointer}.ferin-admin-empty{padding:20px;text-align:center;opacity:.6;border:1px dashed rgba(0,0,0,.15);border-radius:15px}
+.ferin-admin-preview{display:flex;align-items:center;gap:12px;margin-top:9px}.ferin-admin-preview img{width:72px;height:72px;border-radius:14px;object-fit:cover;border:1px solid rgba(0,0,0,.1);display:none}.ferin-admin-preview img.show{display:block}.ferin-admin-preview span{font-size:11px;opacity:.6}
+@media(max-width:700px){#ferinAdminOverlay{padding:8px;min-height:100%;overflow:visible}#ferinAdminPanel{width:100%;border-radius:20px;max-height:none;overflow:visible}.ferin-admin-body{padding:14px}.ferin-admin-grid{grid-template-columns:1fr}.ferin-admin-field.full{grid-column:auto}.ferin-admin-head{padding:14px}.ferin-admin-item{grid-template-columns:50px 1fr}.ferin-admin-thumb{width:50px;height:50px}.ferin-admin-edit{grid-column:2;justify-self:start}.ferin-admin-actions .ferin-admin-btn{flex:1;min-width:130px}#ferinAdminOpen{left:12px;right:auto;bottom:12px}}
+
+
+/* ===== Original inline style block ===== */
+
+/* Fix: keep the scroll hint at the bottom of the hero instead of the middle. */
+.hero .scroll-indicator{
+  position:absolute !important;
+  left:50% !important;
+  bottom:25px !important;
+  top:auto !important;
+  right:auto !important;
+  margin:0 !important;
+  transform:translateX(-50%) !important;
+  z-index:10 !important;
+  width:max-content;
+  max-width:90%;
+  white-space:nowrap;
+}
+@media(max-width:700px){
+  .hero .scroll-indicator{
+    bottom:18px !important;
+    max-width:90%;
+    white-space:normal;
+    text-align:center;
+    justify-content:center;
+  }
+}
+
+
+/* ===== Original inline style block ===== */
+
+/* Final day/night navigation colors. */
+body:not(.dark) .nav .nav-links a:not(.order-nav),
+body:not(.dark) .nav.scrolled .nav-links a:not(.order-nav){
+  color:#8f7761 !important;
+  -webkit-text-fill-color:#8f7761 !important;
+}
+body:not(.dark) .nav .nav-links a:not(.order-nav):hover,
+body:not(.dark) .nav .nav-links a:not(.order-nav):focus-visible,
+body:not(.dark) .nav .nav-links a:not(.order-nav).active,
+body:not(.dark) .nav .nav-links a:not(.order-nav)[aria-current="page"]{
+  color:#5f789c !important;
+  -webkit-text-fill-color:#5f789c !important;
+}
+body.dark .nav .nav-links a:not(.order-nav),
+body.dark .nav.scrolled .nav-links a:not(.order-nav){
+  color:#f5eee7 !important;
+  -webkit-text-fill-color:#f5eee7 !important;
+}
+body.dark .nav .nav-links a:not(.order-nav):hover,
+body.dark .nav .nav-links a:not(.order-nav):focus-visible,
+body.dark .nav .nav-links a:not(.order-nav).active,
+body.dark .nav .nav-links a:not(.order-nav)[aria-current="page"]{
+  color:#d8c3a5 !important;
+  -webkit-text-fill-color:#d8c3a5 !important;
+}
+body:not(.dark) .mobile-menu-panel a{
+  color:#8f7761 !important;
+  -webkit-text-fill-color:#8f7761 !important;
+}
+body.dark .mobile-menu-panel a{
+  color:#f5eee7 !important;
+  -webkit-text-fill-color:#f5eee7 !important;
+}
+
+
+/* ===== Original inline style block ===== */
+
+.menu-toolbar{position:relative;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.ferin-category-close{display:none;flex:0 0 auto;border:1px solid rgba(33,27,23,.16);background:#fffdf9;color:#211b17;border-radius:999px;min-height:44px;padding:0 18px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 8px 22px rgba(33,27,23,.08);transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease;white-space:nowrap}
+.ferin-category-close.is-visible{display:inline-flex;align-items:center;justify-content:center}
+.ferin-category-close:hover{transform:translateY(-2px);background:#211b17;color:#fffdf9;border-color:#211b17}
+body.dark .ferin-category-close{background:#211b17;color:#fff8f0;border-color:rgba(255,248,240,.18)}
+body.dark .ferin-category-close:hover{background:#fff8f0;color:#211b17;border-color:#fff8f0}
+@media(max-width:700px){.menu-toolbar{align-items:stretch;flex-wrap:wrap}.ferin-category-close{width:100%;min-height:42px}}
+
+
+/* ===== Original inline style block ===== */
+
+/* Desktop: keep the Cafe Ferin hero title always visible. */
+@media (min-width:701px){
+  .hero .hero-content .cafe-brand{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    color:#7386A4 !important;
+    -webkit-text-fill-color:#7386A4 !important;
+    background:none !important;
+    background-image:none !important;
+    -webkit-background-clip:initial !important;
+    background-clip:initial !important;
+    filter:none !important;
+    transform:none !important;
+    position:relative !important;
+    z-index:5 !important;
+  }
+  .hero .hero-content .cafe-brand span{
+    color:#7386A4 !important;
+    -webkit-text-fill-color:#7386A4 !important;
+  }
+}
+
+
+
+html body #intro.hide{
+  display:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+  position:fixed !important;
+  z-index:-1 !important;
+}
+
+
+/* ===== CAFE FERIN INTRO — AUTHORITATIVE STYLE ===== */
+html body #intro{
+  position:fixed !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:100vh !important;
+  margin:0 !important;
+  padding:0 !important;
+  z-index:2147483646 !important;
+  display:flex !important;
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  overflow:hidden !important;
+}
+html body #intro.hide{
+  display:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+html body.ferin-ready #intro{
+  display:none !important;
+}
+
+/* FINAL: single admin button, left side */
+#ferinAdminOpen{z-index:2147483647 !important;display:flex !important;align-items:center !important;justify-content:center !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;left:18px !important;right:auto !important;bottom:18px !important;}
+@media(max-width:700px){#ferinAdminOpen{left:12px !important;right:auto !important;bottom:12px !important;}}
+
+/* =========================================================
+   FERIN ADMIN — SINGLE AUTHORITATIVE OVERRIDE
+   ========================================================= */
+#ferinAdminOpen{
+  position:fixed !important;
+  left:18px !important;
+  right:auto !important;
+  top:auto !important;
+  bottom:18px !important;
+  z-index:2147483647 !important;
+  width:52px !important;
+  height:52px !important;
+  min-width:52px !important;
+  min-height:52px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+  border-radius:50% !important;
+  cursor:pointer !important;
+}
+#ferinAdminAuthOverlay{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:2147483647 !important;
+}
+#ferinAdminOverlay{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:2147483646 !important;
+  width:100% !important;
+  min-height:100dvh !important;
+  max-height:none !important;
+  overflow:auto !important;
+  box-sizing:border-box !important;
+}
+@media(max-width:700px){
+  #ferinAdminOpen{left:12px !important;right:auto !important;bottom:12px !important;}
+}
+
+
+/* =========================================================
+   FINAL CLEAN FIX — ADMIN FLOATING BUTTON + THEME
+   ========================================================= */
+#ferinAdminFloating{
+  position:fixed !important;
+  left:18px !important;
+  right:auto !important;
+  bottom:18px !important;
+  top:auto !important;
+  width:58px !important;
+  height:58px !important;
+  z-index:2147483646 !important;
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  transform:none !important;
+  isolation:isolate !important;
+}
+#ferinAdminFloating #ferinAdminOpen{
+  position:absolute !important;
+  inset:0 !important;
+  width:58px !important;
+  height:58px !important;
+  min-width:58px !important;
+  min-height:58px !important;
+  display:grid !important;
+  place-items:center !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+  z-index:1 !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:2px solid rgba(255,255,255,.95) !important;
+  border-radius:50% !important;
+  background:#7386A4 !important;
+  color:#fff !important;
+  box-shadow:0 12px 35px rgba(0,0,0,.28) !important;
+  font-size:27px !important;
+  line-height:1 !important;
+  cursor:pointer !important;
+  transform:none !important;
+}
+#ferinAdminFloating #ferinAdminOpen:hover{transform:scale(1.06) !important;}
+#ferinAdminAuthOverlay{z-index:2147483647 !important;}
+#ferinAdminOverlay{z-index:2147483645 !important;}
+@media(max-width:700px){
+  #ferinAdminFloating{left:12px !important;bottom:12px !important;}
+}
+
+/* One authoritative theme surface layer. */
+html,body{transition:background-color .28s ease,color .28s ease;}
+body:not(.dark){
+  background:#fbf7f1 !important;
+  color:#211b17 !important;
+}
+body.dark{
+  background:#12100f !important;
+  color:#f7efe7 !important;
+}
+body:not(.dark) .theme-toggle{
+  background:#fffdf9 !important; color:#211b17 !important;
+}
+body.dark .theme-toggle{
+  background:#1d1815 !important; color:#f7efe7 !important;
+}
+body:not(.dark) .nav, body:not(.dark) .menu-section, body:not(.dark) .product-card, body:not(.dark) .notice, body:not(.dark) .order-card, body:not(.dark) .feature{
+  color:#211b17 !important;
+}
+body.dark .nav, body.dark .menu-section, body.dark .product-card, body.dark .notice, body.dark .order-card, body.dark .feature{
+  color:#f7efe7 !important;
+}
+
+
+/* =========================================================
+   CAFE FERIN — FINAL THEME OVERRIDE v2
+   data-theme is the authoritative state. Keep this block last.
+   ========================================================= */
+html[data-theme="light"], body[data-theme="light"]{
+  background:#faf6f0 !important;
+  color:#211b17 !important;
+}
+html[data-theme="dark"], body[data-theme="dark"]{
+  background:#12100f !important;
+  color:#f7efe7 !important;
+}
+
+body[data-theme="light"] .nav,
+body[data-theme="light"] .nav-links,
+body[data-theme="light"] .menu-section,
+body[data-theme="light"] .product-card,
+body[data-theme="light"] .notice,
+body[data-theme="light"] .order-card,
+body[data-theme="light"] .feature{
+  background:#fffdf9 !important; color:#211b17 !important;
+  border-color:rgba(33,27,23,.12) !important;
+}
+body[data-theme="light"] .categories{background:#f4eadf !important;color:#211b17 !important}
+body[data-theme="light"] .notice-wrap,
+body[data-theme="light"] .order-section{background:#f3e8dc !important;color:#211b17 !important}
+body[data-theme="light"] footer{background:#e7d8c8 !important;color:#211b17 !important}
+body[data-theme="light"] .nav-links a,
+body[data-theme="light"] .section-title,
+body[data-theme="light"] .current-category,
+body[data-theme="light"] .product-name,
+body[data-theme="light"] .order-card h3,
+body[data-theme="light"] .notice-box strong{color:#211b17 !important}
+body[data-theme="light"] .section-text,
+body[data-theme="light"] .products-count,
+body[data-theme="light"] .product-desc,
+body[data-theme="light"] .order-card p,
+body[data-theme="light"] .feature span,
+body[data-theme="light"] .about-copy p{color:#6e6259 !important}
+body[data-theme="light"] .theme-toggle{background:#f1e6da !important;color:#211b17 !important;border-color:rgba(33,27,23,.12) !important}
+body[data-theme="light"] #intro,body[data-theme="light"] #intro::before{background:#faf6f0 !important;color:#211b17 !important}
+body[data-theme="light"] .hero{color:#211b17 !important;background:linear-gradient(90deg,rgba(255,250,244,.78),rgba(255,250,244,.20)),url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1600&q=70") center/cover !important}
+
+body[data-theme="dark"] .nav,
+body[data-theme="dark"] .nav-links,
+body[data-theme="dark"] .menu-section,
+body[data-theme="dark"] .product-card,
+body[data-theme="dark"] .notice,
+body[data-theme="dark"] .order-card,
+body[data-theme="dark"] .feature{
+  background:#1d1815 !important; color:#f7efe7 !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+body[data-theme="dark"] .categories{background:#171310 !important;color:#f7efe7 !important}
+body[data-theme="dark"] .notice-wrap,
+body[data-theme="dark"] .order-section{background:#241e1a !important;color:#f7efe7 !important}
+body[data-theme="dark"] footer{background:#0e0c0b !important;color:#f7efe7 !important}
+body[data-theme="dark"] .nav-links a,
+body[data-theme="dark"] .section-title,
+body[data-theme="dark"] .current-category,
+body[data-theme="dark"] .product-name,
+body[data-theme="dark"] .order-card h3,
+body[data-theme="dark"] .notice-box strong{color:#f7efe7 !important}
+body[data-theme="dark"] .section-text,
+body[data-theme="dark"] .products-count,
+body[data-theme="dark"] .product-desc,
+body[data-theme="dark"] .order-card p,
+body[data-theme="dark"] .feature span,
+body[data-theme="dark"] .about-copy p{color:#c2b4a8 !important}
+body[data-theme="dark"] .theme-toggle{background:#2a211c !important;color:#f7efe7 !important;border-color:rgba(255,255,255,.12) !important}
+body[data-theme="dark"] #intro,body[data-theme="dark"] #intro::before{background:#12100f !important;color:#f7efe7 !important}
+body[data-theme="dark"] .hero{color:#f7efe7 !important;background:linear-gradient(90deg,rgba(18,12,9,.88),rgba(18,12,9,.34)),url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1600&q=70") center/cover !important}
+
+/* Avoid loading the expensive visual noise until the page is idle. */
+.ferin-premium-light{will-change:transform;}
+
+/* ===== Bestseller flip box (replaces the 3 feature boxes) ===== */
+.fp-box[hidden]{display:none !important}
+.fp-box{margin-top:28px;padding:16px;border-radius:22px;background:var(--paper,#fffdf9);border:1px solid var(--line,rgba(23,18,15,.1));box-shadow:0 14px 34px rgba(60,40,20,.08);direction:rtl;overflow:hidden}
+.fp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.fp-title{font-weight:800;font-size:15px;color:var(--ink,#2a1f18)}
+.fp-count{font-size:12px;color:var(--muted,#806f63)}
+.fp-stage{position:relative;perspective:1200px;min-height:130px}
+.fp-card{display:flex;align-items:center;gap:14px;padding:12px;border-radius:18px;background:linear-gradient(135deg,rgba(201,155,97,.14),rgba(201,155,97,.04));border:1px solid var(--line,rgba(23,18,15,.1));transform-origin:center right;backface-visibility:hidden;will-change:transform,opacity}
+.fp-card.fp-in{animation:fpIn .8s cubic-bezier(.22,.8,.3,1) both}
+.fp-card.fp-out{position:absolute;inset:0;animation:fpOut .8s cubic-bezier(.6,0,.8,.4) both;pointer-events:none}
+@keyframes fpIn{from{transform:rotateY(90deg);opacity:0}to{transform:rotateY(0);opacity:1}}
+@keyframes fpOut{from{transform:rotateY(0);opacity:1}to{transform:rotateY(-90deg);opacity:0}}
+.fp-img{flex:0 0 96px;height:96px;border-radius:16px;overflow:hidden;display:grid;place-items:center;font-size:42px;background:rgba(201,155,97,.2)}
+.fp-img img{width:100%;height:100%;object-fit:cover;display:block}
+.fp-info{flex:1;min-width:0}
+.fp-name{margin:0 0 4px;font-size:16px;font-weight:800;color:var(--ink,#2a1f18)}
+.fp-desc{margin:0 0 8px;font-size:12px;color:var(--muted,#806f63);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fp-price{font-weight:800;font-size:14px;color:var(--gold,#c99b61)}
+.fp-price em{font-style:normal;font-size:11px;font-weight:600;margin-right:3px}
+.fp-old{font-size:12px;color:var(--muted,#806f63);text-decoration:line-through;margin-left:8px}
+.fp-dots{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.fp-dot{width:7px;height:7px;border-radius:99px;border:0;padding:0;background:rgba(128,111,99,.35);cursor:pointer;transition:all .3s}
+.fp-dot.on{width:22px;background:var(--gold,#c99b61)}
+@media (prefers-reduced-motion:reduce){.fp-card.fp-in,.fp-card.fp-out{animation-duration:.01s}}
+.fp-info{text-align:right}
+.fp-info > div{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.fp-old{margin-left:0}
+
+
+/* Placeholder shown when a product has no photo (or the photo fails to load) */
+.product-image{position:relative}
+.product-image .ph-icon{display:none}
+.product-image.no-photo{display:flex;align-items:center;justify-content:center}
+.product-image.no-photo .ph-icon{display:block;font-size:56px;opacity:.55}

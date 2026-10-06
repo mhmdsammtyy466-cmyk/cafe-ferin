@@ -1,0 +1,8 @@
+Cafe Ferin — Admin Stability Fix
+
+- Exactly one #ferinAdminOpen button is retained.
+- Admin button is forced to bottom-left.
+- Admin authentication overlay is above the site intro.
+- Admin panel uses a fixed viewport layer instead of an absolute document layer.
+- The old theme toggle remains separate from the admin button.
+- Panel password: merteks.1405

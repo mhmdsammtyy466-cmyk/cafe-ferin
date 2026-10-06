@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fffaf4" id="themeColorMeta">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1600&q=70">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap">
+<title>Cafe Ferin | نان فانتزی و شیرینی</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+
+<body>
+<!-- AMBIENT BACKGROUND FIELD -->
+<div class="ferin-field" aria-hidden="true">
+  <div class="ferin-grid"></div>
+  <div class="ferin-bloom"></div>
+  <div class="ferin-shapes">
+
+    <span class="ferin-shape ferin-shape--croissant">
+      <svg viewBox="0 0 100 100">
+        <path d="M14 70c0-26 18-44 36-44s36 18 36 44"/>
+        <path d="M14 70c8 6 22 8 36 8s28-2 36-8"/>
+        <path d="M30 66c2-16 12-28 20-28"/>
+        <path d="M50 68c0-18 0-30 0-30"/>
+        <path d="M70 66c-2-16-12-28-20-28"/>
+      </svg>
+    </span>
+
+    <span class="ferin-shape ferin-shape--cake">
+      <svg viewBox="0 0 100 100">
+        <path d="M22 74h56"/>
+        <path d="M26 74V52c0-4 2-6 6-6h36c4 0 6 2 6 6v22"/>
+        <path d="M26 60c6 4 14 4 20 0s14-4 20 0 12 4 16 2"/>
+        <path d="M50 46V34"/>
+        <path d="M50 34c0-4 4-6 4-6"/>
+      </svg>
+    </span>
+
+    <span class="ferin-shape ferin-shape--bread">
+      <svg viewBox="0 0 100 100">
+        <path d="M16 62c0-18 10-28 24-28 18 0 44 6 44 26 0 8-6 14-16 14H30c-8 0-14-5-14-12z"/>
+        <path d="M36 40c-6 6-8 12-8 18"/>
+        <path d="M50 38c-6 6-8 12-8 18"/>
+        <path d="M64 40c-6 6-8 12-8 18"/>
+      </svg>
+    </span>
+
+    <span class="ferin-shape ferin-shape--croissant2">
+      <svg viewBox="0 0 100 100">
+        <path d="M18 68c0-22 15-37 32-37s32 15 32 37"/>
+        <path d="M18 68c7 5 20 7 32 7s25-2 32-7"/>
+        <path d="M38 64c1-13 10-23 12-23"/>
+        <path d="M62 64c-1-13-10-23-12-23"/>
+      </svg>
+    </span>
+
+    <span class="ferin-shape ferin-shape--cup">
+      <svg viewBox="0 0 100 100">
+        <path d="M26 44h40v20c0 8-8 14-20 14s-20-6-20-14z"/>
+        <path d="M66 50c8 0 12 4 12 9s-4 9-12 9"/>
+        <path d="M34 36c0-4 3-6 3-6s3 2 3 6-3 6-3 6-3-2-3-6z"/>
+        <path d="M48 36c0-4 3-6 3-6s3 2 3 6-3 6-3 6-3-2-3-6z"/>
+      </svg>
+    </span>
+
+  </div>
+</div>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-bg" aria-hidden="true"></div>
+  <div class="intro-veil" aria-hidden="true"></div>
+  <div class="intro-grain" aria-hidden="true"></div>
+  <div class="intro-inner">
+    <img class="intro-logo" src="assets/images/logo.webp" alt="Cafe Ferin logo" loading="eager" decoding="async">
+    <div class="intro-small">CAFE & BAKERY</div>
+    <div class="intro-title cafe-brand">Cafe Ferin</div>
+    <div class="intro-line"></div>
+    <div class="intro-dot"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var intro=document.getElementById("intro");
+  function finishIntro(){
+    if(!intro) return;
+    intro.style.setProperty("display","none","important");
+    intro.style.setProperty("opacity","0","important");
+    intro.style.setProperty("visibility","hidden","important");
+    intro.style.setProperty("pointer-events","none","important");
+    if(intro.parentNode) intro.parentNode.removeChild(intro);
+    document.documentElement.classList.add("ferin-intro-finished");
+    if(document.body) document.body.classList.add("ferin-ready");
+  }
+  setTimeout(finishIntro,1600);
+  setTimeout(finishIntro,2600);
+})();
+</script>
+
+
+<!-- NAV -->
+<header class="nav" id="navbar">
+  <a href="#home" class="logo-wrap">
+    <img class="brand-logo" src="assets/images/logo.webp" alt="Ferin Cafe Bakery" loading="lazy" decoding="async">
+    <span class="logo-text cafe-brand">Cafe Ferin</span>
+  </a>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="تغییر حالت شب و روز">☀️</button>
+    <details class="mobile-menu" aria-label="منوی سایت">
+      <summary class="mobile-menu-toggle" aria-label="باز کردن منو"><span aria-hidden="true">☰</span></summary>
+      <nav class="mobile-menu-panel" aria-label="منوی اصلی">
+        <a href="#home">خانه</a>
+        <a href="#about">درباره ما</a>
+        <a href="#categories">دسته‌بندی منو</a>
+        <a href="#notice">اطلاع‌رسانی</a>
+        <a href="#order" class="mobile-order-link">ثبت سفارش</a>
+      </nav>
+    </details>
+  </div>
+  <nav class="nav-links" id="navLinks">
+    <a href="#home">خانه</a>
+    <a href="#about">درباره ما</a>
+    <a href="#categories">دسته‌بندی منو</a>
+    <a href="#notice">اطلاع‌رسانی</a>
+    <a href="#order" class="order-nav">ثبت سفارش</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="eyebrow">CAFE • BAKERY • MOMENTS</div>
+    <h1 class="cafe-brand">Ferin <span>Cafe</span></h1>
+    <p>
+      کافه نان فرین؛ جایی که عطر نان تازه، طعم شیرینی و حال خوب کنار هم جمع می‌شوند.»
+    </p>
+    <div class="hero-buttons">
+      <a class="btn btn-primary" href="#categories">مشاهده منو</a>
+      <a class="btn btn-primary" href="#order">ثبت سفارش</a>
+    </div>
+  </div>
+  <div class="scroll-indicator"><span></span> برای کشف بیشتر اسکرول کنید <span></span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-copy">
+        <div class="section-kicker">OUR STORY</div>
+        <h2 class="section-title">A warm place<br>for good moments.</h2>
+        <p>
+کافه نان فرین
+
+عطر نان تازه، طعم لحظه‌های خوب 🥐☕️
+
+در کافه نان فرین، هر روز نان‌ها، شیرینی‌ها، کیک‌ها و دسرهای تازه را با دقت و عشق آماده می‌کنیم.
+
+از نان‌های خمیرترش و فوکاچیا تا کروسان‌های ترد، کیک‌های خاص و دسرهای خوش‌طعم؛
+فرین جاییه برای تجربه طعم‌های تازه و دوست‌داشتنی.
+
+تازه پخته می‌شود، تازه لذت ببرید.
+
+محصولات فرین را ببینید و طعم مورد علاقه‌تان را انتخاب کنید.        </p>
+        <p>
+          محصولات این صفحه قابل تغییر هستند و می‌توانید قیمت، نام،
+          عکس و توضیحات آن‌ها را مستقیماً از بخش محصولات همین فایل ویرایش کنید.
+        </p>
+        <div class="fp-box" id="bestsellerBox" aria-label="محصولات پرفروش" hidden>
+          <div class="fp-head"><span class="fp-title">🔥 پرفروش‌های فرین</span><span class="fp-count" id="fpCount"></span></div>
+          <div class="fp-stage" id="fpStage"></div>
+          <div class="fp-dots" id="fpDots"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">OUR MENU</div>
+      <h2 class="section-title">Choose your favorite</h2>
+      <p class="section-text">دسته‌بندی موردنظر خود را انتخاب کنید تا محصولات آن را ببینید.</p>
+    </div>
+    <div class="category-grid" id="categoryGrid"></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="menu-toolbar">
+      <div class="current-category" id="currentCategory"></div>
+      <div class="products-count" id="productsCount"></div>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- NOTICE -->
+<section class="notice-wrap" id="notice">
+  <div class="container">
+    <div class="notice">
+      <div>
+        <div class="section-kicker">STAY CONNECTED</div>
+        <h2>Follow <span class="cafe-brand">Cafe Ferin</span></h2>
+        <p>برای دیدن محصولات جدید، اطلاعیه‌ها و خبرهای <span class="cafe-brand">Cafe Ferin</span> ما را در اینستاگرام دنبال کنید.</p>
+      </div>
+      <a class="notice-box instagram-box" href="https://share.google/UwpDSsUhjTUavduN8" target="_blank" rel="noopener" aria-label="Instagram Cafe Ferin">
+  
+  <span class="instagram-icon-wrap" aria-hidden="true">
+    <svg class="instagram-svg" viewBox="0 0 64 64" role="img">
+      <defs>
+        <linearGradient id="igGradientFerin" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#feda75"/>
+          <stop offset="35%" stop-color="#fa7e1e"/>
+          <stop offset="65%" stop-color="#d62976"/>
+          <stop offset="100%" stop-color="#4f5bd5"/>
+        </linearGradient>
+      </defs>
+      <rect x="9" y="9" width="46" height="46" rx="13" fill="none" stroke="url(#igGradientFerin)" stroke-width="5"/>
+      <circle cx="32" cy="32" r="11" fill="none" stroke="url(#igGradientFerin)" stroke-width="5"/>
+      <circle cx="45.5" cy="18.5" r="3.2" fill="#d62976"/>
+    </svg>
+  </span>
+<span class="instagram-box-label">Instagram</span>
+  <span class="instagram-box-handle cafe-brand">Cafe Ferin</span>
+</a>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="order-section" id="order">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-kicker">ORDER</div>
+      <h2 class="section-title">سفارش</h2>
+    </div>
+
+    <div class="order-grid">
+      <div class="order-card">
+        <div class="order-icon">☎️</div>
+        <h3>برای ارتباط با ما</h3>
+        <!-- شماره واقعی را اینجا جایگزین کنید -->
+        <a class="order-link" href="tel:+989129732372">09129732372</a>
+        <br>
+        <a class="order-link" href="tel:+989130894067">09130894067</a>
+      </div>
+
+      <div class="order-card">
+        <div class="order-icon">📍</div>
+        <h3>لوکیشن و آدرس مغازه</h3>
+        <p>خیابان امیر کبیر، ابتدای بلوار امیرالمؤمنین، نبش ذوالفقار ۴</p>
+        <a class="order-link" href="https://nshn.ir/vb2m9Z5xONfY" target="_blank" rel="noopener">باز کردن لوکیشن روی نقشه ↗</a>
+      </div>
+
+      <div class="order-note">
+        برای ثبت سفارش و هماهنگی، با ما تماس بگیرید یا به کافه نان فرین مراجعه کنید.
+      خوشحال می‌شویم با حضور گرمتان، افتخار میزبانی شما را داشته باشیم. 🤍   
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo cafe-brand">Cafe Ferin</div>
+    <div class="footer-social">
+      <a class="instagram-link" href="https://share.google/UwpDSsUhjTUavduN8" target="_blank" rel="noopener"><img class="instagram-icon instagram-uploaded-icon" src="assets/images/embedded-2f932e41ee3d.jpg" alt="Instagram" loading="lazy" decoding="async"><span>Instagram: اینستاگرام Cafe Ferin</span></a>
+      <span>•</span>
+      <a href="#order">ثبت سفارش</a>
+    </div>
+  </div>
+  <div class="copyright">© 2026 <span class="cafe-brand">Cafe Ferin</span> — All Rights Reserved</div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="merteks-footer">
+  <span class="promo">طراحی و توسعه وب‌سایت حرفه‌ای با merteks</span>
+  <span class="site-line"><a href="https://sam8913mt.github.io/marteks/" target="_blank" rel="noopener noreferrer">برای ورود به سایت لمس کنید</a></span>
+</footer>
+
+
+<!-- ================================================================
+     CAFE FERIN — PREMIUM ADD-ON LAYER
+     IMPORTANT: This block is additive. Existing HTML/CSS/JS above
+     is intentionally preserved and not rewritten.
+     ================================================================ -->
+
+
+
+
+
+
+<!-- ============================================================
+     FERIN FINAL RESPONSIVE SYSTEM 2026
+     Additive only: does not remove or edit the existing styles.
+     ============================================================ -->
+
+
+
+
+
+
+
+<!-- =========================================================
+     FERIN ADMIN PASSWORD LOCK — ADDITIVE ONLY
+     Password: merteks.1405
+     ========================================================= -->
+
+
+<div id="ferinAdminAuthOverlay" aria-hidden="true">
+  <div id="ferinAdminAuthBox" role="dialog" aria-modal="true" aria-labelledby="ferinAdminAuthTitle">
+    <div class="ferin-auth-icon">🔐</div>
+    <h2 id="ferinAdminAuthTitle" class="ferin-auth-title">ورود به پنل مدیریت</h2>
+    <p class="ferin-auth-sub">برای دسترسی به مدیریت محصولات، رمز عبور پنل را وارد کنید.</p>
+    <input id="ferinAdminAuthPassword" type="password" inputmode="text" autocomplete="current-password" placeholder="رمز عبور">
+    <div id="ferinAdminAuthError" aria-live="polite"></div>
+    <div class="ferin-auth-actions">
+      <button id="ferinAdminAuthEnter" class="ferin-auth-btn ferin-auth-enter" type="button">ورود به پنل</button>
+      <button id="ferinAdminAuthCancel" class="ferin-auth-btn ferin-auth-cancel" type="button">انصراف</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- FINAL ADMIN PASSWORD GUARD: added without changing the existing panel code -->
+
+
+
+
+<!-- FINAL: close admin panel whenever the user touches anywhere outside the panel -->
+
+
+
+<!-- =========================================================
+     CAFE FERIN — PRODUCT MANAGEMENT PANEL (ADDITIVE)
+     فقط اضافه شده؛ کدهای قبلی سایت حذف/ویرایش نشده‌اند.
+     ========================================================= -->
+
+
+<div id="ferinAdminFloating" aria-hidden="false"><button id="ferinAdminOpen" type="button" aria-label="پنل مدیریت محصولات" title="پنل مدیریت محصولات">⚙️</button></div>
+
+<div id="ferinAdminOverlay" aria-hidden="true">
+  <section id="ferinAdminPanel" role="dialog" aria-modal="true" aria-labelledby="ferinAdminTitle">
+    <div class="ferin-admin-head">
+      <div><div id="ferinAdminTitle" class="ferin-admin-title">مدیریت محصولات Cafe Ferin</div><div class="ferin-admin-sub">افزودن محصول، ویرایش محصول و تعیین دسته‌بندی</div></div>
+      <button class="ferin-admin-close" id="ferinAdminClose" type="button" aria-label="بستن">×</button>
+    </div>
+    <div class="ferin-admin-body">
+      <div class="ferin-admin-grid">
+        <div class="ferin-admin-field">
+          <label for="ferinAdminName">نام محصول</label>
+          <input id="ferinAdminName" type="text" placeholder="مثلاً کیک شکلاتی" autocomplete="off">
+        </div>
+        <div class="ferin-admin-field">
+          <label for="ferinAdminCategory">دسته‌بندی / نوع محصول</label>
+          <select id="ferinAdminCategory"></select>
+        </div>
+        <div class="ferin-admin-field">
+          <label for="ferinAdminStatus">وضعیت / برچسب محصول</label>
+          <select id="ferinAdminStatus" aria-label="وضعیت محصول">
+            <option value="پیشنهاد ویژه">⭐ پیشنهاد ویژه</option>
+            <option value="محبوب">❤️ محبوب</option>
+            <option value="پرفروش">🔥 پرفروش</option>
+            <option value="جدید">✨ جدید</option>
+            <option value="تخفیف">🏷️ تخفیف</option>
+            <option value="ارسال رایگان">🚚 ارسال رایگان</option>
+            <option value="بهترین قیمت">💰 بهترین قیمت</option>
+            <option value="بدون وضعیت" selected>بدون وضعیت</option>
+          </select>
+          <div class="ferin-status-help">این برچسب در گوشه بالای کارت محصول نمایش داده می‌شود.</div>
+        </div>
+        <div class="ferin-admin-field full">
+          <label for="ferinAdminImage">عکس محصول</label>
+          <input id="ferinAdminImage" type="file" accept="image/*">
+          <div class="ferin-admin-preview"><img id="ferinAdminPreviewImg" alt="پیش‌نمایش" loading="lazy" decoding="async"><span id="ferinAdminImageStatus">برای محصول جدید، انتخاب عکس الزامی است.</span></div>
+        </div>
+        <div class="ferin-admin-field">
+          <label for="ferinAdminPrice">قیمت</label>
+          <input id="ferinAdminPrice" type="text" placeholder="مثلاً ۱۷۵,۰۰۰" autocomplete="off">
+        </div>
+        <div class="ferin-admin-field">
+          <label for="ferinAdminOldPrice">قیمت قبلی (اختیاری)</label>
+          <input id="ferinAdminOldPrice" type="text" placeholder="مثلاً ۲۰۶,۰۰۰" autocomplete="off">
+        </div>
+        <div class="ferin-admin-field full">
+          <label for="ferinAdminDesc">توضیحات (اختیاری)</label>
+          <textarea id="ferinAdminDesc" placeholder="توضیح کوتاه محصول"></textarea>
+        </div>
+      </div>
+      <div class="ferin-admin-actions">
+        <button class="ferin-admin-btn ferin-admin-primary" id="ferinAdminSave" type="button">➕ افزودن محصول</button>
+        <button class="ferin-admin-btn ferin-admin-secondary" id="ferinAdminCancel" type="button">پاک کردن فرم</button>
+      </div>
+      <div class="ferin-admin-note">تغییرات این پنل در همین مرورگر ذخیره می‌شود. برای ذخیره‌سازی مشترک بین همه گوشی‌ها و دستگاه‌ها، اتصال به پایگاه‌داده/سرور لازم است.</div>
+      <div class="ferin-admin-divider"></div>
+      <div class="ferin-admin-toolbar"><h3>محصولات فعلی</h3><input id="ferinAdminSearch" class="ferin-admin-search" type="search" placeholder="جستجوی محصول..."></div>
+      <div id="ferinAdminList" class="ferin-admin-list"></div>
+    </div>
+  </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="js/app.js?v=2" defer></script>
+
+
+
