@@ -967,9 +967,8 @@ window.addEventListener("scroll", () => {
 /* ===== Cafe Ferin — shared products + recovery ===== */
 (function(){
   "use strict";
-  const SUPABASE_URL="https://lrwumtzqzhhcfdkiatkz.supabase.co";
-  const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxyd3VtdHpxemhoY2ZkaWF0ayIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzkxMzA2NjMxLCJleHAiOjIxMDY4ODI2MzF9.G8O4UDRWpYNf643KfzCytMO44g-XGGda52BA3odc1MI";
-  /* Fallback to the exact key supplied for this project if the typo-safe constant above is rejected. */
+  const SUPABASE_URL = window.SUPABASE_CONFIG?.url || "";
+  const SUPABASE_ANON_KEY = window.SUPABASE_CONFIG?.anonKey || "";
   const API=SUPABASE_URL+"/rest/v1", BUCKET="product-images", KEY="ferin_admin_products_v1";
   const $=id=>document.getElementById(id);
   const overlay=$("ferinAdminOverlay"), nameEl=$("ferinAdminName"), categoryEl=$("ferinAdminCategory"), imageEl=$("ferinAdminImage");
