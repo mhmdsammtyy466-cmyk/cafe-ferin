@@ -964,144 +964,92 @@ window.addEventListener("scroll", () => {
   }, {capture:true, passive:true});
 })();
 
-/* ===== Original inline script 10 ===== */
+/* ===== Cafe Ferin — shared products + recovery ===== */
 (function(){
   "use strict";
-  const KEY = "ferin_admin_products_v1";
-  const $ = id => document.getElementById(id);
-  const overlay = $("ferinAdminOverlay");
-  const nameEl = $("ferinAdminName"), categoryEl = $("ferinAdminCategory"), imageEl = $("ferinAdminImage");
-  const priceEl = $("ferinAdminPrice"), oldPriceEl = $("ferinAdminOldPrice"), descEl = $("ferinAdminDesc");
-  const statusEl = $("ferinAdminStatus");
-  const preview = $("ferinAdminPreviewImg"), imageStatus = $("ferinAdminImageStatus"), saveBtn = $("ferinAdminSave");
-  const searchEl = $("ferinAdminSearch");
-  let editingId = null, selectedImage = "";
+  const SUPABASE_URL="https://lrwumtzqzhhcfdkiatkz.supabase.co";
+  const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxyd3VtdHpxemhoY2ZkaWF0ayIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzkxMzA2NjMxLCJleHAiOjIxMDY4ODI2MzF9.G8O4UDRWpYNf643KfzCytMO44g-XGGda52BA3odc1MI";
+  /* Fallback to the exact key supplied for this project if the typo-safe constant above is rejected. */
+  const API=SUPABASE_URL+"/rest/v1", BUCKET="product-images", KEY="ferin_admin_products_v1";
+  const $=id=>document.getElementById(id);
+  const overlay=$("ferinAdminOverlay"), nameEl=$("ferinAdminName"), categoryEl=$("ferinAdminCategory"), imageEl=$("ferinAdminImage");
+  const priceEl=$("ferinAdminPrice"), oldPriceEl=$("ferinAdminOldPrice"), descEl=$("ferinAdminDesc"), statusEl=$("ferinAdminStatus");
+  const preview=$("ferinAdminPreviewImg"), imageStatus=$("ferinAdminImageStatus"), saveBtn=$("ferinAdminSave"), searchEl=$("ferinAdminSearch");
+  let editingId=null, selectedImage="";
 
   function readStore(){try{return JSON.parse(localStorage.getItem(KEY)||'{"edits":{},"adds":[],"removed":[]}')}catch(e){return {edits:{},adds:[],removed:[]}}}
   function writeStore(s){localStorage.setItem(KEY,JSON.stringify(s));}
-  function isRemoved(id,store){return (store.removed||[]).includes(id);}
   function uid(){return "ferin_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8)}
-
-  function compressImage(file){
-    return new Promise((resolve,reject)=>{
-      const reader=new FileReader();
-      reader.onerror=reject;
-      reader.onload=()=>{
-        const img=new Image();
-        img.onload=()=>{
-          const max=1100, scale=Math.min(1,max/Math.max(img.width,img.height));
-          const w=Math.max(1,Math.round(img.width*scale)), h=Math.max(1,Math.round(img.height*scale));
-          const c=document.createElement("canvas"); c.width=w;c.height=h;
-          const ctx=c.getContext("2d");ctx.drawImage(img,0,0,w,h);
-          resolve(c.toDataURL("image/jpeg",.78));
-        };
-        img.onerror=reject; img.src=reader.result;
-      };
-      reader.readAsDataURL(file);
-    });
+  function headers(extra){return Object.assign({apikey:SUPABASE_ANON_KEY,Authorization:"Bearer "+SUPABASE_ANON_KEY},extra||{});}
+  async function api(path,opt){opt=opt||{};const r=await fetch(API+path,Object.assign({},opt,{headers:headers(opt.headers||{})}));if(!r.ok){let m="Supabase "+r.status;try{const j=await r.json();m=j.message||j.error_description||j.hint||m;}catch(e){}
+    /* If the "badge" column does not exist in the table yet, retry once without it so saving still works. */
+    if(/badge/i.test(m)&&typeof opt.body==="string"&&!opt._retried){try{const b=JSON.parse(opt.body),strip=o=>{delete o.badge;return o;};const res=await api(path,Object.assign({},opt,{body:JSON.stringify(Array.isArray(b)?b.map(strip):strip(b)),_retried:true}));window.FERIN_BADGE_COLUMN_MISSING=true;setDbStatus(false,"ستون badge در جدول نیست؛ فایل supabase-setup.sql را اجرا کنید تا وضعیت محصول (پرفروش، جدید و...) هم ذخیره شود.");return res;}catch(e2){throw e2;}}
+    throw Error(m)} const t=await r.text();return t?JSON.parse(t):null;}
+  function compressImage(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=reject;reader.onload=()=>{const img=new Image();img.onload=()=>{const max=1100,scale=Math.min(1,max/Math.max(img.width,img.height)),w=Math.max(1,Math.round(img.width*scale)),h=Math.max(1,Math.round(img.height*scale)),c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);resolve(c.toDataURL("image/jpeg",.78));};img.onerror=reject;img.src=reader.result;};reader.readAsDataURL(file);});}
+  function dataUrlToBlob(u){const [h,d]=u.split(","),m=(h.match(/data:([^;]+)/)||[])[1]||"image/jpeg",b=atob(d),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return new Blob([a],{type:m});}
+  async function uploadImage(data,id){if(!data||!data.startsWith("data:image/"))return data||"";const p="products/"+id+"-"+Date.now()+".jpg",r=await fetch(SUPABASE_URL+"/storage/v1/object/"+BUCKET+"/"+p,{method:"POST",headers:headers({"Content-Type":"image/jpeg","x-upsert":"true"}),body:dataUrlToBlob(data)});if(!r.ok)throw Error("آپلود عکس ناموفق بود");return SUPABASE_URL+"/storage/v1/object/public/"+BUCKET+"/"+p;}
+  function ensureIds(){menuData.forEach((c,ci)=>c.products.forEach((p,pi)=>{if(!p._adminId)p._adminId="base_"+c.id+"_"+pi;}));}
+  function applyStore(s){
+    ensureIds(); s=s||{};
+    Object.keys(s.edits||{}).forEach(k=>{if(s.edits[k]&&s.edits[k].categoryId==="sweet")s.edits[k].categoryId="cake"});
+    (s.adds||[]).forEach(p=>{if(p&&p.categoryId==="sweet")p.categoryId="cake"});
+    (s.removed||[]).forEach(id=>menuData.forEach(c=>c.products=c.products.filter(p=>p._adminId!==id)));
+    Object.keys(s.edits||{}).forEach(id=>{const e=s.edits[id]||{};let f=null;for(const c of menuData){const i=c.products.findIndex(p=>p._adminId===id);if(i>=0){f={c,i,p:c.products[i]};break;}}if(!f)return;Object.assign(f.p,e);if(e.categoryId&&e.categoryId!==f.c.id){f.c.products.splice(f.i,1);const t=menuData.find(c=>c.id===e.categoryId);if(t)t.products.push(f.p);}});
+    (s.adds||[]).forEach(p=>{if(!p||!p._adminId)return;if(!menuData.some(c=>c.products.some(x=>x._adminId===p._adminId))){const c=menuData.find(c=>c.id===p.categoryId);if(c)c.products.push(p);}});
   }
-
-  function ensureIds(){
-    menuData.forEach((cat,ci)=>cat.products.forEach((p,pi)=>{if(!p._adminId)p._adminId="base_"+cat.id+"_"+pi;}));
-  }
-  function applyStored(){
-    ensureIds();
-    const s=readStore();
-    Object.keys(s.edits||{}).forEach(k=>{if(s.edits[k]&&s.edits[k].categoryId==="sweet")s.edits[k].categoryId="cake";});
-    (s.adds||[]).forEach(p=>{if(p&&p.categoryId==="sweet")p.categoryId="cake";});
-    /* Apply edits first, including category moves. */
-    Object.keys(s.edits||{}).forEach(id=>{
-      const e=s.edits[id]||{};
-      let found=null;
-      for(const cat of menuData){
-        const idx=cat.products.findIndex(p=>p._adminId===id);
-        if(idx!==-1){found={cat,idx,p:cat.products[idx]};break;}
-      }
-      if(!found)return;
-      Object.assign(found.p,e);
-      if(e.categoryId && e.categoryId!==found.cat.id){
-        found.cat.products.splice(found.idx,1);
-        const target=menuData.find(c=>c.id===e.categoryId);
-        if(target)target.products.push(found.p);
-      }
-    });
-    /* Restore products created through the admin panel. */
-    (s.adds||[]).forEach(p=>{
-      if(!p || !p._adminId)return;
-      if(!menuData.some(c=>c.products.some(x=>x._adminId===p._adminId))){
-        const c=menuData.find(c=>c.id===p.categoryId);
-        if(c)c.products.push(p);
-      }
-    });
-  }
-  applyStored();
-  const removedStore = readStore();
-  menuData.forEach(cat=>{cat.products = cat.products.filter(p=>!isRemoved(p._adminId, removedStore));});
-  renderCategories(); renderProducts();
+  /* Recover the exact 23 products and their original images from the uploaded browser export. */
+  applyStore(window.FERIN_RECOVERED_STORE||null);
+  /* Then apply anything currently in this browser. */
+  const local=readStore();
+  if((local.adds&&local.adds.length)||(local.edits&&Object.keys(local.edits).length)||(local.removed&&local.removed.length)) applyStore(local);
+  renderCategories();renderProducts();
 
   function fillCategories(){categoryEl.innerHTML=menuData.map(c=>`<option value="${c.id}">${c.icon||"🍰"} ${c.name}</option>`).join("");}
   function allProducts(){return menuData.flatMap(c=>c.products.map(p=>({p,c})));}
-  function renderList(){
-    const q=(searchEl.value||"").trim().toLowerCase();
-    const rows=allProducts().filter(({p,c})=>(p.name+" "+c.name).toLowerCase().includes(q));
-    $("ferinAdminList").innerHTML=rows.length?rows.map(({p,c})=>`<div class="ferin-admin-item"><img class="ferin-admin-thumb" src="${p.image||""}" alt=""><div><div class="ferin-admin-item-name">${escapeHtml(p.name||"بدون نام")}</div><div class="ferin-admin-item-meta">${escapeHtml(c.name)}${p.price?" • "+escapeHtml(p.price)+" تومان":""}${p.badge&&p.badge!=="بدون وضعیت"?" • "+escapeHtml(p.badge):""}</div></div><button class="ferin-admin-edit" type="button" data-edit="${p._adminId}">ویرایش</button><button class="ferin-admin-delete" type="button" data-delete="${p._adminId}">حذف</button></div>`).join(""):"<div class='ferin-admin-empty'>محصولی پیدا نشد.</div>";
-  }
-  function escapeHtml(s){return String(s).replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
+  function escapeHtml(s){return String(s==null?"":s).replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
+  function renderList(){const q=(searchEl.value||"").trim().toLowerCase(),rows=allProducts().filter(x=>(x.p.name+" "+x.c.name).toLowerCase().includes(q));$("ferinAdminList").innerHTML=rows.length?rows.map(({p,c})=>`<div class="ferin-admin-item"><img class="ferin-admin-thumb" src="${escapeHtml(p.image||"")}" alt=""><div><div class="ferin-admin-item-name">${escapeHtml(p.name||"بدون نام")}</div><div class="ferin-admin-item-meta">${escapeHtml(c.name)}${p.price?" • "+escapeHtml(p.price)+" تومان":""}${p.badge&&p.badge!=="بدون وضعیت"?" • "+escapeHtml(p.badge):""}</div></div><button class="ferin-admin-edit" type="button" data-edit="${escapeHtml(p._adminId)}">ویرایش</button></div>`).join(""):"<div class='ferin-admin-empty'>محصولی پیدا نشد.</div>";}
   function resetForm(){editingId=null;selectedImage="";nameEl.value="";priceEl.value="";oldPriceEl.value="";descEl.value="";imageEl.value="";preview.src="";preview.classList.remove("show");imageStatus.textContent="برای محصول جدید، انتخاب عکس الزامی است.";saveBtn.textContent="➕ افزودن محصول";fillCategories();if(statusEl)statusEl.value="بدون وضعیت";}
-  function editProduct(id){
-    const found=allProducts().find(({p})=>p._adminId===id);if(!found)return;
-    editingId=id;nameEl.value=found.p.name||"";priceEl.value=found.p.price||"";oldPriceEl.value=found.p.oldPrice||"";descEl.value=found.p.desc||"";categoryEl.value=found.c.id;selectedImage=found.p.image||"";if(statusEl)statusEl.value=found.p.badge||"بدون وضعیت";preview.src=selectedImage;preview.classList.toggle("show",!!selectedImage);imageStatus.textContent=selectedImage?"عکس فعلی محصول فعال است؛ در صورت نیاز عکس جدید انتخاب کنید.":"عکسی ثبت نشده است.";saveBtn.textContent="💾 ذخیره ویرایش";nameEl.focus();}
-
+  function editProduct(id){const f=allProducts().find(x=>x.p._adminId===id);if(!f)return;editingId=id;nameEl.value=f.p.name||"";priceEl.value=f.p.price||"";oldPriceEl.value=f.p.oldPrice||"";descEl.value=f.p.desc||"";categoryEl.value=f.c.id;selectedImage=f.p.image||"";if(statusEl)statusEl.value=f.p.badge||"بدون وضعیت";preview.src=selectedImage;preview.classList.toggle("show",!!selectedImage);imageStatus.textContent=selectedImage?"عکس فعلی محصول فعال است؛ در صورت نیاز عکس جدید انتخاب کنید.":"عکسی ثبت نشده است.";saveBtn.textContent="💾 ذخیره ویرایش";nameEl.focus();}
   imageEl.addEventListener("change",async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{imageStatus.textContent="در حال آماده‌سازی عکس...";selectedImage=await compressImage(f);preview.src=selectedImage;preview.classList.add("show");imageStatus.textContent="عکس جدید انتخاب شد.";}catch(err){selectedImage="";imageStatus.textContent="خواندن عکس انجام نشد.";}});
-
-  saveBtn.addEventListener("click",()=>{
-    const name=nameEl.value.trim(), categoryId=categoryEl.value, price=priceEl.value.trim(), oldPrice=oldPriceEl.value.trim(), desc=descEl.value.trim(), badge=statusEl?statusEl.value:"بدون وضعیت";
-    if(!name){alert("لطفاً نام محصول را وارد کنید.");nameEl.focus();return;}
-    if(!categoryId){alert("لطفاً دسته‌بندی محصول را انتخاب کنید.");return;}
-    if(!editingId && !selectedImage){alert("لطفاً عکس محصول را انتخاب کنید.");return;}
-    const store=readStore();
-    if(editingId){
-      let found=allProducts().find(({p})=>p._adminId===editingId);if(!found)return;
-      const data={name,price,oldPrice,desc,badge};if(selectedImage)data.image=selectedImage;
-      if(found.c.id!==categoryId){
-        found.c.products=found.c.products.filter(p=>p._adminId!==editingId);
-        const target=menuData.find(c=>c.id===categoryId); if(target){const moved={...found.p,...data};target.products.push(moved);store.edits[editingId]={...data};store.edits[editingId].categoryId=categoryId;}
-      }else{Object.assign(found.p,data);store.edits[editingId]={...data};}
-      writeStore(store);renderCategories();renderProducts();renderList();resetForm();alert("محصول با موفقیت ویرایش شد.");
-    }else{
-      const p={_adminId:uid(),name,price,oldPrice,desc,image:selectedImage,rating:5,ratingCount:0,time:0,tag:"",badge,categoryId};
-      const target=menuData.find(c=>c.id===categoryId);if(!target)return;target.products.push(p);store.adds=store.adds||[];store.adds.push(p);writeStore(store);renderCategories();renderProducts();renderList();resetForm();alert("محصول جدید اضافه شد.");
-    }
-  });
-
-  $("ferinAdminList").addEventListener("click",e=>{
-    const edit=e.target.closest("[data-edit]");
-    const del=e.target.closest("[data-delete]");
-    if(edit) editProduct(edit.dataset.edit);
-    if(del){
-      const id=del.dataset.delete;
-      const found=allProducts().find(({p})=>p._adminId===id);
-      if(!found) return;
-      if(!confirm("آیا از حذف این محصول مطمئن هستید؟")) return;
-      const store=readStore();
-      found.c.products=found.c.products.filter(p=>p._adminId!==id);
-      store.removed=store.removed||[];
-      if(!store.removed.includes(id)) store.removed.push(id);
-      store.adds=(store.adds||[]).filter(p=>p._adminId!==id);
-      delete store.edits[id];
-      writeStore(store);
-      renderCategories(); renderProducts(); renderList(); resetForm();
-      alert("محصول حذف شد.");
-    }
-  });
-  searchEl.addEventListener("input",renderList);
-  $("ferinAdminCancel").addEventListener("click",resetForm);
-  $("ferinAdminOpen").addEventListener("click",()=>{fillCategories();renderList();overlay.scrollTop=0;overlay.classList.add("is-open");overlay.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";});
+  async function uuidFromString(str){const b=new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str)));b[6]=(b[6]&15)|64;b[8]=(b[8]&63)|128;const h=Array.from(b.slice(0,16),x=>x.toString(16).padStart(2,"0"));return h.slice(0,4).join("")+"-"+h.slice(4,6).join("")+"-"+h.slice(6,8).join("")+"-"+h.slice(8,10).join("")+"-"+h.slice(10,16).join("");}
+  async function rowFor(p,img){return {id:/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(p._adminId)?p._adminId:await uuidFromString(p._adminId),name:p.name||"محصول",price:p.price||"",old_price:p.oldPrice||"",category:p.categoryId,description:p.desc||"",badge:p.badge||"",image_url:img||p.image||null};}
+  async function syncAllToSupabase(){const products=allProducts().map(x=>x.p);const rows=[];for(const p of products){let img=p.image||"";if(img.startsWith("data:image/"))img=await uploadImage(img,p._adminId);rows.push(await rowFor(p,img));}if(rows.length)await api("/products",{method:"POST",headers:{"Content-Type":"application/json","Prefer":"resolution=merge-duplicates,return=minimal"},body:JSON.stringify(rows)});return rows.length;}
+  let pendingInitialSync=false;
+  function setDbStatus(ok,msg){const el=$("ferinDbStatus");if(!el)return;el.textContent=(ok?"✅ ":"❌ ")+msg;el.className="ferin-db-status "+(ok?"ok":"bad");}
+  /* Uploads the recovered/local products ONLY when the admin opens the panel (never for normal visitors). */
+  async function runInitialSync(){
+    if(!pendingInitialSync)return;pendingInitialSync=false;
+    try{
+      setDbStatus(true,"در حال ذخیرهٔ محصولات در پایگاه‌داده... (چند لحظه صبر کنید)");
+      const count=await syncAllToSupabase();
+      if(count){if(window.FERIN_BADGE_COLUMN_MISSING)setDbStatus(false,count+" محصول ذخیره شد، اما ستون badge در جدول نیست؛ فایل supabase-setup.sql را اجرا کنید تا وضعیت محصول (پرفروش، جدید و...) هم ذخیره شود.");else setDbStatus(true,"متصل — "+count+" محصول در پایگاه‌داده ذخیره شد.");renderCategories();renderProducts();renderList();alert(count+" محصول در پایگاه‌داده ذخیره شد و حالا برای همهٔ بازدیدکنندگان نمایش داده می‌شود.");}
+    }catch(err){pendingInitialSync=true;console.error("Cafe Ferin Supabase sync:",err);setDbStatus(false,"ذخیرهٔ اولیه ناموفق بود: "+err.message);}
+  }
+  async function loadRemote(){
+    try{
+      const rows=await api("/products?select=*&order=created_at.asc");
+      const list=rows||[];
+      const valid=list.filter(r=>menuData.some(c=>c.id===r.category));
+      if(valid.length){
+        const by=new Map(menuData.map(c=>[c.id,c]));
+        menuData.forEach(c=>c.products=[]);
+        valid.forEach(r=>{by.get(r.category).products.push({_adminId:r.id,name:r.name||"",price:r.price||"",oldPrice:r.old_price||"",desc:r.description||"",image:r.image_url||"",rating:5,ratingCount:0,time:0,tag:"",badge:r.badge||""});});
+        renderCategories();renderProducts();renderList();
+        setDbStatus(true,"متصل به پایگاه‌داده — "+valid.length+" محصول بارگذاری شد.");
+        return;
+      }
+      if(!list.length){pendingInitialSync=true;setDbStatus(true,"متصل است ولی جدول خالی است؛ محصولات فعلی هنگام باز کردن پنل ذخیره می‌شوند.");}
+      else setDbStatus(false,"جدول محصولات داده دارد ولی ستون category هیچ‌کدام با دسته‌بندی‌های سایت یکی نیست.");
+    }catch(err){console.error("Cafe Ferin Supabase:",err);setDbStatus(false,"اتصال به پایگاه‌داده برقرار نشد: "+err.message+" — سایت فعلاً از اطلاعات داخل خود فایل‌ها استفاده می‌کند.");}
+  }
+  saveBtn.addEventListener("click",async()=>{const name=nameEl.value.trim(),categoryId=categoryEl.value,price=priceEl.value.trim(),oldPrice=oldPriceEl.value.trim(),desc=descEl.value.trim(),badge=statusEl?statusEl.value:"بدون وضعیت";if(!name)return alert("لطفاً نام محصول را وارد کنید.");if(!categoryId)return alert("لطفاً دسته‌بندی محصول را انتخاب کنید.");if(!editingId&&!selectedImage)return alert("لطفاً عکس محصول را انتخاب کنید.");saveBtn.disabled=true;try{const f=editingId&&allProducts().find(x=>x.p._adminId===editingId);let id=editingId||uid(),img=selectedImage||(f&&f.p.image)||"";if(img.startsWith("data:image/"))img=await uploadImage(img,id);const row=await rowFor({_adminId:id,name,price,oldPrice,categoryId,desc,image:img},img);if(editingId)await api("/products?id=eq."+encodeURIComponent(row.id),{method:"PATCH",headers:{"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(row)});else await api("/products",{method:"POST",headers:{"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify([row])});
+      const s=readStore();s.adds=s.adds||[];s.edits=s.edits||{};if(editingId){if(!f)throw Error("محصول پیدا نشد");Object.assign(f.p,{name,price,oldPrice,desc,badge,image:img});if(f.c.id!==categoryId){f.c.products=f.c.products.filter(p=>p._adminId!==editingId);const t=menuData.find(c=>c.id===categoryId);if(t)t.products.push(f.p);}s.edits[editingId]={name,price,oldPrice,desc,badge,image:img,categoryId};}else{const p={_adminId:id,name,price,oldPrice,desc,image:img,rating:5,ratingCount:0,time:0,tag:"",badge,categoryId};const t=menuData.find(c=>c.id===categoryId);if(t)t.products.push(p);s.adds.push(p);}writeStore(s);renderCategories();renderProducts();renderList();resetForm();alert("محصول با موفقیت در سایت مشترک ذخیره شد.");}catch(err){console.error(err);alert("ذخیره انجام نشد: "+err.message);}finally{saveBtn.disabled=false;}}
+  );
+  $("ferinAdminList").addEventListener("click",e=>{const b=e.target.closest("[data-edit]");if(b)editProduct(b.dataset.edit);});searchEl.addEventListener("input",renderList);$("ferinAdminCancel").addEventListener("click",resetForm);
+  $("ferinAdminOpen").addEventListener("click",()=>{fillCategories();renderList();overlay.scrollTop=0;overlay.classList.add("is-open");overlay.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";runInitialSync();});
   function close(){overlay.classList.remove("is-open");overlay.setAttribute("aria-hidden","true");document.body.style.overflow="";resetForm();}
-  $("ferinAdminClose").addEventListener("click",close);
-  overlay.addEventListener("click",e=>{if(e.target===overlay)close();});
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("is-open"))close();});
-  resetForm();
+  $("ferinAdminClose").addEventListener("click",close);overlay.addEventListener("click",e=>{if(e.target===overlay)close();});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("is-open"))close();});
+  resetForm();loadRemote();
 })();
 
 /* ===== Original inline script 11 ===== */

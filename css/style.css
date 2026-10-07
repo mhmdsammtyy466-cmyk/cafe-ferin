@@ -5166,3 +5166,8 @@ body[data-theme="dark"] .hero{color:#f7efe7 !important;background:linear-gradien
 .product-image .ph-icon{display:none}
 .product-image.no-photo{display:flex;align-items:center;justify-content:center}
 .product-image.no-photo .ph-icon{display:block;font-size:56px;opacity:.55}
+
+/* DB connection status line inside the admin panel */
+.ferin-db-status{margin:10px 0;padding:10px 12px;border-radius:12px;font-size:13px;line-height:1.8;background:rgba(115,134,164,.12)}
+.ferin-db-status.ok{background:rgba(46,125,50,.12)}
+.ferin-db-status.bad{background:rgba(198,40,40,.12)}

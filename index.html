@@ -179,7 +179,8 @@
     <div class="eyebrow">CAFE • BAKERY • MOMENTS</div>
     <h1 class="cafe-brand">Ferin <span>Cafe</span></h1>
     <p>
-      کافه نان فرین؛ جایی که عطر نان تازه، طعم شیرینی و حال خوب کنار هم جمع می‌شوند.»
+      جایی برای عطر کروسان تازه، طعم نان گرم و لحظه‌هایی که دوست داری
+      کمی بیشتر طول بکشند.
     </p>
     <div class="hero-buttons">
       <a class="btn btn-primary" href="#categories">مشاهده منو</a>
@@ -284,17 +285,17 @@
   <div class="container">
     <div class="section-head">
       <div class="section-kicker">ORDER</div>
-      <h2 class="section-title">سفارش</h2>
+      <h2 class="section-title">ثبت سفارش</h2>
+      <p class="section-text">برای ثبت سفارش با ما تماس بگیرید یا حضوری به <span class="cafe-brand">Cafe Ferin</span> مراجعه کنید.</p>
     </div>
 
     <div class="order-grid">
       <div class="order-card">
         <div class="order-icon">☎️</div>
-        <h3>برای ارتباط با ما</h3>
+        <h3>شماره مغازه</h3>
+        <p>برای ثبت سفارش و هماهنگی با کافه تماس بگیرید.</p>
         <!-- شماره واقعی را اینجا جایگزین کنید -->
         <a class="order-link" href="tel:+989129732372">09129732372</a>
-        <br>
-        <a class="order-link" href="tel:+989130894067">09130894067</a>
       </div>
 
       <div class="order-card">
@@ -305,8 +306,7 @@
       </div>
 
       <div class="order-note">
-        برای ثبت سفارش و هماهنگی، با ما تماس بگیرید یا به کافه نان فرین مراجعه کنید.
-      خوشحال می‌شویم با حضور گرمتان، افتخار میزبانی شما را داشته باشیم. 🤍   
+        ثبت سفارش فقط به صورت تلفنی و حضوری انجام میگردد.
       </div>
     </div>
   </div>
@@ -475,6 +475,7 @@
         <button class="ferin-admin-btn ferin-admin-secondary" id="ferinAdminCancel" type="button">پاک کردن فرم</button>
       </div>
       <div class="ferin-admin-note">تغییرات این پنل در همین مرورگر ذخیره می‌شود. برای ذخیره‌سازی مشترک بین همه گوشی‌ها و دستگاه‌ها، اتصال به پایگاه‌داده/سرور لازم است.</div>
+      <div id="ferinDbStatus" class="ferin-db-status">در حال بررسی اتصال به پایگاه‌داده...</div>
       <div class="ferin-admin-divider"></div>
       <div class="ferin-admin-toolbar"><h3>محصولات فعلی</h3><input id="ferinAdminSearch" class="ferin-admin-search" type="search" placeholder="جستجوی محصول..."></div>
       <div id="ferinAdminList" class="ferin-admin-list"></div>
@@ -495,7 +496,7 @@
 
 
 
-<script src="js/app.js?v=2" defer></script>
-
-
-
+<script src="data/recovered-products.js"></script>
+<script src="js/app.js?v=5" defer></script>
+</body>
+</html>

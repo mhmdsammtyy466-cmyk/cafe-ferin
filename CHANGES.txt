@@ -1,0 +1,13 @@
+Cafe Ferin — debug pass (v5)
+
+Changed:
+1. index.html: added the missing </body></html>; app.js version bumped to ?v=5 (forces a fresh load).
+2. Admin panel now shows a live "database connection" status line (green = connected, red = reason).
+3. First upload of the recovered products now runs ONLY when the admin opens the panel
+   (before: any visitor triggered it and saw an alert).
+4. Product status label (پرفروش / جدید / ...) is now saved to and loaded from Supabase
+   (needs the "badge" column — run supabase-setup.sql once. If the column is missing, saving still works
+   and the panel tells you).
+5. The first upload is an upsert, so running it again after a partial failure doesn't create duplicates.
+
+Not changed (by design): admin password and anon key are still inside js/app.js.
