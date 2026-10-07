@@ -370,7 +370,7 @@ function renderProducts(){
     <article class="product-card">
       ${badgeHtml}
       <div class="product-image${safeImage ? "" : " no-photo"}">
-        ${safeImage ? `<img src="${safeImage}" alt="${safeName}" loading="lazy" onerror="this.parentNode.classList.add('no-photo');this.remove()">` : ""}
+        ${safeImage ? `<img src="${safeImage}" alt="${safeName}" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('no-photo');this.remove()">` : ""}
         <span class="ph-icon" aria-hidden="true">${category.icon || "🍰"}</span>
       </div>
       <div class="p-body">
