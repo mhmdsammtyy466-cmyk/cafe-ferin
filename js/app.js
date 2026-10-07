@@ -1006,9 +1006,31 @@ window.addEventListener("scroll", () => {
   function fillCategories(){categoryEl.innerHTML=menuData.map(c=>`<option value="${c.id}">${c.icon||"🍰"} ${c.name}</option>`).join("");}
   function allProducts(){return menuData.flatMap(c=>c.products.map(p=>({p,c})));}
   function escapeHtml(s){return String(s==null?"":s).replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));}
-  function renderList(){const q=(searchEl.value||"").trim().toLowerCase(),rows=allProducts().filter(x=>(x.p.name+" "+x.c.name).toLowerCase().includes(q));$("ferinAdminList").innerHTML=rows.length?rows.map(({p,c})=>`<div class="ferin-admin-item"><img class="ferin-admin-thumb" src="${escapeHtml(p.image||"")}" alt=""><div><div class="ferin-admin-item-name">${escapeHtml(p.name||"بدون نام")}</div><div class="ferin-admin-item-meta">${escapeHtml(c.name)}${p.price?" • "+escapeHtml(p.price)+" تومان":""}${p.badge&&p.badge!=="بدون وضعیت"?" • "+escapeHtml(p.badge):""}</div></div><button class="ferin-admin-edit" type="button" data-edit="${escapeHtml(p._adminId)}">ویرایش</button></div>`).join(""):"<div class='ferin-admin-empty'>محصولی پیدا نشد.</div>";}
+  function renderList(){const q=(searchEl.value||"").trim().toLowerCase(),rows=allProducts().filter(x=>(x.p.name+" "+x.c.name).toLowerCase().includes(q));$("ferinAdminList").innerHTML=rows.length?rows.map(({p,c})=>`<div class="ferin-admin-item"><img class="ferin-admin-thumb" src="${escapeHtml(p.image||"")}" alt=""><div><div class="ferin-admin-item-name">${escapeHtml(p.name||"بدون نام")}</div><div class="ferin-admin-item-meta">${escapeHtml(c.name)}${p.price?" • "+escapeHtml(p.price)+" تومان":""}${p.badge&&p.badge!=="بدون وضعیت"?" • "+escapeHtml(p.badge):""}</div></div><div class="ferin-admin-item-actions"><button class="ferin-admin-edit" type="button" data-edit="${escapeHtml(p._adminId)}">ویرایش</button><button class="ferin-admin-delete" type="button" data-delete="${escapeHtml(p._adminId)}">حذف</button></div></div>`).join(""):"<div class='ferin-admin-empty'>محصولی پیدا نشد.</div>";}
   function resetForm(){editingId=null;selectedImage="";nameEl.value="";priceEl.value="";oldPriceEl.value="";descEl.value="";imageEl.value="";preview.src="";preview.classList.remove("show");imageStatus.textContent="برای محصول جدید، انتخاب عکس الزامی است.";saveBtn.textContent="➕ افزودن محصول";fillCategories();if(statusEl)statusEl.value="بدون وضعیت";}
   function editProduct(id){const f=allProducts().find(x=>x.p._adminId===id);if(!f)return;editingId=id;nameEl.value=f.p.name||"";priceEl.value=f.p.price||"";oldPriceEl.value=f.p.oldPrice||"";descEl.value=f.p.desc||"";categoryEl.value=f.c.id;selectedImage=f.p.image||"";if(statusEl)statusEl.value=f.p.badge||"بدون وضعیت";preview.src=selectedImage;preview.classList.toggle("show",!!selectedImage);imageStatus.textContent=selectedImage?"عکس فعلی محصول فعال است؛ در صورت نیاز عکس جدید انتخاب کنید.":"عکسی ثبت نشده است.";saveBtn.textContent="💾 ذخیره ویرایش";nameEl.focus();}
+  async function deleteProduct(id){
+    const f=allProducts().find(x=>x.p._adminId===id);
+    if(!f)return;
+    if(!confirm("آیا از حذف «"+(f.p.name||"این محصول")+"» مطمئن هستید؟"))return;
+    try{
+      const rowId=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)?id:await uuidFromString(id);
+      await api("/products?id=eq."+encodeURIComponent(rowId),{method:"DELETE",headers:{"Prefer":"return=minimal"}});
+      const s=readStore();
+      s.adds=(s.adds||[]).filter(p=>p&&p._adminId!==id);
+      s.edits=s.edits||{};
+      delete s.edits[id];
+      s.removed=s.removed||[];
+      if(!s.removed.includes(id))s.removed.push(id);
+      writeStore(s);
+      f.c.products=f.c.products.filter(p=>p._adminId!==id);
+      if(editingId===id)resetForm();
+      renderCategories();renderProducts();renderList();
+      if(typeof window.buildFerinBestseller==='function')window.buildFerinBestseller();
+      alert("محصول با موفقیت حذف شد.");
+    }catch(err){console.error(err);alert("حذف انجام نشد: "+err.message);}
+  }
+
   imageEl.addEventListener("change",async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{imageStatus.textContent="در حال آماده‌سازی عکس...";selectedImage=await compressImage(f);preview.src=selectedImage;preview.classList.add("show");imageStatus.textContent="عکس جدید انتخاب شد.";}catch(err){selectedImage="";imageStatus.textContent="خواندن عکس انجام نشد.";}});
   async function uuidFromString(str){const b=new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str)));b[6]=(b[6]&15)|64;b[8]=(b[8]&63)|128;const h=Array.from(b.slice(0,16),x=>x.toString(16).padStart(2,"0"));return h.slice(0,4).join("")+"-"+h.slice(4,6).join("")+"-"+h.slice(6,8).join("")+"-"+h.slice(8,10).join("")+"-"+h.slice(10,16).join("");}
   async function rowFor(p,img){return {id:/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(p._adminId)?p._adminId:await uuidFromString(p._adminId),name:p.name||"محصول",price:p.price||"",old_price:p.oldPrice||"",category:p.categoryId,description:p.desc||"",badge:p.badge||"",image_url:img||p.image||null};}
@@ -1041,10 +1063,10 @@ window.addEventListener("scroll", () => {
       else setDbStatus(false,"جدول محصولات داده دارد ولی ستون category هیچ‌کدام با دسته‌بندی‌های سایت یکی نیست.");
     }catch(err){console.error("Cafe Ferin Supabase:",err);setDbStatus(false,"اتصال به پایگاه‌داده برقرار نشد: "+err.message+" — سایت فعلاً از اطلاعات داخل خود فایل‌ها استفاده می‌کند.");}
   }
-  saveBtn.addEventListener("click",async()=>{const name=nameEl.value.trim(),categoryId=categoryEl.value,price=priceEl.value.trim(),oldPrice=oldPriceEl.value.trim(),desc=descEl.value.trim(),badge=statusEl?statusEl.value:"بدون وضعیت";if(!name)return alert("لطفاً نام محصول را وارد کنید.");if(!categoryId)return alert("لطفاً دسته‌بندی محصول را انتخاب کنید.");if(!editingId&&!selectedImage)return alert("لطفاً عکس محصول را انتخاب کنید.");saveBtn.disabled=true;try{const f=editingId&&allProducts().find(x=>x.p._adminId===editingId);let id=editingId||uid(),img=selectedImage||(f&&f.p.image)||"";if(img.startsWith("data:image/"))img=await uploadImage(img,id);const row=await rowFor({_adminId:id,name,price,oldPrice,categoryId,desc,image:img},img);if(editingId)await api("/products?id=eq."+encodeURIComponent(row.id),{method:"PATCH",headers:{"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(row)});else await api("/products",{method:"POST",headers:{"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify([row])});
+  saveBtn.addEventListener("click",async()=>{const name=nameEl.value.trim(),categoryId=categoryEl.value,price=priceEl.value.trim(),oldPrice=oldPriceEl.value.trim(),desc=descEl.value.trim(),badge=statusEl?statusEl.value:"بدون وضعیت";if(!name)return alert("لطفاً نام محصول را وارد کنید.");if(!categoryId)return alert("لطفاً دسته‌بندی محصول را انتخاب کنید.");if(!editingId&&!selectedImage)return alert("لطفاً عکس محصول را انتخاب کنید.");saveBtn.disabled=true;try{const f=editingId&&allProducts().find(x=>x.p._adminId===editingId);let id=editingId||uid(),img=selectedImage||(f&&f.p.image)||"";if(img.startsWith("data:image/"))img=await uploadImage(img,id);const row=await rowFor({_adminId:id,name,price,oldPrice,categoryId,desc,badge,image:img},img);if(editingId)await api("/products?id=eq."+encodeURIComponent(row.id),{method:"PATCH",headers:{"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(row)});else await api("/products",{method:"POST",headers:{"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify([row])});
       const s=readStore();s.adds=s.adds||[];s.edits=s.edits||{};if(editingId){if(!f)throw Error("محصول پیدا نشد");Object.assign(f.p,{name,price,oldPrice,desc,badge,image:img});if(f.c.id!==categoryId){f.c.products=f.c.products.filter(p=>p._adminId!==editingId);const t=menuData.find(c=>c.id===categoryId);if(t)t.products.push(f.p);}s.edits[editingId]={name,price,oldPrice,desc,badge,image:img,categoryId};}else{const p={_adminId:id,name,price,oldPrice,desc,image:img,rating:5,ratingCount:0,time:0,tag:"",badge,categoryId};const t=menuData.find(c=>c.id===categoryId);if(t)t.products.push(p);s.adds.push(p);}writeStore(s);renderCategories();renderProducts();renderList();resetForm();alert("محصول با موفقیت در سایت مشترک ذخیره شد.");}catch(err){console.error(err);alert("ذخیره انجام نشد: "+err.message);}finally{saveBtn.disabled=false;}}
   );
-  $("ferinAdminList").addEventListener("click",e=>{const b=e.target.closest("[data-edit]");if(b)editProduct(b.dataset.edit);});searchEl.addEventListener("input",renderList);$("ferinAdminCancel").addEventListener("click",resetForm);
+  $("ferinAdminList").addEventListener("click",async e=>{const edit=e.target.closest("[data-edit]");if(edit){editProduct(edit.dataset.edit);return;}const del=e.target.closest("[data-delete]");if(del)await deleteProduct(del.dataset.delete);});searchEl.addEventListener("input",renderList);$("ferinAdminCancel").addEventListener("click",resetForm);
   $("ferinAdminOpen").addEventListener("click",()=>{fillCategories();renderList();overlay.scrollTop=0;overlay.classList.add("is-open");overlay.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";runInitialSync();});
   function close(){overlay.classList.remove("is-open");overlay.setAttribute("aria-hidden","true");document.body.style.overflow="";resetForm();}
   $("ferinAdminClose").addEventListener("click",close);overlay.addEventListener("click",e=>{if(e.target===overlay)close();});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("is-open"))close();});
@@ -1157,6 +1179,7 @@ window.addEventListener("scroll", () => {
     show(idx,false);
     start();
   }
+  window.buildFerinBestseller = build;
   dots.addEventListener("click", function(e){
     var b = e.target.closest(".fp-dot"); if(!b) return;
     show(+b.dataset.i,true); start();
