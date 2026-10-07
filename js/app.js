@@ -1056,6 +1056,7 @@ window.addEventListener("scroll", () => {
         menuData.forEach(c=>c.products=[]);
         valid.forEach(r=>{by.get(r.category).products.push({_adminId:r.id,name:r.name||"",price:r.price||"",oldPrice:r.old_price||"",desc:r.description||"",image:r.image_url||"",rating:5,ratingCount:0,time:0,tag:"",badge:r.badge||""});});
         renderCategories();renderProducts();renderList();
+        if(typeof window.buildFerinBestseller==="function") window.buildFerinBestseller();
         setDbStatus(true,"متصل به پایگاه‌داده — "+valid.length+" محصول بارگذاری شد.");
         return;
       }
@@ -1195,4 +1196,10 @@ window.addEventListener("scroll", () => {
     window.renderProducts = function(){ var r = orig.apply(this, arguments); build(); return r; };
   }
   build();
+  /* Start/rebuild once the page has finished its initial render. */
+  if(document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", build, {once:true});
+  } else {
+    requestAnimationFrame(build);
+  }
 })();
