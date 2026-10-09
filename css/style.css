@@ -5578,3 +5578,199 @@ body:not(.dark) .hero .hero-content h1.cafe-brand *{
   color:#4660ae !important;
   -webkit-text-fill-color:#4660ae !important;
 }
+
+
+
+
+
+
+
+
+
+
+/* =====================================================================
+   FINAL THEME LAYER (debug v6)
+   - Site background = the orange from the reference image (#ffb461)
+   - Wheat heads = deep amber-brown so they are clearly visible on orange,
+     and they sway/float continuously
+   - Dark mode = swapped: deep brown background + orange wheat
+   Why it was broken before: older rules such as
+   html[data-theme="light"]{background:#faf6f0 !important} had a higher
+   specificity than the plain `html{...!important}` override, so the cream
+   colour always won and the orange never appeared.
+   ===================================================================== */
+:root{
+  --site-bg:#ffb461;
+  --site-bg-top:#efaa5d;
+  --wheat-color:#8a4a10;
+  --wheat-opacity:.5;
+}
+html[data-theme="dark"], html:has(body.dark){
+  --site-bg:#1d140d;
+  --site-bg-top:#150e09;
+  --wheat-color:#ffb461;
+  --wheat-opacity:.42;
+}
+html, html[data-theme="light"], html[data-theme="dark"], html:has(body.dark){
+  min-height:100%;
+  background:var(--site-bg) !important;
+  background-color:var(--site-bg) !important;
+  background-image:none !important;
+}
+body, body[data-theme="light"], body[data-theme="dark"], body.dark{
+  min-height:100vh;
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  position:relative !important;
+  isolation:isolate !important;
+}
+/* fixed backdrop (same colour as the reference image, slightly darker at the very top) */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background:linear-gradient(180deg,var(--site-bg-top) 0%,var(--site-bg) 18%,var(--site-bg) 100%);
+}
+/* sections must not paint their own colour over the backdrop
+   (selectors mirror the older ones, e.g. body:not(.dark) main, so they win) */
+html body:not(.dark) main,
+html body:not(.dark) main > section,
+html body:not(.dark) #about,
+html body:not(.dark) .about,
+html body:not(.dark) .categories,
+html body:not(.dark) .menu-section,
+html body:not(.dark) .notice-wrap,
+html body:not(.dark) .order-section,
+html body:not(.dark) footer,
+html body:not(.dark) .features,
+html body:not(.dark) .hero,
+html body:not(.dark) section,
+html body.dark main,
+html body.dark main > section,
+html body.dark #about,
+html body.dark .about,
+html body.dark .categories,
+html body.dark .menu-section,
+html body.dark .notice-wrap,
+html body.dark .order-section,
+html body.dark footer,
+html body.dark .features,
+html body.dark .hero,
+html body.dark section,
+html body[data-theme="light"] main,
+html body[data-theme="dark"] main{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+}
+/* top bar: translucent so the orange shows through */
+html body:not(.dark) .nav,
+html body:not(.dark) .nav.scrolled{
+  background:rgba(255,180,97,.82) !important;
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  box-shadow:0 6px 24px rgba(138,74,16,.14) !important;
+}
+html body.dark .nav,
+html body.dark .nav.scrolled{
+  background:rgba(29,20,13,.82) !important;
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+}
+/* white strip behind the desktop links + muddy grey hero discs sat on top of the orange */
+html body:not(.dark) .nav-links,
+html body.dark .nav-links{
+  background:transparent !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+}
+html body .hero::before,
+html body .hero::after{ display:none !important; }
+/* the old decorative grid / bloom layer was washing the orange out */
+html body .ferin-field{ display:none !important; }
+
+/* ---------- animated wheat ---------- */
+body > .wheat-motion{
+  position:fixed !important;
+  inset:0 !important;
+  display:block !important;
+  z-index:-1 !important;           /* above the backdrop, below all content */
+  overflow:hidden !important;
+  pointer-events:none !important;
+  opacity:1 !important;
+  color:var(--wheat-color) !important;
+}
+.wheat-motion .wheat-head{
+  position:absolute !important;
+  display:block !important;
+  width:clamp(34px,5vw,84px) !important;
+  height:auto !important;
+  color:var(--wheat-color) !important;
+  opacity:var(--wheat-opacity) !important;
+  transform-origin:50% 96%;        /* sway from the stem base */
+  will-change:transform;
+  animation:wheatSway var(--dur,11s) ease-in-out var(--delay,0s) infinite !important;
+}
+.wheat-motion .wheat-head svg{ display:block !important; width:100% !important; height:auto !important; }
+.wheat-motion .wheat-head-1{left:4%;top:12%;--rot:-24deg;--sway:9deg;--dur:9s;--delay:-2s;--sc:1}
+.wheat-motion .wheat-head-2{left:13%;top:56%;--rot:18deg;--sway:11deg;--dur:11s;--delay:-8s;--sc:0.9}
+.wheat-motion .wheat-head-3{left:22%;top:24%;--rot:-12deg;--sway:8deg;--dur:10s;--delay:-5s;--sc:1.15}
+.wheat-motion .wheat-head-4{left:29%;top:72%;--rot:26deg;--sway:10deg;--dur:12s;--delay:-10s;--sc:0.85}
+.wheat-motion .wheat-head-5{left:38%;top:15%;--rot:14deg;--sway:9deg;--dur:9.5s;--delay:-4s;--sc:1.1}
+.wheat-motion .wheat-head-6{left:46%;top:61%;--rot:-20deg;--sway:12deg;--dur:13s;--delay:-7s;--sc:0.95}
+.wheat-motion .wheat-head-7{left:55%;top:28%;--rot:16deg;--sway:8deg;--dur:10.5s;--delay:-1s;--sc:1.2}
+.wheat-motion .wheat-head-8{left:64%;top:70%;--rot:-14deg;--sway:10deg;--dur:11.5s;--delay:-9s;--sc:1}
+.wheat-motion .wheat-head-9{left:73%;top:17%;--rot:20deg;--sway:9deg;--dur:9s;--delay:-6s;--sc:0.9}
+.wheat-motion .wheat-head-10{left:82%;top:54%;--rot:-18deg;--sway:11deg;--dur:12.5s;--delay:-3s;--sc:1.1}
+.wheat-motion .wheat-head-11{left:91%;top:26%;--rot:12deg;--sway:8deg;--dur:10s;--delay:-11s;--sc:1}
+.wheat-motion .wheat-head-12{left:2%;top:78%;--rot:15deg;--sway:10deg;--dur:11s;--delay:-5s;--sc:1.15}
+.wheat-motion .wheat-head-13{left:18%;top:8%;--rot:24deg;--sway:9deg;--dur:12s;--delay:-7s;--sc:0.85}
+.wheat-motion .wheat-head-14{left:33%;top:43%;--rot:-21deg;--sway:12deg;--dur:9.5s;--delay:-3s;--sc:1}
+.wheat-motion .wheat-head-15{left:42%;top:83%;--rot:16deg;--sway:8deg;--dur:13s;--delay:-9s;--sc:1.1}
+.wheat-motion .wheat-head-16{left:59%;top:8%;--rot:-24deg;--sway:10deg;--dur:10s;--delay:-4s;--sc:0.9}
+.wheat-motion .wheat-head-17{left:69%;top:45%;--rot:10deg;--sway:9deg;--dur:11.5s;--delay:-10s;--sc:1.2}
+.wheat-motion .wheat-head-18{left:78%;top:82%;--rot:22deg;--sway:11deg;--dur:9s;--delay:-6s;--sc:0.95}
+.wheat-motion .wheat-head-19{left:88%;top:7%;--rot:-12deg;--sway:8deg;--dur:12s;--delay:-1s;--sc:1.05}
+.wheat-motion .wheat-head-20{left:96%;top:72%;--rot:17deg;--sway:10deg;--dur:10.5s;--delay:-8s;--sc:0.9}
+.wheat-motion .wheat-head-21{left:25%;top:88%;--rot:-16deg;--sway:9deg;--dur:11s;--delay:-11s;--sc:1}
+.wheat-motion .wheat-head-22{left:51%;top:42%;--rot:19deg;--sway:12deg;--dur:13s;--delay:-2s;--sc:1.1}
+@keyframes wheatSway{
+  0%,100%{ transform:translate3d(0,0,0) rotate(calc(var(--rot,0deg) - var(--sway,9deg))) scale(var(--sc,1)); }
+  50%    { transform:translate3d(14px,-22px,0) rotate(calc(var(--rot,0deg) + var(--sway,9deg))) scale(var(--sc,1)); }
+}
+/* Restore a Nastaliq display font for the Persian brand title. */
+.cafe-brand, .cafe-brand span {
+  font-family:"Noto Nastaliq Urdu","IranNastaliq",serif !important;
+  font-weight:400 !important;
+  letter-spacing:0 !important;
+  line-height:2 !important;
+  padding-bottom:.12em;
+}
+/* content stays above the wheat; interactive controls keep working */
+/* (do NOT touch `position` on every child of body: it turned the fixed navbar
+   and the fixed admin button into relative ones, so the menu scrolled away) */
+body > main,
+body > footer{
+  position:relative;
+  z-index:1;
+}
+body > header.nav{ position:fixed !important; z-index:1000 !important; }
+body > #intro{ z-index:9999 !important; }
+@media(prefers-reduced-motion:reduce){
+  .wheat-motion .wheat-head{ animation:none !important; }
+}
+
+/* ===== Intro: slightly darker backdrop (v7) ===== */
+html body #intro .intro-bg{
+  filter:saturate(.9) contrast(1.05) brightness(.56) !important;
+}
+html body #intro .intro-veil{
+  background:
+    radial-gradient(circle at 50% 42%, rgba(18,16,14,.40) 0%, rgba(18,16,14,.86) 62%, rgba(18,16,14,.97) 100%),
+    linear-gradient(180deg, rgba(18,16,14,.62) 0%, rgba(18,16,14,.38) 40%, rgba(18,16,14,.92) 100%) !important;
+}
+/* Persian title inside the intro: same look as the hero title */
+html body #intro .intro-title{ direction:rtl !important; }

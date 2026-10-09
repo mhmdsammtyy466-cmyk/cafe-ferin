@@ -11,3 +11,20 @@ Changed:
 5. The first upload is an upsert, so running it again after a partial failure doesn't create duplicates.
 
 Not changed (by design): admin password and anon key are still inside js/app.js.
+
+v6 — background + animated wheat debug
+1. Background: the site background is now the orange of the reference image (#ffb461,
+   slightly darker at the very top). Cause of the old bug: html[data-theme="light"]{background:#faf6f0 !important}
+   and body:not(.dark) main{background:#fbf7f1 !important} out-ranked the orange override, so the page stayed cream.
+2. Wheat heads: now deep amber-brown (#8a4a10) so they are clearly visible on orange; each one sways from its
+   stem base with its own speed/angle. Dark mode is the "swap": deep brown background + orange wheat.
+3. Fixed navbar bug: a rule set `position:relative` on every child of <body>, which turned the fixed navbar into a
+   normal block, so the menu scrolled away. Removed it.
+4. Nav bar is translucent orange (no white strip behind the links); the grey hero discs and old grid layer that
+   washed out the orange are hidden.
+(CSS version bumped to ?v=11.)
+
+v7 — intro: brand text is now Persian (کافه فرین) like the hero; backdrop slightly darker;
+app.js no longer adds "ferin-ready" early (it hid the intro the moment the script ran, so it flashed for a split second).
+
+v8 — category photos replaced: fantasy, cake, cookie, dessert now use assets/images/cat-*-v3.webp (new filenames so browsers do not show cached old photos). "diet" keeps cat-diet-v2.webp. Edit: js/app.js, const categoryImages.

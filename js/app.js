@@ -320,7 +320,7 @@ let activeCategory = "";
 
 /* Each category shows its own photograph, with the name on a glass plate
    so the label stays readable over any image. */
-const categoryImages = {"fantasy": "assets/images/cat-fantasy-v2.webp", "cake": "assets/images/cat-cake-v2.webp", "dessert": "assets/images/cat-dessert-v2.webp", "cookie": "assets/images/cat-cookie-v2.webp", "diet": "assets/images/cat-diet-v2.webp"};
+const categoryImages = {"fantasy": "assets/images/cat-fantasy-v3.webp", "cake": "assets/images/cat-cake-v3.webp", "dessert": "assets/images/cat-dessert-v3.webp", "cookie": "assets/images/cat-cookie-v3.webp", "diet": "assets/images/cat-diet-v2.webp"};
 
 function renderCategories(){
   categoryGrid.innerHTML = menuData.map(cat => {
@@ -442,7 +442,8 @@ window.addEventListener("scroll", () => {
 (function(){
   "use strict";
 
-  document.body.classList.add("ferin-ready");
+  /* "ferin-ready" is added by the intro script in index.html after 1.6s;
+     adding it here hid the intro the moment app.js ran. */
 
   var finePointer = window.matchMedia("(pointer:fine)").matches;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
