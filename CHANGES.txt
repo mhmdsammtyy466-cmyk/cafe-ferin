@@ -28,3 +28,12 @@ v7 — intro: brand text is now Persian (کافه فرین) like the hero; backd
 app.js no longer adds "ferin-ready" early (it hid the intro the moment the script ran, so it flashed for a split second).
 
 v8 — category photos replaced: fantasy, cake, cookie, dessert now use assets/images/cat-*-v3.webp (new filenames so browsers do not show cached old photos). "diet" keeps cat-diet-v2.webp. Edit: js/app.js, const categoryImages.
+
+v9 — Farin logo + centering
+1. Every "فرین" / "Cafe Ferin" text on the site (intro, navbar, hero, about, best-sellers, Instagram box, order note,
+   hero badge, product descriptions) is now the new logo (assets/images/farin-wordmark.webp, transparent background;
+   farin-logo-full.* also includes the tagline). Admin-panel texts and the <title> were left as plain text.
+2. In dark mode / dark intro / blue note the logo is shown in white automatically.
+3. All texts on the site are centered (CSS block at the end of css/style.css). CSS ?v=13, JS ?v=12.
+v9.1 — location card title is now: لوکیشن و آدرس فروشگاه + Farin logo.
+v9.2 — order note: more line height so the logo does not overlap the text.

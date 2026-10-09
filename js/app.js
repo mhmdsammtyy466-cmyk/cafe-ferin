@@ -360,7 +360,7 @@ function renderProducts(){
     const rawStatus = product.badge || product.tag || "";
     const status = String(rawStatus).trim();
     const safeName = String(product.name || "محصول").replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));
-    const safeDesc = String(product.desc || "").replace(/Cafe Ferin/g, '<span class="cafe-brand">Cafe Ferin</span>');
+    const safeDesc = String(product.desc || "").replace(/Cafe Ferin/g, '<img class="farin-inline" src="assets/images/farin-wordmark.webp" alt="Cafe Ferin" decoding="async">');
     const safeImage = String(product.image || "");
     const badgeHtml = status && status !== "بدون وضعیت"
       ? `<span class="ferin-product-badge">${status}</span>`
@@ -660,7 +660,7 @@ window.addEventListener("scroll", () => {
     if(!heroContent || $(".ferin-premium-hero-badge",heroContent)) return;
     const badge=document.createElement("div");
     badge.className="ferin-premium-hero-badge";
-    badge.innerHTML="<i></i><span>تجربه‌ای تازه در Cafe Ferin</span>";
+    badge.innerHTML="<i></i><span>تجربه‌ای تازه در <img class=\"farin-inline\" src=\"assets/images/farin-wordmark.webp\" alt=\"Cafe Ferin\" decoding=\"async\"></span>";
     const first=heroContent.firstElementChild;
     if(first) heroContent.insertBefore(badge,first);
     else heroContent.appendChild(badge);

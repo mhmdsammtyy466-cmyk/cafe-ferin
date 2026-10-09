@@ -5774,3 +5774,61 @@ html body #intro .intro-veil{
 }
 /* Persian title inside the intro: same look as the hero title */
 html body #intro .intro-title{ direction:rtl !important; }
+
+/* ===== v9: Farin logo replaces the "فرین" / "Cafe Ferin" text + everything centered ===== */
+img.farin-inline{
+  display:inline-block !important;
+  height:1.9em !important; width:auto !important; max-width:none !important;
+  vertical-align:middle !important; margin:-.35em .12em -.3em !important;
+  object-fit:contain; background:none !important; border:0 !important; box-shadow:none !important;
+}
+img.farin-nav{ height:38px; width:auto; max-width:none; display:block; object-fit:contain; }
+.logo-wrap{ gap:8px; }
+.farin-title{
+  display:flex !important; flex-direction:column; align-items:center; justify-content:center;
+  gap:2px; text-align:center !important; margin-inline:auto; direction:rtl;
+}
+.farin-title .farin-cafe{
+  font-size:clamp(22px,5.4vw,34px); font-weight:700; line-height:1.2; color:#0b4cad;
+  -webkit-text-fill-color:#0b4cad; text-shadow:none;
+}
+.farin-title img.farin-block{
+  height:clamp(110px,28vw,190px); width:auto; max-width:86vw; object-fit:contain; display:block;
+  filter:drop-shadow(0 2px 10px rgba(0,0,0,.12));
+}
+#intro .farin-title .farin-cafe{ color:#fff; -webkit-text-fill-color:#fff; }
+#intro .farin-title img.farin-block{ height:clamp(90px,24vw,150px); }
+/* logo is blue: on dark surfaces switch it to a light tone so it stays readable */
+body.dark img.farin-inline,
+body.dark img.farin-nav,
+body.dark .farin-title img.farin-block,
+#intro img.farin-block{ filter:brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,0,0,.35)); }
+body.dark .farin-title .farin-cafe{ color:#fff; -webkit-text-fill-color:#fff; }
+
+/* center every text on the page */
+html body, html body main, html body main section, html body footer,
+html body .container, html body .hero-content, html body .about-copy, html body .section-head,
+html body .section-title, html body .section-kicker, html body .notice, html body .notice > div,
+html body .order-card, html body .order-note, html body .order-grid, html body .category-card,
+html body .product-card, html body .product-card *, html body .merteks-footer,
+html body .fp-box, html body .fp-head, html body p, html body h1, html body h2, html body h3, html body h4{
+  text-align:center !important;
+}
+html body .about-copy, html body .about-grid{ margin-inline:auto; }
+html body .about-grid{ display:flex !important; justify-content:center; }
+html body .notice{ flex-direction:column; align-items:center; justify-content:center; }
+html body .fp-head, html body .hero-buttons, html body .eyebrow, html body .ferin-premium-hero-badge,
+html body .instagram-box{ justify-content:center; align-items:center; }
+html body .instagram-box{ flex-direction:column; text-align:center !important; }
+html body .section-head, html body .hero-content{ margin-inline:auto; align-items:center; }
+html body .product-card{ align-items:center; }
+html body .ferin-product-badge{ text-align:center !important; }
+html body .mobile-menu-panel a, html body .nav-links a{ text-align:center !important; }
+html body #intro .farin-title .farin-cafe{ color:#fff !important; -webkit-text-fill-color:#fff !important; }
+html body .hero .hero-content h1.farin-title .farin-cafe{ color:#0b4cad !important; -webkit-text-fill-color:#0b4cad !important; }
+html body.dark .hero .hero-content h1.farin-title .farin-cafe{ color:#fff !important; -webkit-text-fill-color:#fff !important; }
+html body h2 img.farin-inline{ height:1.45em !important; margin:-.3em .1em -.25em !important; }
+html body .order-note img.farin-inline{ filter:brightness(0) invert(1) !important; }
+html body .order-card h3 img.farin-inline{ height:1.7em !important; margin:-.4em .1em -.35em !important; }
+html body .order-note{ line-height:2.4 !important; }
+html body .order-note img.farin-inline{ height:1.6em !important; margin:-.2em .15em -.2em !important; }
