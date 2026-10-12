@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&text=%D9%83%D8%A7%D9%81%D9%87%DA%A9%D8%A7%D9%81%D9%87&display=swap">
-<link rel="stylesheet" href="css/style.min.css?v=16">
+<link rel="stylesheet" href="css/style.min.css?v=17">
 </head>
 
 <body>
@@ -326,100 +326,12 @@
   </div>
 </div>
 
-<!-- Admin: login -->
-<div id="ferinAdminAuthOverlay" aria-hidden="true">
-  <form id="ferinAdminAuthBox" role="dialog" aria-modal="true" aria-labelledby="ferinAdminAuthTitle" autocomplete="on">
-    <div class="ferin-auth-icon">🔐</div>
-    <h2 id="ferinAdminAuthTitle" class="ferin-auth-title">ورود به پنل مدیریت</h2>
-    <p class="ferin-auth-sub">برای مدیریت محصولات، ایمیل و رمز عبور مدیر را وارد کنید.</p>
-    <input id="ferinAdminAuthEmail" type="email" inputmode="email" autocomplete="username" placeholder="ایمیل" required>
-    <input id="ferinAdminAuthPassword" type="password" autocomplete="current-password" placeholder="رمز عبور" required>
-    <div id="ferinAdminAuthError" aria-live="polite"></div>
-    <div class="ferin-auth-actions">
-      <button id="ferinAdminAuthEnter" class="ferin-auth-btn ferin-auth-enter" type="submit">ورود به پنل</button>
-      <button id="ferinAdminAuthCancel" class="ferin-auth-btn ferin-auth-cancel" type="button">انصراف</button>
-    </div>
-  </form>
-</div>
-
-<!-- Admin: open button (visible only on /#admin) -->
-<div id="ferinAdminFloating" hidden><button id="ferinAdminOpen" type="button" aria-label="پنل مدیریت محصولات" title="پنل مدیریت محصولات">⚙️</button></div>
-
-<!-- Admin: product panel -->
-<div id="ferinAdminOverlay" aria-hidden="true">
-  <section id="ferinAdminPanel" role="dialog" aria-modal="true" aria-labelledby="ferinAdminTitle">
-    <div class="ferin-admin-head">
-      <div><div id="ferinAdminTitle" class="ferin-admin-title">مدیریت محصولات Cafe Ferin</div><div class="ferin-admin-sub">افزودن محصول، ویرایش محصول و تعیین دسته‌بندی</div></div>
-      <button class="ferin-admin-close" id="ferinAdminClose" type="button" aria-label="بستن">×</button>
-    </div>
-    <div class="ferin-admin-body">
-      <div class="ferin-admin-grid">
-        <div class="ferin-admin-field">
-          <label for="ferinAdminName">نام محصول</label>
-          <input id="ferinAdminName" type="text" placeholder="مثلاً کیک شکلاتی" autocomplete="off">
-        </div>
-        <div class="ferin-admin-field">
-          <label for="ferinAdminCategory">دسته‌بندی / نوع محصول</label>
-          <select id="ferinAdminCategory"></select>
-        </div>
-        <div class="ferin-admin-field">
-          <label for="ferinAdminStatus">وضعیت / برچسب محصول</label>
-          <select id="ferinAdminStatus">
-            <option value="پیشنهاد ویژه">⭐ پیشنهاد ویژه</option>
-            <option value="محبوب">❤️ محبوب</option>
-            <option value="پرفروش">🔥 پرفروش</option>
-            <option value="جدید">✨ جدید</option>
-            <option value="تخفیف">🏷️ تخفیف</option>
-            <option value="ارسال رایگان">🚚 ارسال رایگان</option>
-            <option value="بهترین قیمت">💰 بهترین قیمت</option>
-            <option value="بدون وضعیت" selected>بدون وضعیت</option>
-          </select>
-          <div class="ferin-status-help">این برچسب در گوشه بالای کارت محصول نمایش داده می‌شود.</div>
-        </div>
-        <div class="ferin-admin-field">
-          <label for="ferinAdminUnit">واحد قیمت</label>
-          <select id="ferinAdminUnit">
-            <option value="" selected>هر عدد / هر بسته</option>
-            <option value="کیلو">هر کیلو</option>
-          </select>
-        </div>
-        <div class="ferin-admin-field full">
-          <label for="ferinAdminImage">عکس محصول</label>
-          <input id="ferinAdminImage" type="file" accept="image/*">
-          <div class="ferin-admin-preview"><img id="ferinAdminPreviewImg" alt="پیش‌نمایش" decoding="async"><span id="ferinAdminImageStatus">برای محصول جدید، انتخاب عکس الزامی است.</span></div>
-        </div>
-        <div class="ferin-admin-field">
-          <label for="ferinAdminPrice">قیمت (تومان)</label>
-          <input id="ferinAdminPrice" type="text" inputmode="numeric" placeholder="مثلاً ۱۷۵۰۰۰" autocomplete="off">
-        </div>
-        <div class="ferin-admin-field">
-          <label for="ferinAdminOldPrice">قیمت قبلی (اختیاری)</label>
-          <input id="ferinAdminOldPrice" type="text" inputmode="numeric" placeholder="مثلاً ۲۰۶۰۰۰" autocomplete="off">
-        </div>
-        <div class="ferin-admin-field full">
-          <label for="ferinAdminDesc">توضیحات (اختیاری)</label>
-          <textarea id="ferinAdminDesc" placeholder="توضیح کوتاه محصول"></textarea>
-        </div>
-      </div>
-      <div class="ferin-admin-actions">
-        <button class="ferin-admin-btn ferin-admin-primary" id="ferinAdminSave" type="button">➕ افزودن محصول</button>
-        <button class="ferin-admin-btn ferin-admin-secondary" id="ferinAdminCancel" type="button">پاک کردن فرم</button>
-        <button class="ferin-admin-btn ferin-admin-secondary" id="ferinAdminLogout" type="button">خروج از پنل</button>
-      </div>
-      <div class="ferin-admin-note">تغییرات این پنل روی سایت ذخیره می‌شود و برای همهٔ بازدیدکنندگان نمایش داده می‌شود.</div>
-      <div id="ferinDbStatus" class="ferin-db-status" role="status"></div>
-      <div class="ferin-admin-divider"></div>
-      <div class="ferin-admin-toolbar"><h3>محصولات فعلی</h3><input id="ferinAdminSearch" class="ferin-admin-search" type="search" placeholder="جستجوی محصول..."></div>
-      <div id="ferinAdminList" class="ferin-admin-list"></div>
-    </div>
-  </section>
-</div>
-
 <!-- Ambient lights (moved by script) -->
 <div class="ferin-premium-light one" aria-hidden="true"></div>
 <div class="ferin-premium-light two" aria-hidden="true"></div>
 
 <script src="js/supabase.js"></script>
-<script src="js/app.min.js?v=16" defer></script>
+<script src="js/shared.min.js?v=17"></script>
+<script src="js/app.min.js?v=17" defer></script>
 </body>
 </html>
