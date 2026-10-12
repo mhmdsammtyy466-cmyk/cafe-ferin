@@ -1,5 +1,5 @@
 /* Cafe Ferin — public site script
-   Products live in Supabase (single source of truth). The admin page is separate: /admin/ */
+   Products live in Supabase (single source of truth); each category has its own page (cake.html, ...) and fetches only its own products. The admin page is separate: /admin/ */
 (() => {
   "use strict";
 
@@ -13,6 +13,9 @@
   const LOGO = '<img class="farin-inline" src="assets/images/farin-wordmark.webp" alt="فرین" decoding="async">';
   const withLogo = text => esc(text).replace(/Cafe Ferin/g, LOGO);
 
+  /* On a category page <body data-category="cake"> names the category it shows. */
+  const pageCategory = document.body.dataset.category || "";
+
   const reduceMotion = matchMedia("(prefers-reduced-motion:reduce)").matches;
   const fx = matchMedia("(pointer:fine)").matches && !reduceMotion;   // pointer effects: mouse only
 
@@ -24,38 +27,59 @@
   }
 
   /* ============ state ============ */
-  let products = [];            // rows from the database
-  let loadState = "loading";    // loading | ready | error
-  let activeCategory = CATEGORIES[0].id;
+  const { api, normalise } = window.Ferin;
+  const byCategory = {};        // category id -> products (loaded on demand, then cached)
+  const loading = {};           // category id -> in-flight request
+  let bestsellers = [];
+  let loadState = "idle";       // idle | loading | ready | error  (state of the ACTIVE category)
+  let activeCategory = pageCategory;   // set only on a category page
 
-  async function loadProducts() {
+  const allLoaded = () => Object.values(byCategory).flat();
+
+  /* Each category is its own small request, made only when the visitor opens it. */
+  async function loadCategory(id) {
+    if (byCategory[id]) { loadState = "ready"; return renderProducts(); }
     loadState = "loading";
     renderProducts();
     try {
-      products = await fetchProducts();
-      loadState = "ready";
+      loading[id] = loading[id] || api("/rest/v1/products?select=*&order=created_at.asc&category=eq." + encodeURIComponent(id));
+      byCategory[id] = (await loading[id] || []).map(normalise);
+      delete loading[id];
+      if (id === activeCategory) loadState = "ready";
     } catch (e) {
-      console.error("Cafe Ferin: could not load products", e);
-      loadState = "error";
+      delete loading[id];
+      console.error("Cafe Ferin: could not load category " + id, e);
+      if (id === activeCategory) loadState = "error";
     }
-    renderProducts();
+    if (id === activeCategory) renderProducts();   // ignore answers for a category the visitor already left
+  }
+
+  /* Bestsellers: one tiny request for just the flagged products. */
+  async function loadBestsellers() {
+    if (!byId("bestsellerBox")) return;   // only the home page has the carousel
+    try {
+      const rows = await api("/rest/v1/products?select=*&order=created_at.asc&badge=ilike." + encodeURIComponent("*پرفروش*"));
+      bestsellers = (rows || []).map(normalise);
+    } catch (e) {
+      console.error("Cafe Ferin: could not load bestsellers", e);
+      bestsellers = [];
+    }
     renderBestsellers();
   }
 
   /* ============ categories + product grid ============ */
   const categoryGrid = byId("categoryGrid");
   const productGrid = byId("productGrid");
-  const menuSection = byId("menu");
-  const closeCategoryBtn = byId("ferinCategoryClose");
 
+  /* Home page: every category is a link to its own page (cake.html, dessert.html, ...). */
   function renderCategories() {
-    categoryGrid.innerHTML = CATEGORIES.map(c => {
-      const on = c.id === activeCategory;
-      return `<button type="button" class="category${on ? " active is-active" : ""}" aria-pressed="${on}" data-id="${c.id}" style="--cat-photo:url('${c.image}')">
+    if (!categoryGrid) return;
+    if (categoryGrid.children.length) return;   // cards already in index.html
+    categoryGrid.innerHTML = CATEGORIES.map(c =>
+      `<a class="category" href="${c.id}.html" data-id="${c.id}" style="--cat-photo:url('${c.image}')">
       <span class="category-photo" aria-hidden="true" style="background-image:url('${c.image}')"></span>
       <span class="category-shade" aria-hidden="true"></span>
-      <span class="category-name">${esc(c.name)}</span></button>`;
-    }).join("");
+      <span class="category-name">${esc(c.name)}</span></a>`).join("");
   }
 
   const unitText = p => "تومان" + (p.unit ? " / " + p.unit : "");
@@ -67,9 +91,8 @@
   const oldPriceText = p => (p.oldPrice ? fmtPrice(p.oldPrice) : esc(p.oldPriceText));
 
   function renderProducts() {
+    if (!productGrid) return;          // home page has no product grid
     const cat = CATEGORIES.find(c => c.id === activeCategory);
-    menuSection.classList.toggle("visible", !!cat);
-    closeCategoryBtn.classList.toggle("is-visible", !!cat);
     if (!cat) return;
     byId("currentCategory").textContent = cat.name;
     const count = byId("productsCount");
@@ -85,7 +108,7 @@
       return;
     }
 
-    const list = products.filter(p => p.category === cat.id);
+    const list = byCategory[cat.id] || [];
     count.textContent = `${faNum(list.length)} محصول`;
     if (!list.length) {
       productGrid.innerHTML = '<div class="empty">هنوز محصولی در این دسته ثبت نشده است.</div>';
@@ -115,29 +138,12 @@
       img.addEventListener("error", () => { img.parentNode.classList.add("no-photo"); img.remove(); }, { once: true }));
   }
 
-  function selectCategory(id) {
-    activeCategory = id;
-    renderCategories();
-    renderProducts();
-    menuSection.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  categoryGrid.addEventListener("click", e => {
-    const btn = e.target.closest(".category");
-    if (btn) selectCategory(btn.dataset.id);
-  });
-  closeCategoryBtn.addEventListener("click", () => {
-    activeCategory = "";
-    renderCategories();
-    renderProducts();
-    byId("categories").scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-  productGrid.addEventListener("click", e => {
-    if (e.target.closest("[data-retry]")) return loadProducts();
+  if (productGrid) productGrid.addEventListener("click", e => {
+    if (e.target.closest("[data-retry]")) return loadCategory(activeCategory);
     const card = e.target.closest(".product-card");
     if (card) openQuickView(card.dataset.id, card);
   });
-  productGrid.addEventListener("keydown", e => {
+  if (productGrid) productGrid.addEventListener("keydown", e => {
     if (e.key !== "Enter" && e.key !== " ") return;
     const card = e.target.closest(".product-card");
     if (card) { e.preventDefault(); openQuickView(card.dataset.id, card); }
@@ -148,7 +154,7 @@
   let qvOpener = null;
 
   function openQuickView(id, opener) {
-    const p = products.find(x => x.id === id);
+    const p = allLoaded().find(x => x.id === id) || bestsellers.find(x => x.id === id);
     if (!p) return;
     const img = $(".ferin-qv-image img", qv);
     const src = safeUrl(p.image);
@@ -166,14 +172,16 @@
     $(".ferin-qv-close", qv).focus();
   }
   function closeQuickView() {
-    if (!qv.classList.contains("is-open")) return;
+    if (!qv || !qv.classList.contains("is-open")) return;
     qv.classList.remove("is-open");
     lockScroll(false);
     if (qvOpener) qvOpener.focus();
   }
-  $(".ferin-qv-close", qv).addEventListener("click", closeQuickView);
-  qv.addEventListener("click", e => { if (e.target === qv) closeQuickView(); });
-  document.addEventListener("keydown", e => { if (e.key === "Escape") closeQuickView(); });
+  if (qv) {
+    $(".ferin-qv-close", qv).addEventListener("click", closeQuickView);
+    qv.addEventListener("click", e => { if (e.target === qv) closeQuickView(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeQuickView(); });
+  }
 
   /* ============ bestsellers carousel ============ */
   const fp = {
@@ -212,7 +220,8 @@
     fp.timer = setInterval(() => { if (!fp.paused && !document.hidden) fpShow(fp.idx + 1, true); }, 4000);
   }
   function renderBestsellers() {
-    fp.items = products.filter(p => p.badge.includes("پرفروش"));
+    if (!fp.box) return;
+    fp.items = bestsellers;
     fp.stage.innerHTML = "";
     if (!fp.items.length) { fp.box.hidden = true; clearInterval(fp.timer); return; }
     fp.box.hidden = false;
@@ -220,14 +229,16 @@
     fpShow(fp.idx, false);
     fpStart();
   }
-  fp.dots.addEventListener("click", e => {
-    const b = e.target.closest(".fp-dot");
-    if (b) { fpShow(+b.dataset.i, true); fpStart(); }
-  });
-  fp.box.addEventListener("mouseenter", () => { fp.paused = true; });
-  fp.box.addEventListener("mouseleave", () => { fp.paused = false; });
-  fp.box.addEventListener("touchstart", () => { fp.paused = true; }, { passive: true });
-  fp.box.addEventListener("touchend", () => setTimeout(() => { fp.paused = false; }, 2500), { passive: true });
+  if (fp.box) {
+    fp.dots.addEventListener("click", e => {
+      const b = e.target.closest(".fp-dot");
+      if (b) { fpShow(+b.dataset.i, true); fpStart(); }
+    });
+    fp.box.addEventListener("mouseenter", () => { fp.paused = true; });
+    fp.box.addEventListener("mouseleave", () => { fp.paused = false; });
+    fp.box.addEventListener("touchstart", () => { fp.paused = true; }, { passive: true });
+    fp.box.addEventListener("touchend", () => setTimeout(() => { fp.paused = false; }, 2500), { passive: true });
+  }
 
   /* ============ theme ============ */
   (() => {
@@ -347,5 +358,6 @@
 
   /* ============ start ============ */
   renderCategories();
-  loadProducts();
+  if (pageCategory) loadCategory(pageCategory);   // category page: load only this category
+  else loadBestsellers();                         // home page: just the bestsellers
 })();

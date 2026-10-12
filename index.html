@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&text=%D9%83%D8%A7%D9%81%D9%87%DA%A9%D8%A7%D9%81%D9%87&display=swap">
-<link rel="stylesheet" href="css/style.min.css?v=18">
+<link rel="stylesheet" href="css/style.min.css?v=20">
 </head>
 
 <body>
@@ -224,21 +224,30 @@
     <div class="section-head">
       <div class="section-kicker" lang="en">OUR MENU</div>
       <h2 class="section-title" lang="en">Choose your favorite</h2>
-      <p class="section-text">دسته‌بندی موردنظر خود را انتخاب کنید تا محصولات آن را ببینید.</p>
+      <p class="section-text">دسته‌بندی موردنظر خود را انتخاب کنید تا وارد صفحهٔ محصولات آن شوید.</p>
     </div>
-    <div class="category-grid" id="categoryGrid"></div>
-  </div>
-</section>
-
-<!-- Menu -->
-<section class="menu-section" id="menu">
-  <div class="container">
-    <div class="menu-toolbar">
-      <div class="current-category" id="currentCategory"></div>
-      <div class="products-count" id="productsCount"></div>
-      <button type="button" id="ferinCategoryClose" class="ferin-category-close" aria-label="بستن دسته‌بندی">✕</button>
+    <div class="category-grid" id="categoryGrid">
+      <a class="category" href="fantasy.html" data-id="fantasy" style="--cat-photo:url('assets/images/cat-fantasy-v3.webp')">
+      <span class="category-photo" aria-hidden="true" style="background-image:url('assets/images/cat-fantasy-v3.webp')"></span>
+      <span class="category-shade" aria-hidden="true"></span>
+      <span class="category-name">نان فانتزی</span></a>
+      <a class="category" href="cake.html" data-id="cake" style="--cat-photo:url('assets/images/cat-cake-v3.webp')">
+      <span class="category-photo" aria-hidden="true" style="background-image:url('assets/images/cat-cake-v3.webp')"></span>
+      <span class="category-shade" aria-hidden="true"></span>
+      <span class="category-name">کیک و شیرینی</span></a>
+      <a class="category" href="dessert.html" data-id="dessert" style="--cat-photo:url('assets/images/cat-dessert-v3.webp')">
+      <span class="category-photo" aria-hidden="true" style="background-image:url('assets/images/cat-dessert-v3.webp')"></span>
+      <span class="category-shade" aria-hidden="true"></span>
+      <span class="category-name">دسر</span></a>
+      <a class="category" href="cookie.html" data-id="cookie" style="--cat-photo:url('assets/images/cat-cookie-v3.webp')">
+      <span class="category-photo" aria-hidden="true" style="background-image:url('assets/images/cat-cookie-v3.webp')"></span>
+      <span class="category-shade" aria-hidden="true"></span>
+      <span class="category-name">کوکی</span></a>
+      <a class="category" href="diet.html" data-id="diet" style="--cat-photo:url('assets/images/cat-diet-v2.webp')">
+      <span class="category-photo" aria-hidden="true" style="background-image:url('assets/images/cat-diet-v2.webp')"></span>
+      <span class="category-shade" aria-hidden="true"></span>
+      <span class="category-name">محصولات رژیمی</span></a>
     </div>
-    <div class="product-grid" id="productGrid" aria-live="polite"></div>
   </div>
 </section>
 
@@ -310,28 +319,17 @@
   <span class="site-line"><a href="https://sam8913mt.github.io/marteks/" target="_blank" rel="noopener noreferrer">برای ورود به سایت لمس کنید</a></span>
 </footer>
 
-<!-- Quick view -->
-<div id="ferinQuickView" role="dialog" aria-modal="true" aria-label="نمایش سریع محصول">
-  <div class="ferin-qv-wrap">
-    <button class="ferin-qv-close" type="button" aria-label="بستن">×</button>
-    <div class="ferin-qv-card">
-      <div class="ferin-qv-image"><img alt=""></div>
-      <div class="ferin-qv-info">
-        <div class="ferin-qv-kicker" lang="en">CAFE FERIN • MENU</div>
-        <h3 class="ferin-qv-title"></h3>
-        <p class="ferin-qv-desc"></p>
-        <div class="ferin-qv-price"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Ambient lights (moved by script) -->
 <div class="ferin-premium-light one" aria-hidden="true"></div>
 <div class="ferin-premium-light two" aria-hidden="true"></div>
 
+<script>
+(function(){var g=document.getElementById("categoryGrid");if(!g)return;
+function dedupe(){var seen={};Array.prototype.slice.call(g.querySelectorAll(".category")).forEach(function(c){var k=c.getAttribute("href");if(seen[k])c.remove();else seen[k]=1;});}
+dedupe();new MutationObserver(dedupe).observe(g,{childList:true});})();
+</script>
 <script src="js/supabase.js"></script>
-<script src="js/shared.min.js?v=18"></script>
-<script src="js/app.min.js?v=18" defer></script>
+<script src="js/shared.min.js?v=19"></script>
+<script src="js/app.js?v=22" defer></script>
 </body>
 </html>

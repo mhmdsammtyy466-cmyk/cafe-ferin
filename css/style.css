@@ -4609,3 +4609,5 @@ body.dark .ferin-category-close:focus-visible{outline-color:#fff}
 body.dark .fp-title,
 body.dark .fp-name{color:#fff8f0}
 body.dark .fp-desc{color:rgba(255,248,240,.72)}
+
+a.category{display:block;text-decoration:none;color:inherit}
