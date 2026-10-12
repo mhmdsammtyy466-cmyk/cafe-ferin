@@ -1,6 +1,5 @@
 /* Cafe Ferin — admin page styles (loaded only by /admin/, after style.css) */
 
-body:not(.dark) .ferin-admin-panel select,
 body:not(.dark) #ferinAdminPanel select {
   appearance: auto !important;
   -webkit-appearance: auto !important;
@@ -13,14 +12,12 @@ body:not(.dark) #ferinAdminPanel select {
   min-height: 46px;
 }
 
-body:not(.dark) .ferin-admin-panel select:focus,
 body:not(.dark) #ferinAdminPanel select:focus {
   background: #ded0c0 !important;
   border-color: #344c96 !important;
   outline: 3px solid rgba(70,96,174,.18) !important;
 }
 
-body.dark .ferin-admin-panel select,
 body.dark #ferinAdminPanel select {
   appearance: auto !important;
   -webkit-appearance: auto !important;
@@ -33,7 +30,6 @@ body.dark #ferinAdminPanel select {
   min-height: 46px;
 }
 
-body.dark .ferin-admin-panel select:focus,
 body.dark #ferinAdminPanel select:focus {
   background: #3a2f27 !important;
   border-color: #344c96 !important;
@@ -41,7 +37,6 @@ body.dark #ferinAdminPanel select:focus {
 }
 
 @media (max-width:850px) {
-  .ferin-admin-panel select,
   #ferinAdminPanel select {
     width: 100% !important;
     max-width: 100% !important;
@@ -53,7 +48,6 @@ body.dark #ferinAdminPanel select:focus {
   }
 }
 
-body.dark .ferin-admin-panel select option,
 body.dark #ferinAdminPanel select option {
   background-color: #302720 !important;
   color: #fff7ef !important;

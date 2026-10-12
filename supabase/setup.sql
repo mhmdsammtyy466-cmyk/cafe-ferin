@@ -41,7 +41,7 @@ where old_price_num is null and coalesce(old_price, '') <> '';
 -- 2) فقط ادمین می‌تواند تغییر بدهد
 create or replace function public.is_ferin_admin() returns boolean
 language sql stable as $$
-  select coalesce(auth.jwt() ->> 'email', '') = 'mhmdsammtyy466@gmail.com'
+  select coalesce(auth.jwt() ->> 'email', '') = 'YOUR_ADMIN_EMAIL'
 $$;
 
 alter table public.products enable row level security;

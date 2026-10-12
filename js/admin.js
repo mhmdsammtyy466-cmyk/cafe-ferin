@@ -28,13 +28,38 @@
     } catch (e) { /* storage blocked: the admin simply has to log in again */ }
   }
   async function authRequest(grant, payload) {
-    const r = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=${grant}`, {
-      method: "POST",
-      headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    if (!r.ok) throw new Error("AUTH");
+    let r;
+    try {
+      r = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=${grant}`, {
+        method: "POST",
+        headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) { throw new Error("NETWORK"); }
+    if (!r.ok) {
+      let j = {};
+      try { j = await r.json(); } catch (e) { /* no body */ }
+      const err = new Error("AUTH");
+      err.status = r.status;
+      err.code = j.error_code || j.error || "";
+      err.detail = j.msg || j.error_description || j.message || "";
+      throw err;
+    }
     return r.json();
+  }
+  /* Explain why a login failed, in plain Persian. */
+  function loginMessage(err) {
+    const tag = err.message === "NETWORK" ? "" : ` [${err.status || "?"} ${err.code || "-"}]`;
+    return loginText(err) + tag;
+  }
+  function loginText(err) {
+    if (err.message === "NETWORK") return "اتصال به Supabase برقرار نشد؛ اینترنت یا فیلترشکن را بررسی کنید.";
+    const text = (err.code + " " + err.detail).toLowerCase();
+    if (/email_not_confirmed|not confirmed/.test(text)) return "ایمیل این کاربر تأیید نشده است. در Supabase کاربر را با گزینهٔ Auto Confirm User بسازید.";
+    if (/rate|too many|429/.test(text) || err.status === 429) return "تلاش‌های زیاد؛ چند دقیقه صبر کنید و دوباره امتحان کنید.";
+    if (/api key|apikey|invalid_api_key|no_authorization/.test(text) || err.status === 401) return "کلید Supabase در js/supabase.js معتبر نیست.";
+    if (/invalid_credentials|invalid login|invalid_grant/.test(text) || err.status === 400) return "ایمیل یا رمز عبور اشتباه است، یا این کاربر هنوز در Supabase ساخته نشده (Authentication ← Users ← Add user).";
+    return "ورود انجام نشد: " + (err.detail || err.code || err.status || "خطای ناشناخته");
   }
   const login = async (email, password) => setSession(await authRequest("password", { email, password }));
   /* A valid admin token, refreshed if it is about to expire. */
@@ -104,7 +129,8 @@
       A.pass.value = "";
       showPanel();
     } catch (err) {
-      A.authError.textContent = "ایمیل یا رمز عبور اشتباه است.";
+      console.warn("Cafe Ferin login failed:", err.status, err.code, err.detail || err.message);
+      A.authError.textContent = loginMessage(err);
       A.pass.value = "";
       A.pass.focus();
     }

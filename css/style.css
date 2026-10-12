@@ -413,7 +413,6 @@ body,
 .nav-links,
 .hero,
 .about-grid,
-.about-image,
 .categories,
 .category,
 .menu-section,
@@ -424,7 +423,6 @@ body,
 .order-section,
 .order-card,
 .order-note,
-.feature,
 footer,
 .theme-toggle {
   transition: background-color .45s ease,
@@ -573,8 +571,6 @@ footer {
   max-width: 100%;
   overflow-x: clip;
 }
-
-body:not(.dark) {}
 @media (max-width:850px) {
   .nav-links {
     overflow-x: hidden !important;
@@ -619,7 +615,7 @@ html, body {
   color-scheme: light !important;
 }
 
-body, main, section, header, footer, nav, article, aside, .hero, .about, .categories, .menu-section, .notice, .notice-wrap, .order-section, .order-card, .features, .feature, .category, .product-card, .nav-links, #intro, .intro-inner {
+body, main, section, header, footer, nav, article, aside, .hero, .about, .categories, .menu-section, .notice, .notice-wrap, .order-section, .order-card, .category, .product-card, .nav-links, #intro, .intro-inner {
   transition: background-color .35s ease, color .35s ease,
         border-color .35s ease, box-shadow .35s ease !important;
 }
@@ -637,7 +633,6 @@ body:not(.dark) footer {
 }
 
 body:not(.dark) .nav-links a,
-body:not(.dark) .logo-text,
 body:not(.dark) .section-title,
 body:not(.dark) .section-text,
 body:not(.dark) .product-name,
@@ -645,8 +640,6 @@ body:not(.dark) .product-desc,
 body:not(.dark) .products-count,
 body:not(.dark) .about-copy,
 body:not(.dark) .about-copy p,
-body:not(.dark) .feature,
-body:not(.dark) .feature span,
 body:not(.dark) .category,
 body:not(.dark) .notice,
 body:not(.dark) .notice-box,
@@ -659,8 +652,7 @@ body:not(.dark) .order-card p {
 body:not(.dark) .category,
 body:not(.dark) .product-card,
 body:not(.dark) .notice,
-body:not(.dark) .order-card,
-body:not(.dark) .feature {
+body:not(.dark) .order-card {
   background: #fffdf9 !important;
   border-color: rgba(33,27,23,.12) !important;
 }
@@ -679,7 +671,6 @@ body.dark footer {
 }
 
 body.dark .nav-links a,
-body.dark .logo-text,
 body.dark .section-title,
 body.dark .section-text,
 body.dark .product-name,
@@ -687,8 +678,6 @@ body.dark .product-desc,
 body.dark .products-count,
 body.dark .about-copy,
 body.dark .about-copy p,
-body.dark .feature,
-body.dark .feature span,
 body.dark .category,
 body.dark .notice,
 body.dark .notice-box,
@@ -701,8 +690,7 @@ body.dark .order-card p {
 body.dark .category,
 body.dark .product-card,
 body.dark .notice,
-body.dark .order-card,
-body.dark .feature {
+body.dark .order-card {
   background: #171310 !important;
 }
 
@@ -731,9 +719,7 @@ body.dark #intro span {
 
 .nav-links a[href*="order"],
 .nav-links a[href*="سفارش"],
-.nav-links .order-link,
-.nav-links .order-btn,
-.nav-links .nav-order {
+.nav-links .order-link {
   padding: 0 !important;
   font-weight: inherit !important;
   transform: none !important;
@@ -742,13 +728,9 @@ body.dark #intro span {
 body:not(.dark) .nav-links a[href*="order"],
 body:not(.dark) .nav-links a[href*="سفارش"],
 body:not(.dark) .nav-links .order-link,
-body:not(.dark) .nav-links .order-btn,
-body:not(.dark) .nav-links .nav-order,
 body.dark .nav-links a[href*="order"],
 body.dark .nav-links a[href*="سفارش"],
-body.dark .nav-links .order-link,
-body.dark .nav-links .order-btn,
-body.dark .nav-links .nav-order {
+body.dark .nav-links .order-link {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -882,7 +864,7 @@ body.dark .nav-links .nav-order {
   transform-origin: center !important;
 }
 
-.feature,.category,.product-card,.order-card,.notice-box {
+.category,.product-card,.order-card,.notice-box {
   will-change: transform;
 }
 
@@ -1391,8 +1373,7 @@ body:not(.dark) .current-category {
   .hero-buttons .btn,
   .nav-links,
   .nav-links a,
-  .category,
-  .menu-btn {
+  .category {
     transition: none !important;
   }
 }
@@ -1540,8 +1521,6 @@ body.dark .product-card .product-price em {
   -webkit-text-fill-color: var(--cafe-ferin-blue) !important;
 }
 
-body.dark .cafe-brand,
-body.dark .cafe-brand *,
 body.dark .hero h1,
 body.dark .hero h1 *,
 body.dark #intro .intro-title {
@@ -1634,7 +1613,6 @@ body.dark #intro .intro-title {
 .category,
 .notice,
 .order-card,
-.feature,
 .notice-box {
   position: relative;
   backdrop-filter: blur(16px) saturate(135%);
@@ -1650,8 +1628,7 @@ body.dark #intro .intro-title {
 .product-card::before,
 .category::before,
 .notice-box::before,
-.order-card::before,
-.feature::before {
+.order-card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -1667,8 +1644,7 @@ body.dark #intro .intro-title {
 .product-card:hover::before,
 .category:hover::before,
 .notice-box:hover::before,
-.order-card:hover::before,
-.feature:hover::before {
+.order-card:hover::before {
   left: 150%;
 }
 
@@ -1688,7 +1664,6 @@ body.dark #intro .intro-title {
 }
 
 .product-card .product-image,
-.product-card .product-info,
 .category .icon,
 .category h3 {
   transform: translateZ(26px);
@@ -1696,7 +1671,6 @@ body.dark #intro .intro-title {
 }
 
 .product-card:hover .product-image,
-.product-card:hover .product-info,
 .category:hover .icon,
 .category:hover h3 {
   transform: translateZ(46px);
@@ -1706,7 +1680,6 @@ body.dark .product-card,
 body.dark .category,
 body.dark .notice,
 body.dark .order-card,
-body.dark .feature,
 body.dark .notice-box {
   background-color: rgba(28,28,28,.55) !important;
   border-color: rgba(201,211,242,.20) !important;
@@ -1717,8 +1690,7 @@ body.dark .notice-box {
 body.dark .product-card::before,
 body.dark .category::before,
 body.dark .notice-box::before,
-body.dark .order-card::before,
-body.dark .feature::before {
+body.dark .order-card::before {
   background: linear-gradient(100deg,transparent,rgba(255,255,255,.14),transparent);
 }
 
@@ -1759,7 +1731,7 @@ body::after {
     animation: none !important;
     transition: none !important;
   }
-  .product-card::before,.category::before,.notice-box::before,.order-card::before,.feature::before {
+  .product-card::before,.category::before,.notice-box::before,.order-card::before {
     display: none !important
   }
 }
@@ -1784,8 +1756,7 @@ body::after {
 #categories .container,
 #menu .container,
 #order .container,
-#notice .container,
-footer .footer-inner {
+#notice .container {
   backdrop-filter: blur(18px) saturate(135%);
   -webkit-backdrop-filter: blur(18px) saturate(135%);
   background: rgba(247,244,239,.55);
@@ -1802,8 +1773,7 @@ body.dark #about .container,
 body.dark #categories .container,
 body.dark #menu .container,
 body.dark #order .container,
-body.dark #notice .container,
-body.dark footer .footer-inner {
+body.dark #notice .container {
   background: rgba(28,28,28,.52);
   border-color: rgba(201,211,242,.16);
   box-shadow: 0 24px 64px rgba(0,0,0,.55),
@@ -1815,8 +1785,7 @@ body.dark footer .footer-inner {
   #categories .container,
   #menu .container,
   #order .container,
-  #notice .container,
-  footer .footer-inner {
+  #notice .container {
     padding: 26px 18px;
     border-radius: 20px
   }
@@ -2703,7 +2672,7 @@ body.dark .ferin-qv-card {
   }
 }
 
-.btn,.order-nav,.theme-toggle,button {
+.btn,.theme-toggle,button {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -2868,8 +2837,7 @@ button,a,input,select,textarea {
   }
   .about-grid,
   .notice,
-  .order-grid,
-  .features {
+  .order-grid {
     grid-template-columns: 1fr !important;
   }
   .category-grid {
@@ -3266,8 +3234,7 @@ body[data-theme="light"] .nav-links,
 body[data-theme="light"] .menu-section,
 body[data-theme="light"] .product-card,
 body[data-theme="light"] .notice,
-body[data-theme="light"] .order-card,
-body[data-theme="light"] .feature {
+body[data-theme="light"] .order-card {
   background: #fffdf9 !important;
   color: #211b17 !important;
   border-color: rgba(33,27,23,.12) !important;
@@ -3295,7 +3262,6 @@ body[data-theme="light"] .section-text,
 body[data-theme="light"] .products-count,
 body[data-theme="light"] .product-desc,
 body[data-theme="light"] .order-card p,
-body[data-theme="light"] .feature span,
 body[data-theme="light"] .about-copy p {
   color: #5f5750 !important
 }
@@ -3320,8 +3286,7 @@ body[data-theme="dark"] .nav-links,
 body[data-theme="dark"] .menu-section,
 body[data-theme="dark"] .product-card,
 body[data-theme="dark"] .notice,
-body[data-theme="dark"] .order-card,
-body[data-theme="dark"] .feature {
+body[data-theme="dark"] .order-card {
   background: #1d1815 !important;
   color: #f7efe7 !important;
   border-color: rgba(255,255,255,.12) !important;
@@ -3349,7 +3314,6 @@ body[data-theme="dark"] .section-text,
 body[data-theme="dark"] .products-count,
 body[data-theme="dark"] .product-desc,
 body[data-theme="dark"] .order-card p,
-body[data-theme="dark"] .feature span,
 body[data-theme="dark"] .about-copy p {
   color: #c2b4a8 !important
 }
@@ -3595,8 +3559,7 @@ body.dark :focus-visible {
 
 .product-card::before,
 .order-card::before,
-.notice-box::before,
-.feature::before {
+.notice-box::before {
   background: none !important;
   display: none !important;
 }
@@ -3619,8 +3582,6 @@ body.dark .about-copy .section-title::after {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16'%3E%3Cpath d='M2 8 C 14 -2 26 -2 38 8 S 62 18 74 8 S 98 -2 118 8' fill='none' stroke='%239db0f0' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat !important;
 }
 
-body.dark .cafe-brand,
-body.dark .logo-text,
 body.dark .instagram-box-handle,
 body.dark .hero h1,
 body.dark .hero h1 span,
@@ -3634,8 +3595,6 @@ body.dark .hero h1 {
   -webkit-text-fill-color: #b4c2f5 !important
 }
 
-body:not(.dark) .cafe-brand,
-body:not(.dark) .logo-text,
 body:not(.dark) .instagram-box-handle {
   color: #344c96 !important;
   -webkit-text-fill-color: #344c96 !important;
@@ -4088,7 +4047,6 @@ html body:not(.dark) .menu-section,
 html body:not(.dark) .notice-wrap,
 html body:not(.dark) .order-section,
 html body:not(.dark) footer,
-html body:not(.dark) .features,
 html body:not(.dark) .hero,
 html body:not(.dark) section,
 html body.dark main,
@@ -4100,7 +4058,6 @@ html body.dark .menu-section,
 html body.dark .notice-wrap,
 html body.dark .order-section,
 html body.dark footer,
-html body.dark .features,
 html body.dark .hero,
 html body.dark section,
 html body[data-theme="light"] main,
@@ -4500,7 +4457,7 @@ body.dark .farin-title .farin-cafe {
   -webkit-text-fill-color: #fff;
 }
 
-html body, html body main, html body main section, html body footer, html body .container, html body .hero-content, html body .about-copy, html body .section-head, html body .section-title, html body .section-kicker, html body .notice, html body .notice > div, html body .order-card, html body .order-note, html body .order-grid, html body .category-card, html body .product-card, html body .product-card *, html body .merteks-footer, html body .fp-box, html body .fp-head, html body p, html body h1, html body h2, html body h3, html body h4 {
+html body, html body main, html body main section, html body footer, html body .container, html body .hero-content, html body .about-copy, html body .section-head, html body .section-title, html body .section-kicker, html body .notice, html body .notice > div, html body .order-card, html body .order-note, html body .order-grid, html body .product-card, html body .product-card *, html body .merteks-footer, html body .fp-box, html body .fp-head, html body p, html body h1, html body h2, html body h3, html body h4 {
   text-align: center !important;
 }
 
