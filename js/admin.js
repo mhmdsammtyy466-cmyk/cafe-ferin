@@ -254,7 +254,7 @@
     A.save.disabled = true;
     say("در حال ذخیره...", true);
     try {
-      const id = editingId || crypto.randomUUID();
+      const id = editingId || (crypto.randomUUID?crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c=="x"?r:(r&3|8)).toString(16)}));
       let image = currentImage;
       if (pickedImage) image = await uploadImage(pickedImage, id);
       const row = {

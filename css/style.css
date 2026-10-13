@@ -2384,7 +2384,6 @@ html {
   pointer-events: none;
   z-index: 0;
   opacity: .12;
-  filter: blur(55px);
   background: radial-gradient(circle,var(--ferin-addon-accent),transparent 68%);
   transform: translate3d(0,0,0);
   transition: opacity .5s ease;
@@ -4611,3 +4610,14 @@ body.dark .fp-name{color:#fff8f0}
 body.dark .fp-desc{color:rgba(255,248,240,.72)}
 
 a.category{display:block;text-decoration:none;color:inherit}
+
+/* ---- performance pass ---- */
+/* sections below the first screen are not laid out / painted (or their images fetched) until near the viewport */
+#categories,#notice,#order,.merteks-footer{content-visibility:auto;contain-intrinsic-size:auto 700px}
+#notice,.merteks-footer{contain-intrinsic-size:auto 360px}
+/* stop paying for animations on the intro layer after it is hidden, and for hidden-tab animations */
+#intro.hide .intro-bg{animation:none;will-change:auto}
+@media (max-width:700px){
+  .ferin-premium-light{display:none}
+  .wheat-motion .wheat-head:nth-child(n+8){display:none}
+}

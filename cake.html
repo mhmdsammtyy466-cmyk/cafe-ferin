@@ -15,9 +15,10 @@
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&text=%D9%83%D8%A7%D9%81%D9%87%DA%A9%D8%A7%D9%81%D9%87&display=swap">
-<link rel="stylesheet" href="css/style.min.css?v=20">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap"></noscript>
+<link rel="stylesheet" href="css/style.min.css?v=21">
 </head>
 
 <body data-category="cake">
@@ -53,14 +54,6 @@
   <span class="wheat-head wheat-head-12"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
   <span class="wheat-head wheat-head-13"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
   <span class="wheat-head wheat-head-14"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
-  <span class="wheat-head wheat-head-15"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
-  <span class="wheat-head wheat-head-16"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
-  <span class="wheat-head wheat-head-17"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
-  <span class="wheat-head wheat-head-18"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
-  <span class="wheat-head wheat-head-19"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
-  <span class="wheat-head wheat-head-20"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
-  <span class="wheat-head wheat-head-21"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
-  <span class="wheat-head wheat-head-22"><svg viewBox="0 0 100 150" aria-hidden="true"><use href="#wheat"/></svg></span>
 </div>
 
 <!-- Ambient background -->
@@ -197,8 +190,8 @@
 <div class="ferin-premium-light one" aria-hidden="true"></div>
 <div class="ferin-premium-light two" aria-hidden="true"></div>
 
-<script src="js/supabase.js"></script>
-<script src="js/shared.min.js?v=19"></script>
+<script src="js/supabase.js" defer></script>
+<script src="js/shared.min.js?v=19" defer></script>
 <script src="js/app.js?v=22" defer></script>
 </body>
 </html>
